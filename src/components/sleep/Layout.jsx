@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Moon, BookOpen, BarChart3 } from "lucide-react";
+import { Moon, BookOpen, BarChart3, MessageCircle } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { DataDialog } from "./DataDialog";
 
@@ -11,6 +11,7 @@ const NAV = [
 
 export function SleepLayout({ children }) {
   const isMobile = useIsMobile();
+  const items = [...NAV, { to: "/chat", label: "Assistant", icon: MessageCircle }];
 
   if (isMobile) {
     return (
@@ -29,10 +30,10 @@ export function SleepLayout({ children }) {
         </header>
         <main className="flex-1 overflow-y-auto pb-[calc(6rem+env(safe-area-inset-bottom,16px))]">{children}</main>
         <nav
-          className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-3 border-t border-border bg-card/95 backdrop-blur"
+          className={`fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t border-border bg-card/95 backdrop-blur`}
           style={{ paddingBottom: "env(safe-area-inset-bottom, 16px)" }}
         >
-          {NAV.map(({ to, label, icon: Icon }) => (
+          {items.map(({ to, label, icon: Icon }) => (
             <Link
               key={to}
               to={to}
@@ -56,7 +57,7 @@ export function SleepLayout({ children }) {
           <span className="font-heading text-2xl font-extrabold tracking-tight">Lull</span>
         </Link>
         <nav className="flex flex-col gap-1">
-          {NAV.map(({ to, label, icon: Icon }) => (
+          {items.map(({ to, label, icon: Icon }) => (
             <Link
               key={to}
               to={to}

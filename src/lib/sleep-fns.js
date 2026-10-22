@@ -100,6 +100,21 @@ export async function saveAfterWaking({ data }) {
   );
 }
 
+// Merges only the provided fields into the night with this date (creating it if needed).
+export async function applyChatFields({ date, fields }) {
+  const { date: _d, ...patch } = fields;
+  if (patch.bedtime) patch.before_bed_recorded = true;
+  if (
+    patch.estimated_total_sleep_hours != null ||
+    patch.estimated_out_of_bed_time ||
+    patch.estimated_sleep_onset ||
+    patch.sleep_quality
+  ) {
+    patch.after_waking_recorded = true;
+  }
+  return upsert({ nightDate: date }, patch, { before_bed_recorded: false, after_waking_recorded: false, night_awakenings: [] });
+}
+
 export async function saveReminderSettings({ data }) {
   const db = read();
   db.settings = { ...db.settings, ...data };
