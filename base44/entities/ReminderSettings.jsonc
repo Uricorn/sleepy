@@ -1,0 +1,72 @@
+{
+  "name": "ReminderSettings",
+  "type": "object",
+  "properties": {
+    "bedtime_reminder_enabled": {
+      "type": "boolean",
+      "description": "Bedtime reminder enabled",
+      "default": false
+    },
+    "bedtime_reminder_time": {
+      "type": "string",
+      "description": "Bedtime reminder time (HH:MM)",
+      "default": "22:30"
+    },
+    "morning_reminder_enabled": {
+      "type": "boolean",
+      "description": "Morning reminder enabled",
+      "default": false
+    },
+    "morning_reminder_time": {
+      "type": "string",
+      "description": "Morning reminder time (HH:MM)",
+      "default": "07:30"
+    },
+    "timezone": {
+      "type": "string",
+      "description": "IANA timezone",
+      "default": "UTC"
+    }
+  },
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "name": "SleepDiaryEntry",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "description": "Bedtime date (YYYY-MM-DD)"
+    },
+    "bedtime": {
+      "type": "string",
+      "description": "Bedtime (HH:MM)"
+    },
+    "pre_sleep_notes": {
+      "type": "string",
+      "description": "Before-bed notes"
+    },
+    "estimated_sleep_onset": {
+      "type": "string",
+      "description": "Estimated sleep onset (HH:MM)"
+    },
+    "night_awakenings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Night awakenings (HH:MM)"
+    },
+    "estimated_out_of_bed_time": {
+      "type": "string",
+      "description": "Out-of-bed time (HH:MM)"
+    },
+    "estimated_total_sleep_hours": {
+      "type": "number",
+      "description": "Estimated total sleep (hours)"
+    },
+    "sleep_quality": {
+      "type": "integer",
+      "description": "Sleep quality (1-5)"
+    },
+    "woke_up_tired": {
+      "type": "boolean",
+      "description": "Woke up tired"
+    },
+    "additional_notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "before_bed_recorded": {
+      "type": "boolean",
+      "description": "Before-bed stage recorded"
+    },
+    "after_waking_recorded": {
+      "type": "boolean",
+      "description": "After-waking stage recorded"
+    }
+  },
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

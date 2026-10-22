@@ -12,11 +12,14 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Base44 App" },
-      { name: "description", content: "A full-stack Base44 app built with TanStack Start." },
+      { title: "Lull · Sleep Diary" },
+      { name: "description", content: "A calm two-stage sleep diary with gentle reminders and trends." },
     ],
     // No icon link: the platform adds the app's logo when serving.
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" },
       { rel: "stylesheet", href: appCss },
     ],
   }),
