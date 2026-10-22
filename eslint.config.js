@@ -8,7 +8,7 @@ export default [
   },
   pluginJs.configs.recommended,
   {
-    files: ["**/*.{js,jsx}"],
+    files: ["**/*.{js,jsx,mjs}"],
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
       parserOptions: { ecmaVersion: "latest", sourceType: "module", ecmaFeatures: { jsx: true } },
