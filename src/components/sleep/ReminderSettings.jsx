@@ -55,8 +55,7 @@ export function ReminderSettings({ settings, onPatch }) {
       <div className="flex gap-2 rounded-2xl bg-secondary p-3 text-xs text-muted-foreground">
         <Info className="mt-0.5 h-4 w-4 shrink-0" />
         <p>
-          Reminders fire as browser notifications while Sleepy is open. Reliable background push requires the native mobile
-          app with push enabled. {settings.timezone ? `Timezone: ${settings.timezone}.` : ""}
+          Reminders appear only while Sleepy is open and visible. They do not wake the phone or run while the app is closed. Use your phone's alarm for reliable background reminders. {settings.timezone ? `Timezone: ${settings.timezone}.` : ""}
         </p>
       </div>
     </div>

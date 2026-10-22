@@ -1,11 +1,23 @@
 {
   "name": "Sleepy · Sleep Diary",
   "short_name": "Sleepy",
-  "start_url": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#0C1017",
   "theme_color": "#0C1017",
   "icons": [
-    { "src": "https://media.base44.com/images/public/6ada54ca775d39c7b5450843/d7a956832_generated_image.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }

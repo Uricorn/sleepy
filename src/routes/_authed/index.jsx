@@ -115,12 +115,12 @@ function HomePage() {
             : "Start logging tonight's sleep, one calm stage at a time."}
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
-          <a href="#before-bed" className="inline-flex h-12 items-center gap-2 rounded-full bg-[#818CF8] px-5 font-semibold text-[#0C1017]">
+          <button type="button" onClick={() => document.getElementById("before-bed")?.scrollIntoView({ behavior: "smooth" })} className="inline-flex h-12 items-center gap-2 rounded-full bg-[#818CF8] px-5 font-semibold text-[#0C1017]">
             <Moon className="h-5 w-5" /> Log before bed
-          </a>
-          <a href="#after-waking" className="inline-flex h-12 items-center gap-2 rounded-full border border-border bg-card px-5 font-semibold text-foreground">
+          </button>
+          <button type="button" onClick={() => document.getElementById("after-waking")?.scrollIntoView({ behavior: "smooth" })} className="inline-flex h-12 items-center gap-2 rounded-full border border-border bg-card px-5 font-semibold text-foreground">
             <Sunrise className="h-5 w-5 text-[#34D399]" /> Morning entry
-          </a>
+          </button>
         </div>
       </section>
 

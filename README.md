@@ -1,40 +1,50 @@
-# Base44 App — TanStack Start
+# Sleepy Local
 
-A full-stack Base44 app: [TanStack Start](https://tanstack.com/start) (React 19, plain JavaScript) with file-based routes, server functions and server routes, server-rendered and hosted by Base44.
+A local-only sleep diary being converted from a platform-specific web app into a standalone Android APK. The original `Uricorn/sleepy` repository is untouched. This repository is `Uricorn/sleepy-basecode`.
 
-## What is in the starter
+## Current implementation
 
-| Route | File |
-| --- | --- |
-| `/` | `src/routes/index.jsx` — a server-rendered page whose loader calls a server function |
-| `GET /api/time` | `src/routes/api/time.js` — a server route: a raw HTTP endpoint next to the pages |
+- React client app with Vite, TanStack Router hash routing and on-device storage.
+- Before-bed and morning entries, history, trends, editing and JSON backups.
+- Typed-note parsing runs locally. No cloud AI, image analysis, login or server database.
+- Android WebView shell with bundled assets, no INTERNET permission, import file picker and native backup-save dialog.
+- Browser/PWA assets use local icons. The Android shell loads its bundled files from an intercepted local HTTPS origin, without hosting or an actual web server.
+- Reminders are foreground-only. They cannot wake the phone or notify while the app is closed.
 
-## Run locally
+## Verification so far
 
-```bash
+The diary preservation/backup tests and four local-parser tests pass. The full dependency installation, production web build, lint, APK compilation and Android device behavior still need verification. An installable APK has not been delivered. Treat this as a work-in-progress handoff, not a finished release.
+
+See [BASECODE_HANDOFF.md](./BASECODE_HANDOFF.md) for the continuation prompt and exact acceptance checks.
+
+## Local development
+
+Use a supported Node version for Vite 8 (Node 22.12+ or 24 recommended).
+
+```sh
 npm ci
-base44 login   # one-time per machine
-base44 link    # one-time per clone
-base44 dev     # local backend + app together
+npm test
+npm run dev
+npm run build
+npm run lint
 ```
 
-## Build and publish
+Development and production assets must not require a Base44 account, SDK, runtime, cloud service or external hosting.
 
-```bash
-npm run build         # -> dist/client (assets) + dist/server (the Worker)
-base44 deploy         # or publish from the Base44 builder
+## Android build
+
+Install JDK 17+ and Android SDK platform 35 with build-tools 35.0.0. Set `JAVA_HOME` and `ANDROID_HOME`, then:
+
+```sh
+sh scripts/build-android.sh
 ```
 
-There is no `index.html`: the HTML document is rendered on the server from `src/routes/__root.jsx`. The build runs through the [Cloudflare Vite plugin](https://developers.cloudflare.com/workers/vite-plugin/), so dev and build both execute server code in `workerd`.
+This installs JS dependencies, builds the web assets, copies `dist` into the Android project and runs the checked-in Gradle wrapper. Expected test APK output: `android/app/build/outputs/apk/debug/app-debug.apk`. It is a debug-signed personal test build, not an app-store release. Preserve the signing key for updates; production signing and APK verification remain follow-up work.
 
-## How the pieces fit
+The Android app targets Android 8+ (API 26). These are configuration targets, not confirmed device compatibility.
 
-- **Pages** are files in `src/routes/`. A route's `loader` runs on the server for a document request and in the browser for a client navigation; `Route.useLoaderData()` gives the component the resolved data.
-- **Server functions** (`src/lib/server-fns.js`) are RPCs created with `createServerFn`. `src/start.js` runs every one of them through `authMiddleware`, which sends the visitor's token along, so `context.getBase44()` returns a client acting as that visitor and entity access rules apply. `context.getBase44().asServiceRole` bypasses them, so use it only after authenticating the caller (`.middleware([requireUser])`) and checking they may access the records involved: server functions and server routes are public endpoints anyone can call with any input. See **Server Security** in `AGENTS.md`. Call it only in handlers that need Base44: it reads the platform headers, and a handler that never calls it works without them.
-- **Secrets** are read in server code with `import { secrets } from "base44:runtime"` → `secrets.get("NAME")`, inside a handler. Never `process.env`.
-- **Server routes** (`src/routes/api/*.js`) are raw HTTP endpoints for URLs something other than the app's own code requests (webhooks, downloads, feeds); the app's pages call server functions. `src/start.js` runs every request through `base44RequestMiddleware`, so their `server.handlers` receive the same `context.getBase44()` (`({ request, params, context }) => …`).
-- **Server-only code** lives in `*.server.js` files (TanStack refuses to bundle them for the browser).
-- **Auth** is resolved client-side after hydration (`useAuth()`); the server is anonymous on a document request, so give per-user pages `ssr: false`.
-- **Sign-in and gated pages** are not wired in the starter: `src/components/auth/` holds the pages (login, register, password reset, MCP consent) and a login gate for `src/routes/_authed/`, to add when the app needs them. See **Adding Authentication** in `AGENTS.md`.
-- **AI**: TanStack AI is installed and runs on the Base44 AI gateway, with no API key and usage billed to the app's AI credits. `gatewayModel(context.getBase44())` in `src/lib/ai.server.js` builds the adapter; `AGENTS.md` has a streaming chat example (a server route plus `useChat`).
-- **Caching**: the platform caches only what a route opts into via `headers()` (`Cache-Control: public, s-maxage=…`). Everything else is served fresh.
+## Existing diary data
+
+The storage key remains `lull:v1` and the backup format remains `app: "lull", version: 1`. A new Android app has separate storage from the old browser app, so entries will not migrate automatically. Export a backup in the old app first, then import it in the new app. Never clear or uninstall the old app until the imported entries have been checked. Uninstalling this local app deletes its data; keep backups.
+
+Do not add Netlify, hosting, cloud AI, authentication or automatic syncing as part of this conversion.

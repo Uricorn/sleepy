@@ -10,9 +10,7 @@ npm-debug.log*
 node_modules
 *.local
 
-# build output. The Cloudflare Vite plugin emits dist/{client,server} plus the
-# .wrangler/deploy redirect the Base44 publish reads; every build regenerates
-# all of them.
+# Generated web build output and local caches
 dist
 .wrangler
 .tanstack
@@ -28,5 +26,11 @@ src/routeTree.gen.ts
 .DS_Store
 *.sw?
 
-# Local link to a Base44 app, written by `base44 link`
-base44/.app.jsonc
+
+# Android local build artifacts and signing files
+android/.gradle/
+android/local.properties
+android/app/build/
+android/app/src/main/assets/
+*.keystore
+*.jks

@@ -16,7 +16,7 @@ function PrivacyPage() {
       </section>
       <section className="space-y-2">
         <h2 className="font-heading text-lg font-bold">The Assistant</h2>
-        <p className="text-muted-foreground">When you use the Assistant, the text and screenshots you send are transmitted to an AI service to read them and suggest diary entries. Nothing is added to your diary until you tap "Add to diary". Offline notes are processed on your device only.</p>
+        <p className="text-muted-foreground">The Assistant uses a simple on-device text parser. It does not contact an AI service or analyze screenshots. Nothing is added to your diary until you tap "Add to diary". The Android app has no internet permission.</p>
       </section>
       <section className="space-y-2">
         <h2 className="font-heading text-lg font-bold">Backups and deleting data</h2>

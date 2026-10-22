@@ -1,0 +1,27 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.uricorn.sleepy.local'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.uricorn.sleepy.local'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+    }
+    buildTypes {
+        debug { debuggable true }
+        release { minifyEnabled false }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+tasks.register('copyWebAssets', Copy) {
+    from '../../dist'
+    into 'src/main/assets'
+}
+tasks.named('preBuild').configure { dependsOn 'copyWebAssets' }

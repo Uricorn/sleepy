@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "@tanstack/react-router";
 import { Database, Download, Upload } from "lucide-react";
 import { toast } from "sonner";
@@ -18,14 +18,32 @@ export function DataDialog({ className, iconOnly = false }) {
   const router = useRouter();
   const fileRef = useRef(null);
 
+  useEffect(() => {
+    const onSaved = (event) => {
+      if (event.detail?.success) {
+        markBackedUp();
+        toast.success("Backup saved");
+      } else {
+        toast.info("Backup not saved");
+      }
+    };
+    window.addEventListener("sleepy-backup-result", onSaved);
+    return () => window.removeEventListener("sleepy-backup-result", onSaved);
+  }, []);
+
   const onExport = () => {
+    const filename = `sleepy-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    if (window.SleepyNative?.saveBackup) {
+      window.SleepyNative.saveBackup(filename, exportData());
+      return;
+    }
     const blob = new Blob([exportData()], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `sleepy-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = filename;
     a.click();
-    URL.revokeObjectURL(url);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
     markBackedUp();
     toast.success("Backup downloaded");
   };
