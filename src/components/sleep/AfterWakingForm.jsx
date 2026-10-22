@@ -17,16 +17,25 @@ export function AfterWakingForm({ entry, onSave, saving }) {
   const [notes, setNotes] = useState(entry?.additional_notes || "");
   const done = entry?.after_waking_recorded;
 
-  const submit = () =>
+  const [error, setError] = useState("");
+
+  const submit = () => {
+    const n = Number(hours);
+    if (hours !== "" && (!Number.isFinite(n) || n < 0 || n > 24)) {
+      setError("Enter a number of hours between 0 and 24.");
+      return;
+    }
+    setError("");
     onSave({
       estimated_sleep_onset: onset,
       night_awakenings: awakenings.filter((a) => a),
       estimated_out_of_bed_time: outOfBed,
-      estimated_total_sleep_hours: hours === "" ? null : Number(hours),
+      estimated_total_sleep_hours: hours === "" ? null : n,
       sleep_quality: quality,
       woke_up_tired: tired,
       additional_notes: notes,
     });
+  };
 
   return (
     <div className="space-y-4">
@@ -46,6 +55,7 @@ export function AfterWakingForm({ entry, onSave, saving }) {
           placeholder="e.g. 7.5"
           className="h-14 w-full rounded-2xl border border-border bg-secondary px-4 font-heading text-lg focus:outline-none focus:ring-2 focus:ring-[#34D399]"
         />
+        {error && <p className="text-sm text-destructive">{error}</p>}
         <p className="text-xs text-muted-foreground">Enter your own estimate — never auto-calculated.</p>
       </div>
       <QualityScale value={quality} onChange={setQuality} />
