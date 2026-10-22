@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, useLoaderData, useRouter, Link } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { Moon, Sunrise, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
@@ -48,9 +47,9 @@ function HomePage() {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [stage]);
 
-  const saveBedFn = useServerFn(saveBeforeBed);
-  const saveWakeFn = useServerFn(saveAfterWaking);
-  const saveSettingsFn = useServerFn(saveReminderSettings);
+  const saveBedFn = saveBeforeBed;
+  const saveWakeFn = saveAfterWaking;
+  const saveSettingsFn = saveReminderSettings;
 
   // The morning stage binds to the most recent entry whose waking isn't done yet
   // (handles nights crossing midnight), else tonight's entry.

@@ -1,8 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Moon, BookOpen, BarChart3, LogOut } from "lucide-react";
-import { useAuth } from "@/lib/AuthContext";
+import { Moon, BookOpen, BarChart3 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { DeleteAccountDialog } from "./DeleteAccountDialog";
+import { DataDialog } from "./DataDialog";
 
 const NAV = [
   { to: "/", label: "Tonight", icon: Moon },
@@ -11,10 +10,7 @@ const NAV = [
 ];
 
 export function SleepLayout({ children }) {
-  const { user, logout } = useAuth();
   const isMobile = useIsMobile();
-
-  const initial = (user?.full_name || user?.email || "?").slice(0, 1).toUpperCase();
 
   if (isMobile) {
     return (
@@ -28,10 +24,7 @@ export function SleepLayout({ children }) {
             <span className="font-heading text-lg font-extrabold tracking-tight">Lull</span>
           </Link>
           <div className="flex items-center">
-            <DeleteAccountDialog iconOnly className="p-3 text-muted-foreground hover:text-destructive" />
-            <button onClick={logout} className="p-3 text-muted-foreground hover:text-foreground" aria-label="Sign out">
-              <LogOut className="h-5 w-5" />
-            </button>
+            <DataDialog iconOnly className="p-3 text-muted-foreground hover:text-foreground" />
           </div>
         </header>
         <main className="flex-1 overflow-y-auto pb-[calc(6rem+env(safe-area-inset-bottom,16px))]">{children}</main>
@@ -76,19 +69,8 @@ export function SleepLayout({ children }) {
           ))}
         </nav>
         <div className="mt-auto border-t border-border pt-6">
-          <div className="mb-3 flex items-center gap-3">
-            <div className="grid h-9 w-9 place-items-center rounded-full bg-[#818CF8]/20 text-sm font-semibold text-[#818CF8]">
-              {initial}
-            </div>
-            <div className="min-w-0">
-              <p className="truncate text-sm font-medium">{user?.full_name || "Sleeper"}</p>
-              <p className="truncate text-xs text-muted-foreground">{user?.email}</p>
-            </div>
-          </div>
-          <button onClick={logout} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-            <LogOut className="h-4 w-4" /> Sign out
-          </button>
-          <DeleteAccountDialog className="mt-3 flex items-center gap-2 text-sm text-muted-foreground hover:text-destructive" />
+          <p className="mb-3 text-xs text-muted-foreground">Stored only on this device.</p>
+          <DataDialog className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground" />
         </div>
       </aside>
       <main className="flex-1 overflow-y-auto">{children}</main>

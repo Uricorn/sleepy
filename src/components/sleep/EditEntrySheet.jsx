@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useRouter } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import {
   Drawer,
@@ -27,8 +26,8 @@ export function EditEntrySheet({ entry, open, onOpenChange }) {
   const isMobile = useIsMobile();
   const router = useRouter();
   const [saving, setSaving] = useState(false);
-  const saveBedFn = useServerFn(saveBeforeBed);
-  const saveWakeFn = useServerFn(saveAfterWaking);
+  const saveBedFn = saveBeforeBed;
+  const saveWakeFn = saveAfterWaking;
 
   const onSaved = async (fn, vars) => {
     setSaving(true);

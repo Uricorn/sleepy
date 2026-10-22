@@ -1,0 +1,8 @@
+{
+  "name": "Lull · Sleep Diary",
+  "short_name": "Lull",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0C1017",
+  "theme_color": "#0C1017"
+}
