@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { BeforeBedForm } from "@/components/sleep/BeforeBedForm";
 import { AfterWakingForm } from "@/components/sleep/AfterWakingForm";
 import { TrendsCard } from "@/components/sleep/TrendsCard";
+import { BackupReminder } from "@/components/sleep/BackupReminder";
 import { HistoryList } from "@/components/sleep/HistoryList";
 import { ReminderSettings } from "@/components/sleep/ReminderSettings";
 import { EditEntrySheet } from "@/components/sleep/EditEntrySheet";
@@ -101,6 +102,7 @@ function HomePage() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6 px-4 py-6">
+      <BackupReminder hasEntries={recentEntries.length > 0} />
       {/* Hero */}
       <section className="overflow-hidden rounded-[1.5rem] border border-border bg-gradient-to-br from-[#161D2A] to-[#0C1017] p-6">
         <p className="text-sm text-muted-foreground">{formatDateLabel(nightDate)}</p>

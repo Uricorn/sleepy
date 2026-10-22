@@ -5,6 +5,7 @@ import { base44 } from "@/api/base44Client";
 import { chatWithAssistant } from "@/lib/chat-fns";
 import { todayNightKey } from "@/lib/sleep-utils";
 import { ChatBubble } from "./ChatBubble";
+import { useOnline } from "@/hooks/useOnline";
 import { parseLocal } from "@/lib/local-parser";
 
 const INTRO = {
@@ -17,6 +18,7 @@ export function ChatPanel() {
   const [input, setInput] = useState("");
   const [files, setFiles] = useState([]);
   const [busy, setBusy] = useState(false);
+  const online = useOnline();
   const fileRef = useRef(null);
   const endRef = useRef(null);
 
@@ -97,7 +99,7 @@ export function ChatPanel() {
       )}
       <div className="flex items-end gap-2">
         <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={pick} />
-        <button onClick={() => fileRef.current?.click()} aria-label="Upload images" className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-border bg-secondary">
+        <button onClick={() => fileRef.current?.click()} disabled={!online} title={online ? undefined : "Screenshots need internet"} aria-label="Upload images" className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-border bg-secondary disabled:opacity-40">
           <ImagePlus className="h-5 w-5" />
         </button>
         <textarea

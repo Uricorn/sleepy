@@ -9,7 +9,8 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { exportData, importData } from "@/lib/sleep-fns";
+import { Link } from "@tanstack/react-router";
+import { exportData, importData, markBackedUp } from "@/lib/sleep-fns";
 import { EraseDataDialog } from "./DeleteAccountDialog";
 
 export function DataDialog({ className, iconOnly = false }) {
@@ -25,6 +26,7 @@ export function DataDialog({ className, iconOnly = false }) {
     a.download = `lull-backup-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
+    markBackedUp();
     toast.success("Backup downloaded");
   };
 
@@ -65,6 +67,9 @@ export function DataDialog({ className, iconOnly = false }) {
             </button>
             <input ref={fileRef} type="file" accept="application/json,.json" className="hidden" onChange={onFile} />
             <EraseDataDialog onDone={() => setOpen(false)} />
+            <Link to="/privacy" onClick={() => setOpen(false)} className="block pt-1 text-center text-sm text-muted-foreground underline">
+              Privacy policy
+            </Link>
           </div>
         </DialogContent>
       </Dialog>

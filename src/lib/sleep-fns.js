@@ -171,6 +171,15 @@ export function importData(text) {
   return count;
 }
 
+const BACKUP_KEY = "lull.lastBackup";
+export function markBackedUp() {
+  localStorage.setItem(BACKUP_KEY, String(Date.now()));
+}
+export function lastBackupAt() {
+  const v = Number(localStorage.getItem(BACKUP_KEY));
+  return v || null;
+}
+
 export function eraseAllData() {
   localStorage.removeItem(KEY);
 }
