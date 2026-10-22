@@ -4,5 +4,8 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0C1017",
-  "theme_color": "#0C1017"
+  "theme_color": "#0C1017",
+  "icons": [
+    { "src": "https://media.base44.com/images/public/6ada54ca775d39c7b5450843/d7a956832_generated_image.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
 }
