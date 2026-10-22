@@ -26,7 +26,7 @@ const schema = {
   required: ["reply"],
 };
 
-function clean(f = {}) {
+function clean(f = {}, userText = "") {
   const out = {};
   if (/^\d{4}-\d{2}-\d{2}$/.test(f.date || "")) out.date = f.date;
   for (const k of ["bedtime", "estimated_sleep_onset", "estimated_out_of_bed_time"]) {
@@ -34,11 +34,12 @@ function clean(f = {}) {
   }
   const aw = (f.night_awakenings || []).filter((t) => TIME_RE.test(t || ""));
   if (aw.length) out.night_awakenings = aw;
-  if (typeof f.estimated_total_sleep_hours === "number" && f.estimated_total_sleep_hours >= 0 && f.estimated_total_sleep_hours <= 24) {
+  if (typeof f.estimated_total_sleep_hours === "number" && f.estimated_total_sleep_hours > 0 && f.estimated_total_sleep_hours <= 24) {
     out.estimated_total_sleep_hours = Math.round(f.estimated_total_sleep_hours * 100) / 100;
   }
   if (Number.isInteger(f.sleep_quality) && f.sleep_quality >= 1 && f.sleep_quality <= 5) out.sleep_quality = f.sleep_quality;
-  if (typeof f.woke_up_tired === "boolean") out.woke_up_tired = f.woke_up_tired;
+  const mentionsTired = /tired|rested|refresh|exhaust|groggy|energi|fatigue|sleepy/i.test(userText);
+  if (typeof f.woke_up_tired === "boolean" && mentionsTired) out.woke_up_tired = f.woke_up_tired;
   for (const k of ["pre_sleep_notes", "additional_notes"]) {
     if (typeof f[k] === "string" && f[k].trim()) out[k] = f[k].trim().slice(0, 1000);
   }
@@ -71,5 +72,5 @@ ${convo}`;
       response_json_schema: schema,
       file_urls: data.imageUrls?.length ? data.imageUrls : undefined,
     });
-    return { reply: String(res?.reply || "Done."), fields: clean(res?.fields) };
+    return { reply: String(res?.reply || "Done."), fields: clean(res?.fields, data.messages.filter((m) => m.role === "user").map((m) => m.content).join(" ")) };
   });
