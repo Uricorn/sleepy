@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Moon, BookOpen, BarChart3, LogOut } from "lucide-react";
 import { useAuth } from "@/lib/AuthContext";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/utils";
+import { DeleteAccountDialog } from "./DeleteAccountDialog";
 
 const NAV = [
   { to: "/", label: "Tonight", icon: Moon },
@@ -19,17 +19,26 @@ export function SleepLayout({ children }) {
   if (isMobile) {
     return (
       <div className="flex min-h-dvh flex-col bg-background text-foreground">
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur">
+        <header
+          className="sticky top-0 z-20 flex min-h-16 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur"
+          style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
+        >
           <Link to="/" className="flex items-center gap-2">
             <Moon className="h-5 w-5 text-[#818CF8]" />
             <span className="font-heading text-lg font-extrabold tracking-tight">Lull</span>
           </Link>
-          <button onClick={logout} className="p-2 text-muted-foreground hover:text-foreground" aria-label="Sign out">
-            <LogOut className="h-5 w-5" />
-          </button>
+          <div className="flex items-center">
+            <DeleteAccountDialog iconOnly className="p-3 text-muted-foreground hover:text-destructive" />
+            <button onClick={logout} className="p-3 text-muted-foreground hover:text-foreground" aria-label="Sign out">
+              <LogOut className="h-5 w-5" />
+            </button>
+          </div>
         </header>
-        <main className="flex-1 overflow-y-auto pb-24">{children}</main>
-        <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-3 border-t border-border bg-card/95 backdrop-blur">
+        <main className="flex-1 overflow-y-auto pb-[calc(6rem+env(safe-area-inset-bottom,16px))]">{children}</main>
+        <nav
+          className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-3 border-t border-border bg-card/95 backdrop-blur"
+          style={{ paddingBottom: "env(safe-area-inset-bottom, 16px)" }}
+        >
           {NAV.map(({ to, label, icon: Icon }) => (
             <Link
               key={to}
@@ -79,6 +88,7 @@ export function SleepLayout({ children }) {
           <button onClick={logout} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
             <LogOut className="h-4 w-4" /> Sign out
           </button>
+          <DeleteAccountDialog className="mt-3 flex items-center gap-2 text-sm text-muted-foreground hover:text-destructive" />
         </div>
       </aside>
       <main className="flex-1 overflow-y-auto">{children}</main>

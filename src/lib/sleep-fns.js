@@ -156,6 +156,18 @@ export const saveReminderSettings = createServerFn({ method: "POST" })
     return base(context).entities.ReminderSettings.update(settings.id, data);
   });
 
+// Permanently removes the caller's diary data and their account.
+export const deleteMyAccount = createServerFn({ method: "POST" })
+  .middleware([requireUser])
+  .handler(async ({ context }) => {
+    const admin = base(context).asServiceRole;
+    const uid = context.user.id;
+    await admin.entities.SleepDiaryEntry.deleteMany({ created_by_id: uid });
+    await admin.entities.ReminderSettings.deleteMany({ created_by_id: uid });
+    await admin.entities.User.delete(uid);
+    return { ok: true };
+  });
+
 // Lightweight state for the in-app reminder checker.
 export const getReminderCheckState = createServerFn({ method: "GET" })
   .middleware([requireUser])

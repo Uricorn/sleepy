@@ -11,7 +11,7 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { title: "Lull · Sleep Diary" },
       { name: "description", content: "A calm two-stage sleep diary with gentle reminders and trends." },
     ],

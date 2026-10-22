@@ -13,7 +13,10 @@ import { EditEntrySheet } from "@/components/sleep/EditEntrySheet";
 import { getHomeData, saveBeforeBed, saveAfterWaking, saveReminderSettings } from "@/lib/sleep-fns";
 import { todayNightKey, formatDateLabel } from "@/lib/sleep-utils";
 
-const searchSchema = z.object({ stage: z.enum(["before_bed", "after_waking"]).optional() });
+const searchSchema = z.object({
+  stage: z.enum(["before_bed", "after_waking"]).optional(),
+  edit: z.string().optional(),
+});
 
 export const Route = createFileRoute("/_authed/")({
   ssr: false,
@@ -24,7 +27,8 @@ export const Route = createFileRoute("/_authed/")({
 });
 
 function HomePage() {
-  const { stage } = Route.useSearch();
+  const { stage, edit } = Route.useSearch();
+  const navigate = Route.useNavigate();
   const data = useLoaderData({ from: "/_authed/" });
   const { tonightEntry, lastNightEntry, recentEntries, trends, reminderSettings } = data;
   const router = useRouter();
@@ -32,7 +36,8 @@ function HomePage() {
 
   const [savingBed, setSavingBed] = useState(false);
   const [savingWake, setSavingWake] = useState(false);
-  const [editEntry, setEditEntry] = useState(null);
+  const editEntry = recentEntries.find((e) => e.id === edit) || null;
+  const setEditId = (id) => navigate({ search: (prev) => ({ ...prev, edit: id }) });
   const [settings, setSettings] = useState(reminderSettings);
 
   useEffect(() => setSettings(reminderSettings), [reminderSettings]);
@@ -156,12 +161,12 @@ function HomePage() {
           All entries <ChevronRight className="h-4 w-4" />
         </Link>
       </section>
-      <HistoryList entries={recentEntries.slice(0, 5)} onEdit={setEditEntry} />
+      <HistoryList entries={recentEntries.slice(0, 5)} onEdit={(e) => setEditId(e.id)} />
 
       {/* Reminders */}
       <ReminderSettings settings={settings} onPatch={onPatch} />
 
-      <EditEntrySheet entry={editEntry} open={!!editEntry} onOpenChange={(o) => !o && setEditEntry(null)} />
+      <EditEntrySheet entry={editEntry} open={!!editEntry} onOpenChange={(o) => !o && setEditId(undefined)} />
     </div>
   );
 }

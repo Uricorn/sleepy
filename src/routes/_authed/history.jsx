@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { z } from "zod";
 import { createFileRoute, useLoaderData, useRouter } from "@tanstack/react-router";
 import { HistoryList } from "@/components/sleep/HistoryList";
 import { EditEntrySheet } from "@/components/sleep/EditEntrySheet";
@@ -6,6 +6,7 @@ import { getHistory } from "@/lib/sleep-fns";
 
 export const Route = createFileRoute("/_authed/history")({
   ssr: false,
+  validateSearch: z.object({ edit: z.string().optional() }),
   head: () => ({ meta: [{ title: "Lull · History" }] }),
   loader: () => getHistory(),
   component: HistoryPage,
@@ -13,7 +14,9 @@ export const Route = createFileRoute("/_authed/history")({
 
 function HistoryPage() {
   const entries = useLoaderData({ from: "/_authed/history" });
-  const [editId, setEditId] = useState(null);
+  const { edit: editId } = Route.useSearch();
+  const navigate = Route.useNavigate();
+  const setEditId = (id) => navigate({ search: { edit: id } });
   const edit = entries.find((e) => e.id === editId) || null;
 
   return (
@@ -23,7 +26,7 @@ function HistoryPage() {
         <p className="text-sm text-muted-foreground">Tap any night to edit both stages.</p>
       </div>
       <HistoryList entries={entries} onEdit={(e) => setEditId(e.id)} />
-      <EditEntrySheet entry={edit} open={!!edit} onOpenChange={(o) => !o && setEditId(null)} />
+      <EditEntrySheet entry={edit} open={!!edit} onOpenChange={(o) => !o && setEditId(undefined)} />
     </div>
   );
 }
