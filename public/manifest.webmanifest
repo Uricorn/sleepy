@@ -1,6 +1,6 @@
 {
-  "name": "Lull · Sleep Diary",
-  "short_name": "Lull",
+  "name": "Sleepy · Sleep Diary",
+  "short_name": "Sleepy",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0C1017",

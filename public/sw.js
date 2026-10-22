@@ -1,4 +1,4 @@
-// Lull offline support: caches the app shell and assets so the diary works without internet.
+// Sleepy offline support: caches the app shell and assets so the diary works without internet.
 const CACHE = "lull-v1";
 const SHELL = ["/", "/history", "/trends"];
 

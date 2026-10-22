@@ -147,10 +147,10 @@ export function importData(text) {
   try {
     parsed = JSON.parse(text);
   } catch {
-    throw new Error("This file isn't a valid Lull backup.");
+    throw new Error("This file isn't a valid Sleepy backup.");
   }
   if (!parsed || parsed.app !== "lull" || !Array.isArray(parsed.entries)) {
-    throw new Error("This file isn't a valid Lull backup.");
+    throw new Error("This file isn't a valid Sleepy backup.");
   }
   const db = read();
   const byDate = new Map(db.entries.map((e) => [e.date, e]));

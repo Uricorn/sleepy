@@ -1,18 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/privacy")({
-  head: () => ({ meta: [{ title: "Lull · Privacy Policy" }] }),
+  head: () => ({ meta: [{ title: "Sleepy · Privacy Policy" }] }),
   component: PrivacyPage,
 });
 
 function PrivacyPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-5 px-5 py-10 text-foreground">
-      <Link to="/" className="text-sm text-primary">← Back to Lull</Link>
+      <Link to="/" className="text-sm text-primary">← Back to Sleepy</Link>
       <h1 className="font-heading text-3xl font-extrabold">Privacy Policy</h1>
       <section className="space-y-2">
         <h2 className="font-heading text-lg font-bold">Your diary stays on your device</h2>
-        <p className="text-muted-foreground">Lull needs no account. Your sleep entries and reminder settings are stored only in this device's local storage. We do not collect, upload or sell them.</p>
+        <p className="text-muted-foreground">Sleepy needs no account. Your sleep entries and reminder settings are stored only in this device's local storage. We do not collect, upload or sell them.</p>
       </section>
       <section className="space-y-2">
         <h2 className="font-heading text-lg font-bold">The Assistant</h2>
@@ -24,7 +24,7 @@ function PrivacyPage() {
       </section>
       <section className="space-y-2">
         <h2 className="font-heading text-lg font-bold">Not medical advice</h2>
-        <p className="text-muted-foreground">Lull is a personal journal and does not provide medical advice or diagnosis.</p>
+        <p className="text-muted-foreground">Sleepy is a personal journal and does not provide medical advice or diagnosis.</p>
       </section>
     </div>
   );

@@ -57,7 +57,7 @@ export const chatWithAssistant = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     const convo = data.messages.map((m) => `${m.role === "user" ? "User" : "Assistant"}: ${m.content}`).join("\n");
-    const prompt = `You are the assistant inside Lull, a private sleep diary. Today's date is ${data.today}.
+    const prompt = `You are the assistant inside Sleepy, a private sleep diary. Today's date is ${data.today}.
 Help the user fill in their sleep diary from what they say and from attached screenshots (e.g. sleep-ring or wearable app data).
 Rules:
 - Only fill a field when the value is explicitly stated or visible. Never guess or invent. Leave everything else out.

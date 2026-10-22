@@ -4,7 +4,7 @@ import { getTrends } from "@/lib/sleep-fns";
 
 export const Route = createFileRoute("/_authed/trends")({
   ssr: false,
-  head: () => ({ meta: [{ title: "Lull · Trends" }] }),
+  head: () => ({ meta: [{ title: "Sleepy · Trends" }] }),
   loader: () => getTrends(),
   component: TrendsPage,
 });

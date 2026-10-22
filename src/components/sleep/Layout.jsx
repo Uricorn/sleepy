@@ -22,7 +22,7 @@ export function SleepLayout({ children }) {
         >
           <Link to="/" className="flex items-center gap-2">
             <Moon className="h-5 w-5 text-[#818CF8]" />
-            <span className="font-heading text-lg font-extrabold tracking-tight">Lull</span>
+            <span className="font-heading text-lg font-extrabold tracking-tight">Sleepy</span>
           </Link>
           <div className="flex items-center">
             <DataDialog iconOnly className="p-3 text-muted-foreground hover:text-foreground" />
@@ -54,7 +54,7 @@ export function SleepLayout({ children }) {
       <aside className="flex w-[300px] shrink-0 flex-col border-r border-border bg-card p-6">
         <Link to="/" className="mb-10 flex items-center gap-2">
           <Moon className="h-6 w-6 text-[#818CF8]" />
-          <span className="font-heading text-2xl font-extrabold tracking-tight">Lull</span>
+          <span className="font-heading text-2xl font-extrabold tracking-tight">Sleepy</span>
         </Link>
         <nav className="flex flex-col gap-1">
           {items.map(({ to, label, icon: Icon }) => (

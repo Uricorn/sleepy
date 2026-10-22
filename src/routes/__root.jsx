@@ -17,7 +17,7 @@ export const Route = createRootRoute({
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
-      { title: "Lull · Sleep Diary" },
+      { title: "Sleepy · Sleep Diary" },
       { name: "description", content: "A calm two-stage sleep diary with gentle reminders and trends." },
     ],
     // No icon link: the platform adds the app's logo when serving.

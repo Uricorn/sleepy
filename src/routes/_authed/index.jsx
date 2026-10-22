@@ -20,7 +20,7 @@ const searchSchema = z.object({
 
 export const Route = createFileRoute("/_authed/")({
   ssr: false,
-  head: () => ({ meta: [{ title: "Lull · Tonight" }] }),
+  head: () => ({ meta: [{ title: "Sleepy · Tonight" }] }),
   validateSearch: searchSchema,
   loader: () => getHomeData({ data: { nightDate: todayNightKey() } }),
   component: HomePage,
@@ -107,7 +107,7 @@ function HomePage() {
       <section className="overflow-hidden rounded-[1.5rem] border border-border bg-gradient-to-br from-[#161D2A] to-[#0C1017] p-6">
         <p className="text-sm text-muted-foreground">{formatDateLabel(nightDate)}</p>
         <h1 className="mt-1 font-heading text-[clamp(2rem,5vw,3rem)] font-extrabold leading-tight">
-          {tonightEntry ? "Tonight's Log" : active ? "Last Night's Sleep" : "Welcome to Lull"}
+          {tonightEntry ? "Tonight's Log" : active ? "Last Night's Sleep" : "Welcome to Sleepy"}
         </h1>
         <p className="mt-2 text-muted-foreground">
           {active

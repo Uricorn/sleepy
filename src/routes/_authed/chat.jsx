@@ -5,7 +5,7 @@ import { useOnline } from "@/hooks/useOnline";
 
 export const Route = createFileRoute("/_authed/chat")({
   ssr: false,
-  head: () => ({ meta: [{ title: "Lull · Assistant" }] }),
+  head: () => ({ meta: [{ title: "Sleepy · Assistant" }] }),
   component: ChatPage,
 });
 

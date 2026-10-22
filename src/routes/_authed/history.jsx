@@ -7,7 +7,7 @@ import { getHistory } from "@/lib/sleep-fns";
 export const Route = createFileRoute("/_authed/history")({
   ssr: false,
   validateSearch: z.object({ edit: z.string().optional() }),
-  head: () => ({ meta: [{ title: "Lull · History" }] }),
+  head: () => ({ meta: [{ title: "Sleepy · History" }] }),
   loader: () => getHistory(),
   component: HistoryPage,
 });

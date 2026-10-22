@@ -23,7 +23,7 @@ export function DataDialog({ className, iconOnly = false }) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `lull-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `sleepy-backup-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
     markBackedUp();
