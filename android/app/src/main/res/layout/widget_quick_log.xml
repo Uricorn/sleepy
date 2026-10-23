@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="horizontal" android:padding="10dp"
+    android:background="@drawable/widget_bg">
+    <TextView android:id="@+id/widget_before_bed"
+        android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+        android:layout_marginEnd="5dp" android:gravity="center"
+        android:background="@drawable/widget_btn_bg" android:text="@string/shortcut_bed"
+        android:textColor="#FFFFFF" android:textSize="15sp" android:textStyle="bold" />
+    <TextView android:id="@+id/widget_after_waking"
+        android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+        android:layout_marginStart="5dp" android:gravity="center"
+        android:background="@drawable/widget_btn_bg" android:text="@string/shortcut_morning"
+        android:textColor="#FFFFFF" android:textSize="15sp" android:textStyle="bold" />
+</LinearLayout>

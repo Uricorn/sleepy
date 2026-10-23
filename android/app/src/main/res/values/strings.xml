@@ -7,4 +7,6 @@
     <string name="reminder_morning_text">Tap to finish your morning entry.</string>
     <string name="shortcut_bed">Log before bed</string>
     <string name="shortcut_morning">Log morning</string>
+    <string name="widget_label">Sleepy quick log</string>
+    <string name="widget_description">One-tap access to your before-bed and after-waking diary entries.</string>
 </resources>

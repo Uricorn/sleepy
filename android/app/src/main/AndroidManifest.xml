@@ -17,6 +17,12 @@
             </intent-filter>
             <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
         </activity>
+        <receiver android:name=".QuickLogWidget" android:exported="true" android:label="@string/widget_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_quick_log" />
+        </receiver>
         <receiver android:name=".ReminderReceiver" android:exported="false" />
         <receiver android:name=".BootReceiver" android:exported="false">
             <intent-filter>
