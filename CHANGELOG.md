@@ -6,6 +6,8 @@ versioning: [Semantic Versioning](https://semver.org/). Each release also needs
 
 ## [Unreleased]
 
+## [1.1.0]
+
 ### Added
 - Localization in 17 languages with full RTL support, plus a language switcher.
 - Multilingual keyword support in the local typed-note parser.
