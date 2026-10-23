@@ -1,6 +1,6 @@
 # Contributing
 
-1. Use Node 22.12+ (`nvm use`), then `npm ci`.
+1. Use Node 24 (`nvm use` reads `.nvmrc`; 22.12+ also works), then `npm ci`.
 2. `npm run dev` for the web UI, `npm run lint && npm test` before pushing.
 3. Android build: see README "Android build". Releases: see [docs/RELEASING.md](docs/RELEASING.md).
 
