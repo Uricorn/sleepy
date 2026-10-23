@@ -42,7 +42,9 @@ function HomePage() {
   const setEditId = (id) => navigate({ search: (prev) => ({ ...prev, edit: id }) });
   const [settings, setSettings] = useState(reminderSettings);
 
-  useEffect(() => setSettings(reminderSettings), [reminderSettings]);
+  useEffect(() => {
+    setSettings(reminderSettings);
+  }, [reminderSettings]);
 
   useEffect(() => {
     if (!stage) return;
@@ -152,7 +154,7 @@ function HomePage() {
       <section className="flex items-center justify-between">
         <h2 className="font-heading text-xl font-bold">{t("Trends")}</h2>
         <Link to="/trends" className="flex items-center gap-1 text-sm text-[#818CF8]">
-          {t("View all")} <ChevronRight className="h-4 w-4" />
+          {t("View all")} <ChevronRight className="h-4 w-4 rtl:rotate-180" />
         </Link>
       </section>
       <TrendsCard entries={trends} />
@@ -161,7 +163,7 @@ function HomePage() {
       <section className="flex items-center justify-between">
         <h2 className="font-heading text-xl font-bold">{t("Recent nights")}</h2>
         <Link to="/history" className="flex items-center gap-1 text-sm text-[#818CF8]">
-          {t("All entries")} <ChevronRight className="h-4 w-4" />
+          {t("All entries")} <ChevronRight className="h-4 w-4 rtl:rotate-180" />
         </Link>
       </section>
       <HistoryList entries={recentEntries.slice(0, 5)} onEdit={(e) => setEditId(e.id)} />

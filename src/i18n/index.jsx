@@ -24,6 +24,7 @@ export function I18nProvider({ children }) {
   }, [lang]);
 
   const setLang = useCallback((l) => {
+    if (!LANGUAGES[l]) return;
     setLangState(l);
     try { localStorage.setItem(KEY, l); } catch { /* ignore */ }
   }, []);

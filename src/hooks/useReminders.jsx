@@ -6,8 +6,8 @@ import { nowInTz } from "@/lib/sleep-utils";
 import { useI18n } from "@/i18n";
 
 // In the Android app the schedule is handed to native alarms (they fire even when
-// the app is closed). In a browser, reminders fire only while the page is open.
-// Browser-based reminders. Fires a Notification when the wall-clock time in the
+// the app is closed). In a browser, reminders fire only while the page is open:
+// a Notification fires a Notification when the wall-clock time in the
 // user's timezone matches a configured reminder, the relevant stage is not yet
 // done, and the app is open in the browser. A native mobile build (with push
 // enabled) is required for reliable background delivery.
@@ -70,5 +70,5 @@ export function useReminders() {
     check();
     const id = setInterval(check, 60000);
     return () => clearInterval(id);
-  }, [navigate]);
+  }, [navigate, t]);
 }

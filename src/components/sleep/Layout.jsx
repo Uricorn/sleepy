@@ -1,4 +1,5 @@
-import { Link } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Moon, BookOpen, BarChart3, MessageCircle } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { DataDialog } from "./DataDialog";
@@ -15,6 +16,11 @@ export function SleepLayout({ children }) {
   const isMobile = useIsMobile();
   const { t } = useI18n();
   const items = [...NAV, { to: "/chat", label: "Assistant", icon: MessageCircle }];
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  useEffect(() => {
+    const current = items.find((i) => i.to === pathname);
+    if (current) document.title = `Sleepy · ${t(current.label)}`;
+  }, [pathname, t]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (isMobile) {
     return (

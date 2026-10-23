@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 import { Database, Download, Upload } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Link } from "@tanstack/react-router";
 import { exportData, importData, markBackedUp } from "@/lib/sleep-fns";
 import { EraseDataDialog } from "./DeleteAccountDialog";
 import { useI18n } from "@/i18n";
@@ -31,7 +30,7 @@ export function DataDialog({ className, iconOnly = false }) {
     };
     window.addEventListener("sleepy-backup-result", onSaved);
     return () => window.removeEventListener("sleepy-backup-result", onSaved);
-  }, []);
+  }, [t]);
 
   const onExport = () => {
     const filename = `sleepy-backup-${new Date().toISOString().slice(0, 10)}.json`;

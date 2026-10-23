@@ -1,12 +1,12 @@
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
-import { formatDateLabel } from "@/lib/sleep-utils";
+import { formatShortDate } from "@/lib/sleep-utils";
 import { useI18n } from "@/i18n";
 
 export function TrendsCard({ entries = [] }) {
   const { t } = useI18n();
   const data = [...entries]
     .slice(0, 7)
-    .map((e) => ({ name: formatDateLabel(e.date).replace(",", "").split(" ").slice(0, 2).join(" "), hours: e.estimated_total_sleep_hours ?? 0, quality: e.sleep_quality ?? 0 }));
+    .map((e) => ({ name: formatShortDate(e.date), hours: e.estimated_total_sleep_hours ?? 0, quality: e.sleep_quality ?? 0 }));
   // Average only nights that actually have a value, so unlogged mornings don't pull it down.
   const average = (key) => {
     const values = data.map((d) => d[key]).filter((v) => v > 0);

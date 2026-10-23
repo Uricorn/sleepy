@@ -18,7 +18,9 @@ export function ChatPanel() {
   const [busy, setBusy] = useState(false);
   const endRef = useRef(null);
 
-  useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth" }), [messages, busy]);
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, busy]);
 
   const send = async () => {
     const text = input.trim();

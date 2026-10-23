@@ -32,7 +32,7 @@ export function HistoryList({ entries = [], onEdit }) {
         <button
           key={e.id}
           onClick={() => onEdit(e)}
-          className="flex w-full items-center gap-3 rounded-2xl border border-border bg-card p-4 text-left hover:border-[#818CF8]/40"
+          className="flex w-full items-center gap-3 rounded-2xl border border-border bg-card p-4 text-start hover:border-[#818CF8]/40"
         >
           <div className="min-w-0 flex-1">
             <p className="truncate font-medium">{formatDateLabel(e.date)}</p>
@@ -44,7 +44,7 @@ export function HistoryList({ entries = [], onEdit }) {
             <Pill on={e.before_bed_recorded} icon={Moon} label={t("Night")} indigo />
             <Pill on={e.after_waking_recorded} icon={Sunrise} label={t("AM")} />
           </div>
-          <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          <ChevronRight className="h-4 w-4 text-muted-foreground rtl:rotate-180" />
         </button>
       ))}
     </div>

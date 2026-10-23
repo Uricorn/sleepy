@@ -12,9 +12,9 @@
     "lint": "eslint . --quiet",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
-    "test": "node scripts/test-diary.mjs && node src/lib/local-parser.test.js && node scripts/check-release.mjs",
+    "test": "node scripts/test-diary.mjs && node src/lib/local-parser.test.js && node scripts/check-release.mjs && node scripts/check-i18n.mjs",
     "android:build": "sh scripts/build-android.sh",
-    "check:release": "node scripts/check-release.mjs",
+    "check:release": "node scripts/check-release.mjs && node scripts/check-i18n.mjs",
     "android:release": "sh scripts/build-android.sh release"
   },
   "dependencies": {

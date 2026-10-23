@@ -45,7 +45,7 @@ export function ApplyCard({ fields }) {
         {rows.map(([k, label, fmt]) => (
           <div key={k} className="flex justify-between gap-3">
             <dt className="text-muted-foreground">{t(label)}</dt>
-            <dd className="text-right font-medium">{t(fmt(fields[k]))}</dd>
+            <dd className="text-end font-medium">{t(fmt(fields[k]))}</dd>
           </div>
         ))}
       </dl>

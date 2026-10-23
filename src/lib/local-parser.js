@@ -21,8 +21,13 @@ function timeAfter(text, words) {
   return toHHMM(m[1], m[2], m[3]);
 }
 
+// Arabic-Indic (٠-٩) and Persian (۰-۹) digits -> ASCII, so localized keyboards work.
+function normalizeDigits(s) {
+  return s.replace(/[\u0660-\u0669\u06F0-\u06F9]/g, (c) => String(c.charCodeAt(0) & 0xf));
+}
+
 export function parseLocal(text = "") {
-  const t = String(text).toLowerCase();
+  const t = normalizeDigits(String(text)).toLowerCase();
   const fields = {};
 
   const bed = timeAfter(t, "went to bed|bedtime|bed time|in bed at|to bed at|bed at|went to sleep at");
