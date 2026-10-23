@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+/* Tailwind v4 compat: keep v3 default border color */
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button { border-color: hsl(var(--border)); }
+}
 
 @layer base {
   :root {
