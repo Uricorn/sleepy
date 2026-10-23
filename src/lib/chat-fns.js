@@ -1,4 +1,5 @@
 import { parseLocal } from "./local-parser.js";
+import { TIRED, RESTED } from "./parser-keywords.js";
 
 const TIME_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
 
@@ -14,7 +15,7 @@ export function cleanFields(f = {}, userText = "") {
     out.estimated_total_sleep_hours = Math.round(f.estimated_total_sleep_hours * 100) / 100;
   }
   if (Number.isInteger(f.sleep_quality) && f.sleep_quality >= 1 && f.sleep_quality <= 5) out.sleep_quality = f.sleep_quality;
-  const mentionsTired = /tired|rested|refresh|exhaust|groggy|energi|fatigue|sleepy/i.test(userText);
+  const mentionsTired = new RegExp(`${TIRED}|${RESTED}|tired|rested|refresh|exhaust|groggy|energi|fatigue|sleepy`, "i").test(userText);
   if (typeof f.woke_up_tired === "boolean" && mentionsTired) out.woke_up_tired = f.woke_up_tired;
   for (const k of ["pre_sleep_notes", "additional_notes"]) {
     if (typeof f[k] === "string" && f[k].trim()) out[k] = f[k].trim().slice(0, 1000);
