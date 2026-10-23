@@ -139,4 +139,5 @@ export default [
   "Du kannst eine Sicherungsdatei exportieren, auf einem anderen Gerät importieren oder unter „Deine Daten“ alles löschen. Deinstallieren der App oder Löschen der Browserdaten löscht dein Tagebuch, falls du keine Sicherung hast.",
   "Keine medizinische Beratung",
   "Sleepy ist ein persönliches Tagebuch und bietet keine medizinische Beratung oder Diagnose.",
+  "Hauptmenü",
 ];

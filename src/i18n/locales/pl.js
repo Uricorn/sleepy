@@ -139,4 +139,5 @@ export default [
   "Możesz wyeksportować kopię zapasową, zaimportować ją na innym urządzeniu lub usunąć wszystko w „Twoje dane”. Odinstalowanie aplikacji lub wyczyszczenie danych przeglądarki usuwa dziennik, jeśli nie masz kopii.",
   "To nie porada medyczna",
   "Sleepy to osobisty dziennik i nie udziela porad ani diagnoz medycznych.",
+  "Główna",
 ];

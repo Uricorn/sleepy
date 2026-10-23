@@ -139,4 +139,5 @@ export default [
   "Você pode exportar um arquivo de backup, importá-lo em outro dispositivo ou apagar tudo em “Seus dados”. Desinstalar o app ou limpar os dados do navegador apaga seu diário se não houver backup.",
   "Não é aconselhamento médico",
   "O Sleepy é um diário pessoal e não oferece aconselhamento ou diagnóstico médico.",
+  "Principal",
 ];

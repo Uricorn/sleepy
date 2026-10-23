@@ -13,11 +13,12 @@ function ReminderRow({ icon: Icon, indigo, label, desc, enabled, time, onToggle,
           <p className="font-medium">{label}</p>
           <p className="text-xs text-muted-foreground">{desc}</p>
         </div>
-        <Switch checked={enabled} onCheckedChange={onToggle} />
+        <Switch aria-label={label} checked={enabled} onCheckedChange={onToggle} />
       </div>
       {enabled && (
         <input
           type="time"
+          aria-label={label}
           value={time || ""}
           onChange={(e) => onTime(e.target.value)}
           className="h-12 w-full rounded-2xl border border-border bg-secondary px-4 font-heading text-base focus:outline-none focus:ring-2 focus:ring-[#818CF8]"

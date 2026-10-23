@@ -139,4 +139,5 @@ export default [
   "Puedes exportar un archivo de copia, importarlo en otro dispositivo o borrarlo todo desde «Tus datos». Desinstalar la app o borrar los datos del navegador elimina tu diario si no tienes copia.",
   "No es consejo médico",
   "Sleepy es un diario personal y no ofrece consejo ni diagnóstico médico.",
+  "Principal",
 ];

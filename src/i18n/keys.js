@@ -140,4 +140,5 @@ export const KEYS = [
   "You can export a backup file, import it on another device, or erase everything from \"Your data\". Uninstalling the app or clearing browser data deletes your diary unless you have a backup.",
   "Not medical advice",
   "Sleepy is a personal journal and does not provide medical advice or diagnosis.",
+  "Main",
 ];

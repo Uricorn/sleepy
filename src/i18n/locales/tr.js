@@ -139,4 +139,5 @@ export default [
   "Yedek dosyası dışa aktarabilir, başka bir cihaza aktarabilir veya “Verileriniz”den her şeyi silebilirsiniz. Uygulamayı kaldırmak veya tarayıcı verilerini temizlemek, yedeğiniz yoksa günlüğünüzü siler.",
   "Tıbbi tavsiye değildir",
   "Sleepy kişisel bir günlüktür; tıbbi tavsiye veya teşhis sunmaz.",
+  "Ana",
 ];
