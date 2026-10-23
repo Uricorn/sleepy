@@ -37,4 +37,9 @@ export default [
 "La page que vous cherchez n'existe pas.","Retour","Recommencer",
 "C'est l'heure de noter avant le coucher","Complétez l'entrée de sommeil de la nuit dernière","Ouvrir",
 "Touchez pour noter vos remarques avant le coucher.","Touchez pour terminer votre entrée du matin.",
+"Vos 7 dernières nuits en un coup d'œil.",
+"Les rappels sont envoyés sous forme de notifications quotidiennes, même quand Sleepy est fermé. Android peut les livrer avec quelques minutes de retard pour économiser la batterie.",
+"Hors ligne : les notes saisies sont lues sur cet appareil. Rien n'est envoyé ailleurs.",
+"Dans un navigateur, les rappels n'apparaissent que lorsque Sleepy est ouvert et visible.",
+"Décrivez votre nuit en quelques mots ; elle est lue sur cet appareil pour remplir votre journal.",
 ];

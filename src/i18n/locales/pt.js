@@ -37,4 +37,9 @@ export default [
 "A página que você procura não existe.","Voltar","Recomeçar",
 "Hora de registrar antes de dormir","Complete o registro de sono da noite passada","Abrir",
 "Toque para registrar suas notas antes de dormir.","Toque para concluir seu registro da manhã.",
+"Suas últimas 7 noites num relance.",
+"Os lembretes são enviados como notificações diárias, mesmo com o Sleepy fechado. O Android pode entregá-los com alguns minutos de atraso para poupar bateria.",
+"Offline: as notas digitadas são lidas neste dispositivo. Nada é enviado para lugar nenhum.",
+"Em um navegador, os lembretes só aparecem enquanto o Sleepy está aberto e visível.",
+"Descreva sua noite em poucas palavras e ela será lida neste dispositivo para preencher seu diário.",
 ];

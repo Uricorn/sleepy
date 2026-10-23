@@ -38,4 +38,9 @@ export const KEYS = [
   "The page you are looking for does not exist.", "Go back", "Start over",
   "Time to log before bed", "Complete last night's sleep entry", "Open",
   "Tap to record your before-bed notes.", "Tap to finish your morning entry.",
+"Your last 7 nights at a glance.",
+"Reminders are sent as daily notifications, even when Sleepy is closed. Android may deliver them a few minutes late to save battery.",
+"Offline: typed notes are read on this device. Nothing is sent anywhere.",
+"In a browser, reminders appear only while Sleepy is open and visible.",
+"Describe your night in a few words and it is read on this device to fill in your diary.",
 ];

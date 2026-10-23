@@ -37,4 +37,9 @@ export default [
 "La página que buscas no existe.","Volver","Empezar de nuevo",
 "Hora de registrar antes de dormir","Completa la entrada de sueño de anoche","Abrir",
 "Toca para anotar tus notas antes de dormir.","Toca para terminar tu entrada de la mañana.",
+"Tus últimas 7 noches de un vistazo.",
+"Los recordatorios se envían como notificaciones diarias, incluso con Sleepy cerrado. Android puede entregarlos con unos minutos de retraso para ahorrar batería.",
+"Sin conexión: las notas escritas se leen en este dispositivo. No se envía nada a ningún sitio.",
+"En un navegador, los recordatorios solo aparecen mientras Sleepy está abierto y visible.",
+"Describe tu noche en pocas palabras y se leerá en este dispositivo para rellenar tu diario.",
 ];

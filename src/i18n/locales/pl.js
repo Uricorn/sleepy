@@ -37,4 +37,9 @@ export default [
 "Strona, której szukasz, nie istnieje.","Wstecz","Zacznij od nowa",
 "Czas zapisać dane przed snem","Uzupełnij wpis o śnie z ostatniej nocy","Otwórz",
 "Dotknij, aby zapisać notatki przed snem.","Dotknij, aby dokończyć wpis poranny.",
+"Twoje ostatnie 7 nocy w skrócie.",
+"Przypomnienia są wysyłane jako codzienne powiadomienia, nawet gdy Sleepy jest zamknięty. Android może dostarczać je z kilkuminutowym opóźnieniem, aby oszczędzać baterię.",
+"Offline: wpisane notatki są odczytywane na tym urządzeniu. Nic nie jest nigdzie wysyłane.",
+"W przeglądarce przypomnienia pojawiają się tylko, gdy Sleepy jest otwarty i widoczny.",
+"Opisz swoją noc kilkoma słowami, a zostanie odczytana na tym urządzeniu, aby uzupełnić dziennik.",
 ];

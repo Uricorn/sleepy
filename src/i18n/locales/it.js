@@ -37,4 +37,9 @@ export default [
 "La pagina che cerchi non esiste.","Indietro","Ricomincia",
 "È ora di registrare prima di dormire","Completa la voce del sonno di ieri notte","Apri",
 "Tocca per registrare le note prima di dormire.","Tocca per completare la voce del mattino.",
+"Le tue ultime 7 notti a colpo d'occhio.",
+"I promemoria vengono inviati come notifiche giornaliere, anche quando Sleepy è chiuso. Android può consegnarli con qualche minuto di ritardo per risparmiare batteria.",
+"Offline: le note scritte vengono lette su questo dispositivo. Nulla viene inviato altrove.",
+"In un browser, i promemoria compaiono solo mentre Sleepy è aperto e visibile.",
+"Descrivi la tua notte in poche parole e verrà letta su questo dispositivo per compilare il tuo diario.",
 ];

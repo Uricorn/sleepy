@@ -37,4 +37,9 @@ export default [
 "Aradığınız sayfa mevcut değil.","Geri git","Baştan başla",
 "Yatmadan önce kayıt zamanı","Dünkü gecenin uyku girişini tamamlayın","Aç",
 "Yatmadan önce notlarınızı kaydetmek için dokunun.","Sabah girişinizi bitirmek için dokunun.",
+"Son 7 geceniz tek bakışta.",
+"Hatırlatıcılar, Sleepy kapalıyken bile günlük bildirim olarak gönderilir. Android, pil tasarrufu için bunları birkaç dakika geç iletebilir.",
+"Çevrimdışı: yazdığınız notlar bu cihazda okunur. Hiçbir yere hiçbir şey gönderilmez.",
+"Tarayıcıda hatırlatıcılar yalnızca Sleepy açık ve görünürken görünür.",
+"Gecenizi birkaç kelimeyle anlatın; günlüğünüzü doldurmak için bu cihazda okunur.",
 ];

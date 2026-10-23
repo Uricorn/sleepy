@@ -37,4 +37,9 @@ export default [
 "Die gesuchte Seite existiert nicht.","Zurück","Neu beginnen",
 "Zeit, vor dem Schlafen zu erfassen","Schließe den Schlafeintrag der letzten Nacht ab","Öffnen",
 "Tippe, um deine Notizen vor dem Schlafen zu erfassen.","Tippe, um deinen Morgeneintrag abzuschließen.",
+"Deine letzten 7 Nächte auf einen Blick.",
+"Erinnerungen werden als tägliche Benachrichtigungen gesendet, auch wenn Sleepy geschlossen ist. Android kann sie zur Akkuschonung einige Minuten verspätet zustellen.",
+"Offline: Eingetippte Notizen werden auf diesem Gerät gelesen. Es wird nichts irgendwohin gesendet.",
+"In einem Browser erscheinen Erinnerungen nur, solange Sleepy geöffnet und sichtbar ist.",
+"Beschreibe deine Nacht in wenigen Worten; sie wird auf diesem Gerät gelesen, um dein Tagebuch auszufüllen.",
 ];
