@@ -10,6 +10,13 @@ export const LANGUAGES = {
   hi: { name: "हिन्दी", dir: "ltr" },
   ar: { name: "العربية", dir: "rtl" },
   he: { name: "עברית", dir: "rtl" },
+  uk: { name: "Українська", dir: "ltr" },
+  it: { name: "Italiano", dir: "ltr" },
+  tr: { name: "Türkçe", dir: "ltr" },
+  pl: { name: "Polski", dir: "ltr" },
+  ko: { name: "한국어", dir: "ltr" },
+  fa: { name: "فارسی", dir: "rtl" },
+  ur: { name: "اردو", dir: "rtl" },
 };
 
 // Keys: tonight, history, trends, assistant, storedOnDevice, language
@@ -25,4 +32,11 @@ export const translations = {
   hi: { tonight: "आज रात", history: "इतिहास", trends: "रुझान", assistant: "सहायक", storedOnDevice: "केवल इस डिवाइस पर संग्रहीत।", language: "भाषा" },
   ar: { tonight: "الليلة", history: "السجل", trends: "الاتجاهات", assistant: "المساعد", storedOnDevice: "محفوظ على هذا الجهاز فقط.", language: "اللغة" },
   he: { tonight: "הלילה", history: "היסטוריה", trends: "מגמות", assistant: "עוזר", storedOnDevice: "נשמר במכשיר זה בלבד.", language: "שפה" },
+  uk: { tonight: "Сьогодні", history: "Історія", trends: "Тренди", assistant: "Асистент", storedOnDevice: "Зберігається лише на цьому пристрої.", language: "Мова" },
+  it: { tonight: "Stanotte", history: "Cronologia", trends: "Tendenze", assistant: "Assistente", storedOnDevice: "Salvato solo su questo dispositivo.", language: "Lingua" },
+  tr: { tonight: "Bu gece", history: "Geçmiş", trends: "Eğilimler", assistant: "Asistan", storedOnDevice: "Yalnızca bu cihazda saklanır.", language: "Dil" },
+  pl: { tonight: "Dziś w nocy", history: "Historia", trends: "Trendy", assistant: "Asystent", storedOnDevice: "Przechowywane tylko na tym urządzeniu.", language: "Język" },
+  ko: { tonight: "오늘 밤", history: "기록", trends: "추세", assistant: "어시스턴트", storedOnDevice: "이 기기에만 저장됩니다.", language: "언어" },
+  fa: { tonight: "امشب", history: "تاریخچه", trends: "روندها", assistant: "دستیار", storedOnDevice: "فقط روی این دستگاه ذخیره می‌شود.", language: "زبان" },
+  ur: { tonight: "آج رات", history: "تاریخ", trends: "رجحانات", assistant: "معاون", storedOnDevice: "صرف اسی ڈیوائس پر محفوظ ہے۔", language: "زبان" },
 };
