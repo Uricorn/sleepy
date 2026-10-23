@@ -34,7 +34,7 @@ export function SleepLayout({ children }) {
             <span className="font-heading text-lg font-extrabold tracking-tight">Sleepy</span>
           </Link>
           <div className="flex items-center gap-1">
-            <LanguageSwitcher />
+            <LanguageSwitcher iconOnly className="p-3 text-muted-foreground hover:text-foreground" />
             <DataDialog iconOnly className="p-3 text-muted-foreground hover:text-foreground" />
           </div>
         </header>
