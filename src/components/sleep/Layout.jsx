@@ -40,6 +40,7 @@ export function SleepLayout({ children }) {
         </header>
         <main className="flex-1 overflow-y-auto pb-[calc(6rem+env(safe-area-inset-bottom,16px))]">{children}</main>
         <nav
+          aria-label={t("Main")}
           className={`fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t border-border bg-card/95 backdrop-blur`}
           style={{ paddingBottom: "env(safe-area-inset-bottom, 16px)" }}
         >
@@ -66,7 +67,7 @@ export function SleepLayout({ children }) {
           <Moon className="h-6 w-6 text-[#818CF8]" />
           <span className="font-heading text-2xl font-extrabold tracking-tight">Sleepy</span>
         </Link>
-        <nav className="flex flex-col gap-1">
+        <nav aria-label={t("Main")} className="flex flex-col gap-1">
           {items.map(({ to, label, icon: Icon }) => (
             <Link
               key={to}

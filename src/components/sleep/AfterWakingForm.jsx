@@ -51,12 +51,13 @@ export function AfterWakingForm({ entry, onSave, saving }) {
       <AwakeningList value={awakenings} onChange={setAwakenings} />
       <TimeInput id="outofbed" label={t("Out-of-bed time")} value={outOfBed} onChange={setOutOfBed} />
       <div className="space-y-2">
-        <label className="text-sm font-medium text-muted-foreground">{t("Estimated total sleep (hours)")}</label>
+        <label htmlFor="sleep-hours" className="text-sm font-medium text-muted-foreground">{t("Estimated total sleep (hours)")}</label>
         <div className="flex items-center gap-2">
           <Button type="button" variant="outline" aria-label={t("Decrease hours")} onClick={() => step(-0.5)} className="h-14 w-14 rounded-2xl text-xl">
             <Minus className="h-5 w-5" />
           </Button>
           <input
+            id="sleep-hours"
             type="number"
             inputMode="decimal"
             step="0.1"
@@ -98,11 +99,12 @@ export function AfterWakingForm({ entry, onSave, saving }) {
           <p className="font-medium">{t("Woke up tired")}</p>
           <p className="text-xs text-muted-foreground">{t("Did you feel unrested?")}</p>
         </div>
-        <Switch checked={tired} onCheckedChange={setTired} />
+        <Switch aria-label={t("Woke up tired")} checked={tired} onCheckedChange={setTired} />
       </div>
       <div className="space-y-2">
-        <label className="text-sm font-medium text-muted-foreground">{t("Additional notes")}</label>
+        <label htmlFor="after-notes" className="text-sm font-medium text-muted-foreground">{t("Additional notes")}</label>
         <Textarea
+          id="after-notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={3}

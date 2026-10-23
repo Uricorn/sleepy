@@ -17,8 +17,9 @@ export function BeforeBedForm({ entry, onSave, saving }) {
     <div className="space-y-4">
       <TimeInput id="bedtime" label={t("Bedtime")} value={bedtime} onChange={setBedtime} />
       <div className="space-y-2">
-        <label className="text-sm font-medium text-muted-foreground">{t("Before-bed notes")}</label>
+        <label htmlFor="before-notes" className="text-sm font-medium text-muted-foreground">{t("Before-bed notes")}</label>
         <Textarea
+          id="before-notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={4}
