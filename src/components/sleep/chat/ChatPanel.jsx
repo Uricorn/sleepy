@@ -66,16 +66,16 @@ export function ChatPanel() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          rows={1}
+          rows={2}
           maxLength={2000}
           placeholder={t("Message… (e.g. bed at 11pm, up at 7am, slept 7.5h, quality 4)")}
-          className="min-h-14 flex-1 resize-none rounded-2xl border border-border bg-secondary px-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-[#818CF8]"
+          className="h-16 flex-1 resize-none rounded-2xl border border-border bg-secondary px-4 py-2 text-sm leading-snug focus:outline-none focus:ring-2 focus:ring-[#818CF8]"
         />
         <button
           onClick={send}
           disabled={busy || !input.trim()}
           aria-label={t("Send")}
-          className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-[#818CF8] text-[#0C1017] disabled:opacity-60"
+          className="grid h-16 w-14 shrink-0 place-items-center rounded-2xl bg-[#818CF8] text-[#0C1017] disabled:opacity-60"
         >
           <Send className="h-5 w-5" />
         </button>
