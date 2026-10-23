@@ -6,15 +6,15 @@ Categories:
   - Sports & Health
 License: MIT
 AuthorName: Uricorn
-WebSite: https://github.com/Uricorn/sleepy-basecode
-SourceCode: https://github.com/Uricorn/sleepy-basecode
-IssueTracker: https://github.com/Uricorn/sleepy-basecode/issues
-Changelog: https://github.com/Uricorn/sleepy-basecode/blob/HEAD/CHANGELOG.md
+WebSite: https://github.com/Uricorn/sleepy
+SourceCode: https://github.com/Uricorn/sleepy
+IssueTracker: https://github.com/Uricorn/sleepy/issues
+Changelog: https://github.com/Uricorn/sleepy/blob/HEAD/CHANGELOG.md
 
 AutoName: Sleepy
 
 RepoType: git
-Repo: https://github.com/Uricorn/sleepy-basecode.git
+Repo: https://github.com/Uricorn/sleepy.git
 
 Builds:
   - versionName: 1.0.0
