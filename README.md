@@ -1,6 +1,6 @@
 # Sleepy
 
-A local-only sleep diary being converted from a platform-specific web app into a standalone Android APK. The original `Uricorn/sleepy` repository is untouched. This repository is `Uricorn/sleepy-basecode`.
+A private, offline sleep diary for Android. All data stays on the device; the app has no INTERNET permission, account or cloud service.
 
 ## Current implementation
 
@@ -17,8 +17,6 @@ Releases are built by CI (`.github/workflows/release.yml`) and prepared for F-Dr
 [docs/RELEASING.md](docs/RELEASING.md) and [docs/FDROID.md](docs/FDROID.md). Changes are listed in
 [CHANGELOG.md](CHANGELOG.md); contributions: [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under MIT.
 
-See [BASECODE_HANDOFF.md](./BASECODE_HANDOFF.md) for the original conversion prompt (historical).
-
 ## Local development
 
 Use a supported Node version for Vite 8 (Node 22.12+ or 24 recommended).
@@ -31,7 +29,7 @@ npm run build
 npm run lint
 ```
 
-Development and production assets must not require a Base44 account, SDK, runtime, cloud service or external hosting.
+Development and production assets must not require an account, SDK, runtime, cloud service or external hosting.
 
 ## Android build
 
