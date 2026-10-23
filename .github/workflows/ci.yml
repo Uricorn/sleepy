@@ -26,7 +26,7 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: web-dist
           path: dist
@@ -53,7 +53,7 @@ jobs:
       - name: Assemble debug APK and run Android lint
         working-directory: android
         run: ./gradlew assembleDebug lintDebug --no-daemon
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: sleepy-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
