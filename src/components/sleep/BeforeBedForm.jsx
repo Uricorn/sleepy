@@ -3,8 +3,10 @@ import { Moon, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { TimeInput } from "./TimeInput";
+import { useI18n } from "@/i18n";
 
 export function BeforeBedForm({ entry, onSave, saving }) {
+  const { t } = useI18n();
   const [bedtime, setBedtime] = useState(entry?.bedtime || "");
   const [notes, setNotes] = useState(entry?.pre_sleep_notes || "");
   const done = entry?.before_bed_recorded;
@@ -13,14 +15,14 @@ export function BeforeBedForm({ entry, onSave, saving }) {
 
   return (
     <div className="space-y-4">
-      <TimeInput id="bedtime" label="Bedtime" value={bedtime} onChange={setBedtime} />
+      <TimeInput id="bedtime" label={t("Bedtime")} value={bedtime} onChange={setBedtime} />
       <div className="space-y-2">
-        <label className="text-sm font-medium text-muted-foreground">Before-bed notes</label>
+        <label className="text-sm font-medium text-muted-foreground">{t("Before-bed notes")}</label>
         <Textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={4}
-          placeholder="Caffeine, last meal & hour, how your body/stomach feels, exercise, anxiety, noise…"
+          placeholder={t("Caffeine, last meal & hour, how your body/stomach feels, exercise, anxiety, noise…")}
           className="resize-none rounded-2xl border-border bg-secondary text-base"
         />
       </div>
@@ -31,11 +33,11 @@ export function BeforeBedForm({ entry, onSave, saving }) {
       >
         {done ? (
           <>
-            <Check className="h-5 w-5" /> Update before-bed
+            <Check className="h-5 w-5" /> {t("Update before-bed")}
           </>
         ) : (
           <>
-            <Moon className="h-5 w-5" /> Save before-bed log
+            <Moon className="h-5 w-5" /> {t("Save before-bed log")}
           </>
         )}
       </Button>

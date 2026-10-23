@@ -6,15 +6,15 @@ import { useI18n } from "@/i18n";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const NAV = [
-  { to: "/", label: "tonight", icon: Moon },
-  { to: "/history", label: "history", icon: BookOpen },
-  { to: "/trends", label: "trends", icon: BarChart3 },
+  { to: "/", label: "Tonight", icon: Moon },
+  { to: "/history", label: "History", icon: BookOpen },
+  { to: "/trends", label: "Trends", icon: BarChart3 },
 ];
 
 export function SleepLayout({ children }) {
   const isMobile = useIsMobile();
   const { t } = useI18n();
-  const items = [...NAV, { to: "/chat", label: "assistant", icon: MessageCircle }];
+  const items = [...NAV, { to: "/chat", label: "Assistant", icon: MessageCircle }];
 
   if (isMobile) {
     return (
@@ -74,7 +74,7 @@ export function SleepLayout({ children }) {
           ))}
         </nav>
         <div className="mt-auto border-t border-border pt-6">
-          <p className="mb-3 text-xs text-muted-foreground">{t("storedOnDevice")}</p>
+          <p className="mb-3 text-xs text-muted-foreground">{t("Stored only on this device.")}</p>
           <LanguageSwitcher className="mb-3" />
           <DataDialog className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground" />
         </div>

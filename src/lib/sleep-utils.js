@@ -46,11 +46,16 @@ export function formatTime(t) {
   return `${hh}:${String(m || 0).padStart(2, "0")} ${ampm}`;
 }
 
+let dateLocale = "en-US";
+export function setDateLocale(l) {
+  dateLocale = l;
+}
+
 export function formatDateLabel(dateStr) {
   if (!dateStr) return "—";
   const [y, m, d] = dateStr.split("-").map(Number);
   const dt = new Date(y, m - 1, d);
-  return dt.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+  return dt.toLocaleDateString(dateLocale, { weekday: "short", month: "short", day: "numeric" });
 }
 
 export function qualityLabel(q) {

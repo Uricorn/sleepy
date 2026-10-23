@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { chatWithAssistant } from "@/lib/chat-fns";
 import { todayNightKey } from "@/lib/sleep-utils";
 import { ChatBubble } from "./ChatBubble";
+import { useI18n } from "@/i18n";
 
 const INTRO = {
   role: "assistant",
@@ -11,6 +12,7 @@ const INTRO = {
 };
 
 export function ChatPanel() {
+  const { t } = useI18n();
   const [messages, setMessages] = useState([INTRO]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -31,7 +33,7 @@ export function ChatPanel() {
       const hasFields = res?.fields && Object.keys(res.fields).length > 0;
       setMessages((m) => [...m, { role: "assistant", content: res.reply, fields: hasFields ? res.fields : null }]);
     } catch {
-      toast.error("An error occurred while parsing your message.");
+      toast.error(t("An error occurred while parsing your message."));
     } finally {
       setBusy(false);
     }
@@ -52,7 +54,7 @@ export function ChatPanel() {
         ))}
         {busy && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Loader2 className="h-4 w-4 animate-spin" /> Reading…
+            <Loader2 className="h-4 w-4 animate-spin" /> {t("Reading…")}
           </div>
         )}
         <div ref={endRef} />
@@ -64,13 +66,13 @@ export function ChatPanel() {
           onKeyDown={handleKeyDown}
           rows={1}
           maxLength={2000}
-          placeholder="Message… (e.g. bed at 11pm, up at 7am, slept 7.5h, quality 4)"
+          placeholder={t("Message… (e.g. bed at 11pm, up at 7am, slept 7.5h, quality 4)")}
           className="min-h-14 flex-1 resize-none rounded-2xl border border-border bg-secondary px-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-[#818CF8]"
         />
         <button
           onClick={send}
           disabled={busy || !input.trim()}
-          aria-label="Send"
+          aria-label={t("Send")}
           className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-[#818CF8] text-[#0C1017] disabled:opacity-60"
         >
           <Send className="h-5 w-5" />

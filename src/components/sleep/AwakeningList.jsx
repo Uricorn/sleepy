@@ -1,6 +1,8 @@
 import { Plus, X } from "lucide-react";
+import { useI18n } from "@/i18n";
 
 export function AwakeningList({ value = [], onChange }) {
+  const { t } = useI18n();
   const add = () => onChange([...value, ""]);
   const remove = (i) => onChange(value.filter((_, idx) => idx !== i));
   const set = (i, v) => onChange(value.map((x, idx) => (idx === i ? v : x)));
@@ -8,12 +10,12 @@ export function AwakeningList({ value = [], onChange }) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-muted-foreground">Night awakenings</span>
+        <span className="text-sm font-medium text-muted-foreground">{t("Night awakenings")}</span>
         <button type="button" onClick={add} className="flex items-center gap-1 text-sm font-medium text-[#818CF8]">
-          <Plus className="h-4 w-4" /> Add
+          <Plus className="h-4 w-4" /> {t("Add")}
         </button>
       </div>
-      {value.length === 0 && <p className="text-sm text-muted-foreground">No awakenings recorded.</p>}
+      {value.length === 0 && <p className="text-sm text-muted-foreground">{t("No awakenings recorded.")}</p>}
       <div className="space-y-2">
         {value.map((t, i) => (
           <div key={i} className="flex items-center gap-2">

@@ -1,14 +1,16 @@
 import { cn } from "@/lib/utils";
 import { qualityLabel } from "@/lib/sleep-utils";
+import { useI18n } from "@/i18n";
 
 const VALUES = [1, 2, 3, 4, 5];
 
 export function QualityScale({ value, onChange }) {
+  const { t } = useI18n();
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-muted-foreground">Sleep quality</span>
-        <span className="text-sm font-medium text-[#34D399]">{value ? qualityLabel(value) : "Tap to rate"}</span>
+        <span className="text-sm font-medium text-muted-foreground">{t("Sleep quality")}</span>
+        <span className="text-sm font-medium text-[#34D399]">{value ? t(qualityLabel(value)) : t("Tap to rate")}</span>
       </div>
       <div className="grid grid-cols-5 gap-2">
         {VALUES.map((q) => (

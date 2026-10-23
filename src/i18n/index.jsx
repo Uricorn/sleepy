@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
-import { LANGUAGES, translations } from "./translations";
+import { LANGUAGES, translations, DATE_LOCALES } from "./translations";
+import { setDateLocale } from "@/lib/sleep-utils";
 
 const KEY = "sleepy-lang";
 
@@ -27,7 +28,16 @@ export function I18nProvider({ children }) {
     try { localStorage.setItem(KEY, l); } catch { /* ignore */ }
   }, []);
 
-  const t = useCallback((k) => translations[lang]?.[k] ?? translations.en[k] ?? k, [lang]);
+  setDateLocale(DATE_LOCALES[lang]);
+
+  const t = useCallback(
+    (k, vars) => {
+      let s = translations[lang]?.[k] ?? k;
+      if (vars) for (const [name, v] of Object.entries(vars)) s = s.replaceAll(`{${name}}`, String(v));
+      return s;
+    },
+    [lang],
+  );
 
   return <I18nContext.Provider value={{ lang, setLang, t }}>{children}</I18nContext.Provider>;
 }

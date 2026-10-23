@@ -21,8 +21,10 @@ import { BeforeBedForm } from "./BeforeBedForm";
 import { AfterWakingForm } from "./AfterWakingForm";
 import { saveBeforeBed, saveAfterWaking } from "@/lib/sleep-fns";
 import { formatDateLabel } from "@/lib/sleep-utils";
+import { useI18n } from "@/i18n";
 
 export function EditEntrySheet({ entry, open, onOpenChange }) {
+  const { t } = useI18n();
   const isMobile = useIsMobile();
   const router = useRouter();
   const [saving, setSaving] = useState(false);
@@ -33,11 +35,11 @@ export function EditEntrySheet({ entry, open, onOpenChange }) {
     setSaving(true);
     try {
       await fn({ data: vars });
-      toast.success("Saved");
+      toast.success(t("Saved"));
       await router.invalidate();
       onOpenChange?.(false);
     } catch {
-      toast.error("Could not save");
+      toast.error(t("Could not save"));
     } finally {
       setSaving(false);
     }
@@ -46,8 +48,8 @@ export function EditEntrySheet({ entry, open, onOpenChange }) {
   const content = entry && (
     <Tabs defaultValue="before">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="before">Before Bed</TabsTrigger>
-        <TabsTrigger value="after">After Waking</TabsTrigger>
+        <TabsTrigger value="before">{t("Before Bed")}</TabsTrigger>
+        <TabsTrigger value="after">{t("After Waking")}</TabsTrigger>
       </TabsList>
       <TabsContent value="before" className="mt-4">
         <BeforeBedForm
@@ -66,7 +68,7 @@ export function EditEntrySheet({ entry, open, onOpenChange }) {
     </Tabs>
   );
 
-  const title = entry ? formatDateLabel(entry.date) : "Entry";
+  const title = entry ? formatDateLabel(entry.date) : t("Entry");
 
   if (isMobile) {
     return (
@@ -74,7 +76,7 @@ export function EditEntrySheet({ entry, open, onOpenChange }) {
         <DrawerContent>
           <DrawerHeader className="text-center">
             <DrawerTitle>{title}</DrawerTitle>
-            <DrawerDescription>Edit both stages of this night.</DrawerDescription>
+            <DrawerDescription>{t("Edit both stages of this night.")}</DrawerDescription>
           </DrawerHeader>
           <div className="max-h-[72vh] overflow-y-auto px-4 pb-8">{content}</div>
         </DrawerContent>
@@ -87,7 +89,7 @@ export function EditEntrySheet({ entry, open, onOpenChange }) {
       <DialogContent className="max-w-lg">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>Edit both stages of this night.</DialogDescription>
+          <DialogDescription>{t("Edit both stages of this night.")}</DialogDescription>
         </DialogHeader>
         <div className="max-h-[72vh] overflow-y-auto">{content}</div>
       </DialogContent>

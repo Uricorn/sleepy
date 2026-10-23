@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { useRouter } from "@tanstack/react-router";
 import { applyChatFields } from "@/lib/sleep-fns";
 import { formatTime } from "@/lib/sleep-utils";
+import { useI18n } from "@/i18n";
 
 const LABELS = [
   ["bedtime", "Bedtime", formatTime],
@@ -24,6 +25,7 @@ function yesterday() {
 }
 
 export function ApplyCard({ fields }) {
+  const { t } = useI18n();
   const router = useRouter();
   const [date, setDate] = useState(fields.date || yesterday());
   const [done, setDone] = useState(false);
@@ -34,7 +36,7 @@ export function ApplyCard({ fields }) {
     await applyChatFields({ date, fields });
     await router.invalidate();
     setDone(true);
-    toast.success("Diary updated");
+    toast.success(t("Diary updated"));
   };
 
   return (
@@ -42,13 +44,13 @@ export function ApplyCard({ fields }) {
       <dl className="space-y-1 text-sm">
         {rows.map(([k, label, fmt]) => (
           <div key={k} className="flex justify-between gap-3">
-            <dt className="text-muted-foreground">{label}</dt>
-            <dd className="text-right font-medium">{fmt(fields[k])}</dd>
+            <dt className="text-muted-foreground">{t(label)}</dt>
+            <dd className="text-right font-medium">{t(fmt(fields[k]))}</dd>
           </div>
         ))}
       </dl>
       <div className="flex items-center gap-2">
-        <label className="text-xs text-muted-foreground" htmlFor="chat-night">Night of</label>
+        <label className="text-xs text-muted-foreground" htmlFor="chat-night">{t("Night of")}</label>
         <input
           id="chat-night"
           type="date"
@@ -62,7 +64,7 @@ export function ApplyCard({ fields }) {
         disabled={done || !date}
         className="flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#34D399] text-sm font-semibold text-[#0C1017] disabled:opacity-60"
       >
-        {done ? <><Check className="h-4 w-4" /> Added to diary</> : "Add to diary"}
+        {done ? <><Check className="h-4 w-4" /> {t("Added to diary")}</> : t("Add to diary")}
       </button>
     </div>
   );

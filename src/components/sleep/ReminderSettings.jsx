@@ -1,5 +1,6 @@
 import { Switch } from "@/components/ui/switch";
 import { Bell, Moon, Sunrise, Info } from "lucide-react";
+import { useI18n } from "@/i18n";
 
 function ReminderRow({ icon: Icon, indigo, label, desc, enabled, time, onToggle, onTime }) {
   return (
@@ -27,17 +28,18 @@ function ReminderRow({ icon: Icon, indigo, label, desc, enabled, time, onToggle,
 }
 
 export function ReminderSettings({ settings, onPatch }) {
+  const { t } = useI18n();
   return (
     <div className="space-y-5 rounded-[1.25rem] border border-border bg-card p-5">
       <div className="flex items-center gap-2">
         <Bell className="h-5 w-5 text-[#818CF8]" />
-        <h3 className="font-heading text-lg font-bold">Reminders</h3>
+        <h3 className="font-heading text-lg font-bold">{t("Reminders")}</h3>
       </div>
       <ReminderRow
         icon={Moon}
         indigo
-        label="Bedtime reminder"
-        desc="A gentle nudge to log before bed."
+        label={t("Bedtime reminder")}
+        desc={t("A gentle nudge to log before bed.")}
         enabled={settings.bedtime_reminder_enabled}
         time={settings.bedtime_reminder_time}
         onToggle={(v) => onPatch({ bedtime_reminder_enabled: v })}
@@ -45,8 +47,8 @@ export function ReminderSettings({ settings, onPatch }) {
       />
       <ReminderRow
         icon={Sunrise}
-        label="Morning reminder"
-        desc="Remember to complete last night's entry."
+        label={t("Morning reminder")}
+        desc={t("Remember to complete last night's entry.")}
         enabled={settings.morning_reminder_enabled}
         time={settings.morning_reminder_time}
         onToggle={(v) => onPatch({ morning_reminder_enabled: v })}
@@ -55,7 +57,7 @@ export function ReminderSettings({ settings, onPatch }) {
       <div className="flex gap-2 rounded-2xl bg-secondary p-3 text-xs text-muted-foreground">
         <Info className="mt-0.5 h-4 w-4 shrink-0" />
         <p>
-          Reminders appear only while Sleepy is open and visible. They do not wake the phone or run while the app is closed. Use your phone's alarm for reliable background reminders. {settings.timezone ? `Timezone: ${settings.timezone}.` : ""}
+          {t("Reminders appear only while Sleepy is open and visible. They do not wake the phone or run while the app is closed. Use your phone's alarm for reliable background reminders.")} {settings.timezone ? t("Timezone: {tz}.", { tz: settings.timezone }) : ""}
         </p>
       </div>
     </div>

@@ -6,8 +6,10 @@ import { Switch } from "@/components/ui/switch";
 import { TimeInput } from "./TimeInput";
 import { QualityScale } from "./QualityScale";
 import { AwakeningList } from "./AwakeningList";
+import { useI18n } from "@/i18n";
 
 export function AfterWakingForm({ entry, onSave, saving }) {
+  const { t } = useI18n();
   const [onset, setOnset] = useState(entry?.estimated_sleep_onset || "");
   const [awakenings, setAwakenings] = useState(entry?.night_awakenings || []);
   const [outOfBed, setOutOfBed] = useState(entry?.estimated_out_of_bed_time || "");
@@ -28,7 +30,7 @@ export function AfterWakingForm({ entry, onSave, saving }) {
   const submit = () => {
     const n = Number(hours);
     if (hours !== "" && (!Number.isFinite(n) || n < 0 || n > 24)) {
-      setError("Enter a number of hours between 0 and 24.");
+      setError(t("Enter a number of hours between 0 and 24."));
       return;
     }
     setError("");
@@ -45,13 +47,13 @@ export function AfterWakingForm({ entry, onSave, saving }) {
 
   return (
     <div className="space-y-4">
-      <TimeInput id="onset" label="Estimated sleep onset" value={onset} onChange={setOnset} />
+      <TimeInput id="onset" label={t("Estimated sleep onset")} value={onset} onChange={setOnset} />
       <AwakeningList value={awakenings} onChange={setAwakenings} />
-      <TimeInput id="outofbed" label="Out-of-bed time" value={outOfBed} onChange={setOutOfBed} />
+      <TimeInput id="outofbed" label={t("Out-of-bed time")} value={outOfBed} onChange={setOutOfBed} />
       <div className="space-y-2">
-        <label className="text-sm font-medium text-muted-foreground">Estimated total sleep (hours)</label>
+        <label className="text-sm font-medium text-muted-foreground">{t("Estimated total sleep (hours)")}</label>
         <div className="flex items-center gap-2">
-          <Button type="button" variant="outline" aria-label="Decrease hours" onClick={() => step(-0.5)} className="h-14 w-14 rounded-2xl text-xl">
+          <Button type="button" variant="outline" aria-label={t("Decrease hours")} onClick={() => step(-0.5)} className="h-14 w-14 rounded-2xl text-xl">
             <Minus className="h-5 w-5" />
           </Button>
           <input
@@ -65,10 +67,10 @@ export function AfterWakingForm({ entry, onSave, saving }) {
               setHours(e.target.value);
               setError("");
             }}
-            placeholder="e.g. 7.5"
+            placeholder={t("e.g. 7.5")}
             className="h-14 min-w-0 flex-1 rounded-2xl border border-border bg-secondary px-4 text-center font-heading text-lg focus:outline-none focus:ring-2 focus:ring-[#34D399]"
           />
-          <Button type="button" variant="outline" aria-label="Increase hours" onClick={() => step(0.5)} className="h-14 w-14 rounded-2xl text-xl">
+          <Button type="button" variant="outline" aria-label={t("Increase hours")} onClick={() => step(0.5)} className="h-14 w-14 rounded-2xl text-xl">
             <Plus className="h-5 w-5" />
           </Button>
         </div>
@@ -88,23 +90,23 @@ export function AfterWakingForm({ entry, onSave, saving }) {
           ))}
         </div>
         {error && <p className="text-sm text-destructive">{error}</p>}
-        <p className="text-xs text-muted-foreground">Enter your own estimate — never auto-calculated.</p>
+        <p className="text-xs text-muted-foreground">{t("Enter your own estimate — never auto-calculated.")}</p>
       </div>
       <QualityScale value={quality} onChange={setQuality} />
       <div className="flex items-center justify-between rounded-2xl border border-border bg-secondary p-4">
         <div>
-          <p className="font-medium">Woke up tired</p>
-          <p className="text-xs text-muted-foreground">Did you feel unrested?</p>
+          <p className="font-medium">{t("Woke up tired")}</p>
+          <p className="text-xs text-muted-foreground">{t("Did you feel unrested?")}</p>
         </div>
         <Switch checked={tired} onCheckedChange={setTired} />
       </div>
       <div className="space-y-2">
-        <label className="text-sm font-medium text-muted-foreground">Additional notes</label>
+        <label className="text-sm font-medium text-muted-foreground">{t("Additional notes")}</label>
         <Textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={3}
-          placeholder="Dreams, mood, anything else…"
+          placeholder={t("Dreams, mood, anything else…")}
           className="resize-none rounded-2xl border-border bg-secondary text-base"
         />
       </div>
@@ -115,11 +117,11 @@ export function AfterWakingForm({ entry, onSave, saving }) {
       >
         {done ? (
           <>
-            <Check className="h-5 w-5" /> Update morning entry
+            <Check className="h-5 w-5" /> {t("Update morning entry")}
           </>
         ) : (
           <>
-            <Sunrise className="h-5 w-5" /> Save morning entry
+            <Sunrise className="h-5 w-5" /> {t("Save morning entry")}
           </>
         )}
       </Button>

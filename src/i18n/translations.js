@@ -1,3 +1,22 @@
+import { KEYS } from "./keys";
+import es from "./locales/es";
+import fr from "./locales/fr";
+import de from "./locales/de";
+import pt from "./locales/pt";
+import ru from "./locales/ru";
+import uk from "./locales/uk";
+import it from "./locales/it";
+import tr from "./locales/tr";
+import pl from "./locales/pl";
+import ko from "./locales/ko";
+import hi from "./locales/hi";
+import zh from "./locales/zh";
+import ja from "./locales/ja";
+import ar from "./locales/ar";
+import he from "./locales/he";
+import fa from "./locales/fa";
+import ur from "./locales/ur";
+
 export const LANGUAGES = {
   en: { name: "English", dir: "ltr" },
   es: { name: "Español", dir: "ltr" },
@@ -19,24 +38,15 @@ export const LANGUAGES = {
   ur: { name: "اردو", dir: "rtl" },
 };
 
-// Keys: tonight, history, trends, assistant, storedOnDevice, language
-export const translations = {
-  en: { tonight: "Tonight", history: "History", trends: "Trends", assistant: "Assistant", storedOnDevice: "Stored only on this device.", language: "Language" },
-  es: { tonight: "Esta noche", history: "Historial", trends: "Tendencias", assistant: "Asistente", storedOnDevice: "Almacenado solo en este dispositivo.", language: "Idioma" },
-  fr: { tonight: "Ce soir", history: "Historique", trends: "Tendances", assistant: "Assistant", storedOnDevice: "Stocké uniquement sur cet appareil.", language: "Langue" },
-  de: { tonight: "Heute Nacht", history: "Verlauf", trends: "Trends", assistant: "Assistent", storedOnDevice: "Nur auf diesem Gerät gespeichert.", language: "Sprache" },
-  pt: { tonight: "Esta noite", history: "Histórico", trends: "Tendências", assistant: "Assistente", storedOnDevice: "Armazenado apenas neste dispositivo.", language: "Idioma" },
-  ru: { tonight: "Сегодня", history: "История", trends: "Тренды", assistant: "Ассистент", storedOnDevice: "Хранится только на этом устройстве.", language: "Язык" },
-  zh: { tonight: "今晚", history: "历史", trends: "趋势", assistant: "助手", storedOnDevice: "仅存储在此设备上。", language: "语言" },
-  ja: { tonight: "今夜", history: "履歴", trends: "傾向", assistant: "アシスタント", storedOnDevice: "このデバイスにのみ保存されます。", language: "言語" },
-  hi: { tonight: "आज रात", history: "इतिहास", trends: "रुझान", assistant: "सहायक", storedOnDevice: "केवल इस डिवाइस पर संग्रहीत।", language: "भाषा" },
-  ar: { tonight: "الليلة", history: "السجل", trends: "الاتجاهات", assistant: "المساعد", storedOnDevice: "محفوظ على هذا الجهاز فقط.", language: "اللغة" },
-  he: { tonight: "הלילה", history: "היסטוריה", trends: "מגמות", assistant: "עוזר", storedOnDevice: "נשמר במכשיר זה בלבד.", language: "שפה" },
-  uk: { tonight: "Сьогодні", history: "Історія", trends: "Тренди", assistant: "Асистент", storedOnDevice: "Зберігається лише на цьому пристрої.", language: "Мова" },
-  it: { tonight: "Stanotte", history: "Cronologia", trends: "Tendenze", assistant: "Assistente", storedOnDevice: "Salvato solo su questo dispositivo.", language: "Lingua" },
-  tr: { tonight: "Bu gece", history: "Geçmiş", trends: "Eğilimler", assistant: "Asistan", storedOnDevice: "Yalnızca bu cihazda saklanır.", language: "Dil" },
-  pl: { tonight: "Dziś w nocy", history: "Historia", trends: "Trendy", assistant: "Asystent", storedOnDevice: "Przechowywane tylko na tym urządzeniu.", language: "Język" },
-  ko: { tonight: "오늘 밤", history: "기록", trends: "추세", assistant: "어시스턴트", storedOnDevice: "이 기기에만 저장됩니다.", language: "언어" },
-  fa: { tonight: "امشب", history: "تاریخچه", trends: "روندها", assistant: "دستیار", storedOnDevice: "فقط روی این دستگاه ذخیره می‌شود.", language: "زبان" },
-  ur: { tonight: "آج رات", history: "تاریخ", trends: "رجحانات", assistant: "معاون", storedOnDevice: "صرف اسی ڈیوائس پر محفوظ ہے۔", language: "زبان" },
-};
+
+const LOCALES = { es, fr, de, pt, ru, uk, it, tr, pl, ko, hi, zh, ja, ar, he, fa, ur };
+
+export const translations = Object.fromEntries(
+  Object.entries(LOCALES).map(([code, arr]) => {
+    if (arr.length !== KEYS.length) console.warn(`[i18n] ${code}: expected ${KEYS.length} strings, got ${arr.length}`);
+    return [code, Object.fromEntries(KEYS.map((k, i) => [k, arr[i]]))];
+  }),
+);
+
+// BCP-47 tags for date formatting
+export const DATE_LOCALES = { en: "en-US", es: "es", fr: "fr", de: "de", pt: "pt-BR", ru: "ru", uk: "uk", it: "it", tr: "tr", pl: "pl", ko: "ko", hi: "hi", zh: "zh-CN", ja: "ja", ar: "ar", he: "he", fa: "fa", ur: "ur" };
