@@ -33,3 +33,11 @@ With `UpdateCheckMode: Tags`, pushing a new `vX.Y.Z` tag is enough: F-Droid's bo
 The signing key on F-Droid differs from the GitHub-release APK key, so users cannot switch between
 the two sources without reinstalling (export a backup first). Reproducible-build verification
 (`Binaries:` in the recipe) is possible later if you want one signing key for both.
+
+## Policy review notes (Quality Control)
+
+- **Native features (rule 3):** this is not a thin website wrapper. Sleepy adds native reminder notifications
+  (AlarmManager + NotificationChannel, rescheduled on boot), Storage Access Framework backup export/import,
+  launcher shortcuts, notification deep links and an offline asset-intercepting WebView with all network blocked.
+- **Dependencies:** only packages imported by the app are kept in `package.json` (audited; unused UI kit removed).
+- **Age/users (rule 6):** if the project is under three months old, mention real users or other F-Droid apps in the MR.

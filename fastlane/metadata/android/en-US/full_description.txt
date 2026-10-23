@@ -7,7 +7,8 @@ Sleepy is a simple sleep diary that keeps everything on your phone. It has no ac
 • See trends over time
 • Type a quick note and let the built-in on-device parser fill in the form (this is a local parser, not cloud AI)
 • Export and import JSON backups using Android's system file picker
-• Optional in-app reminders (they only work while the app is open)
+• Optional daily bedtime and morning reminder notifications, delivered even when the app is closed (no internet or Google services needed)
+• Home-screen shortcuts to log before bed or in the morning
 
 <b>Privacy</b>
 • All diary data is stored locally on the device

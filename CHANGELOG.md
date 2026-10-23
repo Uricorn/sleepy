@@ -6,6 +6,15 @@ versioning: [Semantic Versioning](https://semver.org/). Each release also needs
 
 ## [Unreleased]
 
+### Added
+- Native daily reminder notifications that work when the app is closed (rescheduled after reboot).
+- Launcher shortcuts and notification taps open the before-bed / morning entry directly.
+
+### Changed
+- Removed unused dependencies and dead UI components (smaller, faster F-Droid build).
+- Trend averages ignore nights without a value.
+- Assistant page text no longer mentions uploads or internet.
+
 ## [1.0.0]
 
 ### Added

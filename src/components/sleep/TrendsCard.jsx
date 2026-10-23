@@ -5,8 +5,13 @@ export function TrendsCard({ entries = [] }) {
   const data = [...entries]
     .slice(0, 7)
     .map((e) => ({ name: formatDateLabel(e.date).replace(",", "").split(" ").slice(0, 2).join(" "), hours: e.estimated_total_sleep_hours ?? 0, quality: e.sleep_quality ?? 0 }));
-  const avgHours = data.length ? data.reduce((s, d) => s + (d.hours || 0), 0) / data.length : 0;
-  const avgQ = data.length ? data.reduce((s, d) => s + (d.quality || 0), 0) / data.length : 0;
+  // Average only nights that actually have a value, so unlogged mornings don't pull it down.
+  const average = (key) => {
+    const values = data.map((d) => d[key]).filter((v) => v > 0);
+    return values.length ? values.reduce((s, v) => s + v, 0) / values.length : 0;
+  };
+  const avgHours = average("hours");
+  const avgQ = average("quality");
 
   return (
     <div className="space-y-5 rounded-[1.25rem] border border-border bg-card p-5">

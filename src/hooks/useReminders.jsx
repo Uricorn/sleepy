@@ -4,6 +4,8 @@ import { useNavigate } from "@tanstack/react-router";
 import { getReminderCheckState } from "@/lib/sleep-fns";
 import { nowInTz } from "@/lib/sleep-utils";
 
+// In the Android app the schedule is handed to native alarms (they fire even when
+// the app is closed). In a browser, reminders fire only while the page is open.
 // Browser-based reminders. Fires a Notification when the wall-clock time in the
 // user's timezone matches a configured reminder, the relevant stage is not yet
 // done, and the app is open in the browser. A native mobile build (with push
@@ -11,6 +13,7 @@ import { nowInTz } from "@/lib/sleep-utils";
 export function useReminders() {
   const navigate = useNavigate();
   const fired = useRef({});
+  const synced = useRef(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -19,6 +22,16 @@ export function useReminders() {
       try {
         const s = await getReminderCheckState();
         if (!s) return;
+        if (window.SleepyNative?.setReminders) {
+          const bed = s.bedtimeEnabled ? s.bedtimeTime || "" : "";
+          const morning = s.morningEnabled ? s.morningTime || "" : "";
+          const sig = `${bed}|${morning}`;
+          if (synced.current !== sig) {
+            synced.current = sig;
+            window.SleepyNative.setReminders(bed, morning);
+          }
+          return;
+        }
         const now = nowInTz(s.timezone);
 
         const maybeFire = (type, enabled, time, skip) => {
