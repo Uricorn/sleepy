@@ -43,9 +43,3 @@ sh scripts/build-android.sh
 This installs JS dependencies, builds the web assets, copies `dist` into the Android project and runs the checked-in Gradle wrapper. Expected test APK output: `android/app/build/outputs/apk/debug/app-debug.apk`. It is a debug-signed test build. For a signed release APK use `npm run android:release` (see docs/RELEASING.md).
 
 The Android app targets Android 8+ (API 26). These are configuration targets, not confirmed device compatibility.
-
-## Existing diary data
-
-The storage key remains `lull:v1` and the backup format remains `app: "lull", version: 1`. A new Android app has separate storage from the old browser app, so entries will not migrate automatically. Export a backup in the old app first, then import it in the new app. Never clear or uninstall the old app until the imported entries have been checked. Uninstalling this local app deletes its data; keep backups.
-
-Do not add Netlify, hosting, cloud AI, authentication or automatic syncing as part of this conversion.

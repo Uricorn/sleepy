@@ -139,4 +139,5 @@ export default [
   "Puoi esportare un file di backup, importarlo su un altro dispositivo o cancellare tutto da “I tuoi dati”. Disinstallare l'app o cancellare i dati del browser elimina il diario se non hai un backup.",
   "Non è un parere medico",
   "Sleepy è un diario personale e non fornisce pareri o diagnosi mediche.",
+  "Principale",
 ];

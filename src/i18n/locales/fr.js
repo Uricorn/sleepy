@@ -139,4 +139,5 @@ export default [
   "Vous pouvez exporter une sauvegarde, l'importer sur un autre appareil ou tout effacer depuis « Vos données ». Désinstaller l'app ou effacer les données du navigateur supprime votre journal sans sauvegarde.",
   "Pas un avis médical",
   "Sleepy est un journal personnel et ne fournit ni avis ni diagnostic médical.",
+  "Principale",
 ];
