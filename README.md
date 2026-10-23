@@ -6,7 +6,8 @@ A private, offline sleep diary for Android. All data stays on the device; the ap
 
 - React client app with Vite, TanStack Router hash routing and on-device storage.
 - Before-bed and morning entries, history, trends, editing and JSON backups.
-- Typed-note parsing runs locally. No cloud AI, image analysis, login or server database.
+- Multilingual UI (17 languages incl. RTL: Arabic, Hebrew, Persian, Urdu) via `src/i18n`; language switcher in the app. Locale files in `src/i18n/locales` are positional arrays matching `src/i18n/keys.js`; `npm test` verifies lengths.
+- Typed-note parsing runs locally, with multilingual keywords (`src/lib/parser-keywords.js`). No cloud AI, image analysis, login or server database.
 - Android WebView shell with bundled assets, no INTERNET permission, import file picker and native backup-save dialog.
 - Browser/PWA assets use local icons. The Android shell loads its bundled files from an intercepted local HTTPS origin, without hosting or an actual web server.
 - Reminders are native Android notifications scheduled with inexact `AlarmManager` alarms (rescheduled after reboot). They work with the app closed but may arrive a few minutes late under Doze. In a browser they fire only while the page is open. Notification permission is requested on Android 13+.

@@ -1,0 +1,4 @@
+• Native daily reminder notifications that work when the app is closed
+• Launcher shortcuts and notification taps open entries directly
+• 17 languages with full right-to-left support
+• Multilingual note parsing and a chat crash fix

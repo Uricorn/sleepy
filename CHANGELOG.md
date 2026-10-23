@@ -6,11 +6,16 @@ versioning: [Semantic Versioning](https://semver.org/). Each release also needs
 
 ## [Unreleased]
 
+## [1.1.0]
+
 ### Added
+- Localization in 17 languages with full RTL support, plus a language switcher.
+- Multilingual keyword support in the local typed-note parser.
 - Native daily reminder notifications that work when the app is closed (rescheduled after reboot).
 - Launcher shortcuts and notification taps open the before-bed / morning entry directly.
 
 ### Changed
+- Fixed a chat crash.
 - Removed unused dependencies and dead UI components (smaller, faster F-Droid build).
 - Trend averages ignore nights without a value.
 - Assistant page text no longer mentions uploads or internet.
