@@ -4,6 +4,9 @@ name: Release
 on:
   push:
     tags: ['v*']
+  # Used by auto-tag.yml (tags pushed with GITHUB_TOKEN do not trigger push events).
+  # Run it with the tag as the ref, e.g. `gh workflow run release.yml --ref v1.2.0`.
+  workflow_dispatch:
 
 permissions:
   contents: write

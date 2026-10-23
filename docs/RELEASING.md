@@ -22,7 +22,8 @@ Local signed build: create untracked `android/keystore.properties` with `storeFi
 2. Update `package.json` `version`, `android/app/build.gradle` `versionName` + `versionCode`.
 3. Add `## [X.Y.Z]` to `CHANGELOG.md` and `fastlane/metadata/android/en-US/changelogs/<versionCode>.txt`.
 4. `npm run lint && npm test` (the release check fails if anything is out of sync).
-5. Merge to `main`, then tag: `git tag vX.Y.Z && git push origin vX.Y.Z`.
+5. Merge to `main`. The **Auto tag** workflow creates `vX.Y.Z` from `package.json` (if missing) and starts Release.
+   Manual fallback: `git tag vX.Y.Z && git push origin vX.Y.Z`.
 6. The **Release** workflow builds, signs, verifies and publishes the APK + `SHA256SUMS.txt`.
 7. Add the new build entry to the F-Droid recipe (or let the auto-update bot do it).
 
