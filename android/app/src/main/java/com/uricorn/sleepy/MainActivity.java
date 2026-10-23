@@ -94,7 +94,20 @@ public final class MainActivity extends Activity {
                 return true;
             }
         });
-        if (state == null || webView.restoreState(state) == null) webView.loadUrl("https://" + HOST + "/");
+        if (state == null || webView.restoreState(state) == null) webView.loadUrl("https://" + HOST + "/" + stageHash(getIntent()));
+    }
+
+    /** Maps a notification/shortcut "stage" extra to the app's hash route. */
+    private static String stageHash(Intent intent) {
+        String stage = intent == null ? null : intent.getStringExtra("stage");
+        return "before_bed".equals(stage) || "after_waking".equals(stage) ? "#/?stage=" + stage : "";
+    }
+
+    @Override protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        String hash = stageHash(intent);
+        if (!hash.isEmpty()) webView.loadUrl("https://" + HOST + "/" + hash);
     }
 
     private WebResourceResponse blockedResponse() {
@@ -116,6 +129,20 @@ public final class MainActivity extends Activity {
     }
 
     private final class BackupBridge {
+        /** Called by the web UI with "HH:MM" strings, or empty to disable each daily reminder. */
+        @JavascriptInterface public void setReminders(String bedtime, String morning) {
+            runOnUiThread(() -> {
+                ReminderScheduler.set(MainActivity.this, ReminderScheduler.BEDTIME, bedtime);
+                ReminderScheduler.set(MainActivity.this, ReminderScheduler.MORNING, morning);
+                boolean any = (bedtime != null && !bedtime.isEmpty()) || (morning != null && !morning.isEmpty());
+                if (any && android.os.Build.VERSION.SDK_INT >= 33
+                        && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
+                            != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 73);
+                }
+            });
+        }
+
         @JavascriptInterface public void saveBackup(String filename, String json) {
             if (json == null || json.length() > 20_000_000) return;
             runOnUiThread(() -> {

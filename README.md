@@ -9,7 +9,7 @@ A private, offline sleep diary for Android. All data stays on the device; the ap
 - Typed-note parsing runs locally. No cloud AI, image analysis, login or server database.
 - Android WebView shell with bundled assets, no INTERNET permission, import file picker and native backup-save dialog.
 - Browser/PWA assets use local icons. The Android shell loads its bundled files from an intercepted local HTTPS origin, without hosting or an actual web server.
-- Reminders are foreground-only. They cannot wake the phone or notify while the app is closed.
+- Reminders are native Android notifications scheduled with inexact `AlarmManager` alarms (rescheduled after reboot). They work with the app closed but may arrive a few minutes late under Doze. In a browser they fire only while the page is open. Notification permission is requested on Android 13+.
 
 ## Status
 

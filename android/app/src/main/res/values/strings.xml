@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reminder_channel">Sleep diary reminders</string>
+    <string name="reminder_bed_title">Time to log before bed</string>
+    <string name="reminder_bed_text">Tap to record your before-bed notes.</string>
+    <string name="reminder_morning_title">Complete last night\'s sleep entry</string>
+    <string name="reminder_morning_text">Tap to finish your morning entry.</string>
+    <string name="shortcut_bed">Log before bed</string>
+    <string name="shortcut_morning">Log morning</string>
+</resources>

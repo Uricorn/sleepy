@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut android:shortcutId="before_bed" android:enabled="true" android:icon="@drawable/sleepy_icon"
+        android:shortcutShortLabel="@string/shortcut_bed">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="com.uricorn.sleepy"
+            android:targetClass="com.uricorn.sleepy.MainActivity">
+            <extra android:name="stage" android:value="before_bed" />
+        </intent>
+    </shortcut>
+    <shortcut android:shortcutId="after_waking" android:enabled="true" android:icon="@drawable/sleepy_icon"
+        android:shortcutShortLabel="@string/shortcut_morning">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="com.uricorn.sleepy"
+            android:targetClass="com.uricorn.sleepy.MainActivity">
+            <extra android:name="stage" android:value="after_waking" />
+        </intent>
+    </shortcut>
+</shortcuts>
