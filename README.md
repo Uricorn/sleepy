@@ -11,11 +11,13 @@ A local-only sleep diary being converted from a platform-specific web app into a
 - Browser/PWA assets use local icons. The Android shell loads its bundled files from an intercepted local HTTPS origin, without hosting or an actual web server.
 - Reminders are foreground-only. They cannot wake the phone or notify while the app is closed.
 
-## Verification so far
+## Status
 
-The diary preservation/backup tests and four local-parser tests pass. The full dependency installation, production web build, lint, APK compilation and Android device behavior still need verification. An installable APK has not been delivered. Treat this as a work-in-progress handoff, not a finished release.
+Releases are built by CI (`.github/workflows/release.yml`) and prepared for F-Droid. See
+[docs/RELEASING.md](docs/RELEASING.md) and [docs/FDROID.md](docs/FDROID.md). Changes are listed in
+[CHANGELOG.md](CHANGELOG.md); contributions: [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under MIT.
 
-See [BASECODE_HANDOFF.md](./BASECODE_HANDOFF.md) for the continuation prompt and exact acceptance checks.
+See [BASECODE_HANDOFF.md](./BASECODE_HANDOFF.md) for the original conversion prompt (historical).
 
 ## Local development
 
@@ -39,7 +41,7 @@ Install JDK 17+ and Android SDK platform 35 with build-tools 35.0.0. Set `JAVA_H
 sh scripts/build-android.sh
 ```
 
-This installs JS dependencies, builds the web assets, copies `dist` into the Android project and runs the checked-in Gradle wrapper. Expected test APK output: `android/app/build/outputs/apk/debug/app-debug.apk`. It is a debug-signed personal test build, not an app-store release. Preserve the signing key for updates; production signing and APK verification remain follow-up work.
+This installs JS dependencies, builds the web assets, copies `dist` into the Android project and runs the checked-in Gradle wrapper. Expected test APK output: `android/app/build/outputs/apk/debug/app-debug.apk`. It is a debug-signed test build. For a signed release APK use `npm run android:release` (see docs/RELEASING.md).
 
 The Android app targets Android 8+ (API 26). These are configuration targets, not confirmed device compatibility.
 
