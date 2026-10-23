@@ -2,16 +2,19 @@ import { Link } from "@tanstack/react-router";
 import { Moon, BookOpen, BarChart3, MessageCircle } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { DataDialog } from "./DataDialog";
+import { useI18n } from "@/i18n";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const NAV = [
-  { to: "/", label: "Tonight", icon: Moon },
-  { to: "/history", label: "History", icon: BookOpen },
-  { to: "/trends", label: "Trends", icon: BarChart3 },
+  { to: "/", label: "tonight", icon: Moon },
+  { to: "/history", label: "history", icon: BookOpen },
+  { to: "/trends", label: "trends", icon: BarChart3 },
 ];
 
 export function SleepLayout({ children }) {
   const isMobile = useIsMobile();
-  const items = [...NAV, { to: "/chat", label: "Assistant", icon: MessageCircle }];
+  const { t } = useI18n();
+  const items = [...NAV, { to: "/chat", label: "assistant", icon: MessageCircle }];
 
   if (isMobile) {
     return (
@@ -24,7 +27,8 @@ export function SleepLayout({ children }) {
             <Moon className="h-5 w-5 text-[#818CF8]" />
             <span className="font-heading text-lg font-extrabold tracking-tight">Sleepy</span>
           </Link>
-          <div className="flex items-center">
+          <div className="flex items-center gap-1">
+            <LanguageSwitcher />
             <DataDialog iconOnly className="p-3 text-muted-foreground hover:text-foreground" />
           </div>
         </header>
@@ -41,7 +45,7 @@ export function SleepLayout({ children }) {
               activeProps={{ className: "text-[#818CF8]" }}
             >
               <Icon className="h-5 w-5" />
-              <span className="text-[11px] font-medium">{label}</span>
+              <span className="text-[11px] font-medium">{t(label)}</span>
             </Link>
           ))}
         </nav>
@@ -51,7 +55,7 @@ export function SleepLayout({ children }) {
 
   return (
     <div className="flex min-h-dvh bg-background text-foreground">
-      <aside className="flex w-[300px] shrink-0 flex-col border-r border-border bg-card p-6">
+      <aside className="flex w-[300px] shrink-0 flex-col border-e border-border bg-card p-6">
         <Link to="/" className="mb-10 flex items-center gap-2">
           <Moon className="h-6 w-6 text-[#818CF8]" />
           <span className="font-heading text-2xl font-extrabold tracking-tight">Sleepy</span>
@@ -65,12 +69,13 @@ export function SleepLayout({ children }) {
               activeProps={{ className: "bg-secondary text-foreground" }}
             >
               <Icon className="h-5 w-5" />
-              <span className="font-medium">{label}</span>
+              <span className="font-medium">{t(label)}</span>
             </Link>
           ))}
         </nav>
         <div className="mt-auto border-t border-border pt-6">
-          <p className="mb-3 text-xs text-muted-foreground">Stored only on this device.</p>
+          <p className="mb-3 text-xs text-muted-foreground">{t("storedOnDevice")}</p>
+          <LanguageSwitcher className="mb-3" />
           <DataDialog className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground" />
         </div>
       </aside>
