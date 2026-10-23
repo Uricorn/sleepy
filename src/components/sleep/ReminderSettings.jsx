@@ -57,7 +57,9 @@ export function ReminderSettings({ settings, onPatch }) {
       <div className="flex gap-2 rounded-2xl bg-secondary p-3 text-xs text-muted-foreground">
         <Info className="mt-0.5 h-4 w-4 shrink-0" />
         <p>
-          {t("Reminders appear only while Sleepy is open and visible. They do not wake the phone or run while the app is closed. Use your phone's alarm for reliable background reminders.")} {settings.timezone ? t("Timezone: {tz}.", { tz: settings.timezone }) : ""}
+          {typeof window !== "undefined" && window.SleepyNative?.setReminders
+            ? t("Reminders are sent as daily notifications, even when Sleepy is closed. Android may deliver them a few minutes late to save battery.")
+            : t("In a browser, reminders appear only while Sleepy is open and visible.")} {settings.timezone ? t("Timezone: {tz}.", { tz: settings.timezone }) : ""}
         </p>
       </div>
     </div>
