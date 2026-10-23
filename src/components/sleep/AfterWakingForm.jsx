@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sunrise, Check } from "lucide-react";
+import { Sunrise, Check, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
@@ -18,6 +18,12 @@ export function AfterWakingForm({ entry, onSave, saving }) {
   const done = entry?.after_waking_recorded;
 
   const [error, setError] = useState("");
+
+  const step = (d) => {
+    const cur = Number(hours) || 0;
+    setHours(String(Math.min(24, Math.max(0, Math.round((cur + d) * 10) / 10))));
+    setError("");
+  };
 
   const submit = () => {
     const n = Number(hours);
@@ -44,17 +50,43 @@ export function AfterWakingForm({ entry, onSave, saving }) {
       <TimeInput id="outofbed" label="Out-of-bed time" value={outOfBed} onChange={setOutOfBed} />
       <div className="space-y-2">
         <label className="text-sm font-medium text-muted-foreground">Estimated total sleep (hours)</label>
-        <input
-          type="number"
-          inputMode="decimal"
-          step="0.1"
-          min="0"
-          max="24"
-          value={hours}
-          onChange={(e) => setHours(e.target.value)}
-          placeholder="e.g. 7.5"
-          className="h-14 w-full rounded-2xl border border-border bg-secondary px-4 font-heading text-lg focus:outline-none focus:ring-2 focus:ring-[#34D399]"
-        />
+        <div className="flex items-center gap-2">
+          <Button type="button" variant="outline" aria-label="Decrease hours" onClick={() => step(-0.5)} className="h-14 w-14 rounded-2xl text-xl">
+            <Minus className="h-5 w-5" />
+          </Button>
+          <input
+            type="number"
+            inputMode="decimal"
+            step="0.1"
+            min="0"
+            max="24"
+            value={hours}
+            onChange={(e) => {
+              setHours(e.target.value);
+              setError("");
+            }}
+            placeholder="e.g. 7.5"
+            className="h-14 min-w-0 flex-1 rounded-2xl border border-border bg-secondary px-4 text-center font-heading text-lg focus:outline-none focus:ring-2 focus:ring-[#34D399]"
+          />
+          <Button type="button" variant="outline" aria-label="Increase hours" onClick={() => step(0.5)} className="h-14 w-14 rounded-2xl text-xl">
+            <Plus className="h-5 w-5" />
+          </Button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {[5, 6, 7, 8, 9].map((h) => (
+            <button
+              key={h}
+              type="button"
+              onClick={() => {
+                setHours(String(h));
+                setError("");
+              }}
+              className={`rounded-full border px-4 py-1.5 text-sm ${Number(hours) === h && hours !== "" ? "border-[#34D399] bg-[#34D399]/20" : "border-border bg-secondary"}`}
+            >
+              {h}h
+            </button>
+          ))}
+        </div>
         {error && <p className="text-sm text-destructive">{error}</p>}
         <p className="text-xs text-muted-foreground">Enter your own estimate — never auto-calculated.</p>
       </div>
