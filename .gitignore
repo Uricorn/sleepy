@@ -34,3 +34,12 @@ android/app/build/
 android/app/src/main/assets/
 *.keystore
 *.jks
+
+# Built packages are never committed; releases are attached to GitHub Releases
+*.apk
+*.aab
+keystore.properties
+android/.idea/
+android/.gradle/
+android/build/
+android/captures/

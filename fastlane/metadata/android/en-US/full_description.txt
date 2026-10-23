@@ -1,0 +1,19 @@
+Sleepy is a simple sleep diary that keeps everything on your phone. It has no account, no cloud, no ads and no analytics, and the app does not even request the INTERNET permission.
+
+<b>What you can do</b>
+• Record a before-bed entry and a morning entry for each night
+• Log night awakenings, sleep quality and notes
+• Browse and edit your history
+• See trends over time
+• Type a quick note and let the built-in on-device parser fill in the form (this is a local parser, not cloud AI)
+• Export and import JSON backups using Android's system file picker
+• Optional in-app reminders (they only work while the app is open)
+
+<b>Privacy</b>
+• All diary data is stored locally on the device
+• No INTERNET permission, no trackers, no third-party services
+• Only the sleep information you report is recorded; nothing is inferred
+• Android auto-backup is disabled, so export a backup before changing phones
+
+<b>Good to know</b>
+Uninstalling the app deletes its data. Use Export backup regularly and keep the file somewhere safe.

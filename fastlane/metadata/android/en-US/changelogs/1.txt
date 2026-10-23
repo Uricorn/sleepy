@@ -1,0 +1,3 @@
+• First public release
+• Before-bed and morning diary entries, history and trends
+• Local JSON backup export and import

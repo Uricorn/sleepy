@@ -1,18 +1,54 @@
 plugins { id 'com.android.application' }
 
+// Optional release signing. Provide these as environment variables (CI) or in an
+// untracked android/keystore.properties file. When absent, the release build is
+// left unsigned, which is what F-Droid expects (it signs the app itself).
+def keystoreProps = new Properties()
+def keystoreFile = rootProject.file('keystore.properties')
+if (keystoreFile.exists()) keystoreFile.withInputStream { keystoreProps.load(it) }
+def signingValue = { String envName, String propName ->
+    System.getenv(envName) ?: keystoreProps.getProperty(propName)
+}
+def releaseStoreFile = signingValue('SLEEPY_KEYSTORE_FILE', 'storeFile')
+
 android {
-    namespace 'com.uricorn.sleepy.local'
+    namespace 'com.uricorn.sleepy'
     compileSdk 35
     defaultConfig {
-        applicationId 'com.uricorn.sleepy.local'
+        applicationId 'com.uricorn.sleepy'
         minSdk 26
         targetSdk 35
+        // Keep these two literals in sync with package.json "version" and add
+        // fastlane/metadata/android/en-US/changelogs/<versionCode>.txt for each
+        // release (npm run check:release enforces this). F-Droid reads them too.
         versionCode 1
         versionName '1.0.0'
     }
+    signingConfigs {
+        if (releaseStoreFile) {
+            release {
+                storeFile file(releaseStoreFile)
+                storePassword signingValue('SLEEPY_KEYSTORE_PASSWORD', 'storePassword')
+                keyAlias signingValue('SLEEPY_KEY_ALIAS', 'keyAlias')
+                keyPassword signingValue('SLEEPY_KEY_PASSWORD', 'keyPassword')
+            }
+        }
+    }
     buildTypes {
         debug { debuggable true }
-        release { minifyEnabled false }
+        release {
+            minifyEnabled false
+            if (releaseStoreFile) signingConfig signingConfigs.release
+        }
+    }
+    // Signing-block metadata that only Google Play reads; it makes builds non-reproducible.
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+    lint {
+        abortOnError true
+        checkReleaseBuilds true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -20,8 +56,14 @@ android {
     }
 }
 
+// The web UI is built by `npm run build` into <repo>/dist and bundled as APK assets.
 tasks.register('copyWebAssets', Copy) {
     from '../../dist'
     into 'src/main/assets'
+    doFirst {
+        if (!file('../../dist/index.html').exists()) {
+            throw new GradleException('dist/ is missing. Run "npm ci && npm run build" before Gradle.')
+        }
+    }
 }
 tasks.named('preBuild').configure { dependsOn 'copyWebAssets' }
