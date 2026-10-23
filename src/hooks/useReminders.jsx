@@ -69,6 +69,10 @@ export function useReminders() {
 
     check();
     const id = setInterval(check, 60000);
-    return () => clearInterval(id);
+    window.addEventListener("sleepy-reminders-changed", check);
+    return () => {
+      clearInterval(id);
+      window.removeEventListener("sleepy-reminders-changed", check);
+    };
   }, [navigate, t]);
 }

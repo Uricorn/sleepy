@@ -96,6 +96,7 @@ function HomePage() {
     }
     try {
       await saveSettingsFn({ data: patch });
+      window.dispatchEvent(new Event("sleepy-reminders-changed"));
       await router.invalidate();
     } catch {
       toast.error(t("Could not update reminders"));
