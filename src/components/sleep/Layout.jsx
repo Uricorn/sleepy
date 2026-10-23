@@ -18,7 +18,7 @@ export function SleepLayout({ children }) {
       <div className="flex min-h-dvh flex-col bg-background text-foreground">
         <header
           className="sticky top-0 z-20 flex min-h-16 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur"
-          style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
+          style={{ paddingTop: "max(env(safe-area-inset-top, 0px), 2rem)" }}
         >
           <Link to="/" className="flex items-center gap-2">
             <Moon className="h-5 w-5 text-[#818CF8]" />
