@@ -41,16 +41,25 @@ export function formatTime(t) {
   if (!t) return "—";
   const [h, m] = t.split(":").map(Number);
   if (Number.isNaN(h)) return t;
-  const ampm = h >= 12 ? "PM" : "AM";
-  const hh = h % 12 === 0 ? 12 : h % 12;
-  return `${hh}:${String(m || 0).padStart(2, "0")} ${ampm}`;
+  return new Date(2000, 0, 1, h, m || 0).toLocaleTimeString(dateLocale, { hour: "numeric", minute: "2-digit" });
+}
+
+let dateLocale = "en-US";
+export function setDateLocale(l) {
+  dateLocale = l;
 }
 
 export function formatDateLabel(dateStr) {
   if (!dateStr) return "—";
   const [y, m, d] = dateStr.split("-").map(Number);
   const dt = new Date(y, m - 1, d);
-  return dt.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+  return dt.toLocaleDateString(dateLocale, { weekday: "short", month: "short", day: "numeric" });
+}
+
+export function formatShortDate(dateStr) {
+  if (!dateStr) return "—";
+  const [y, m, d] = dateStr.split("-").map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString(dateLocale, { month: "short", day: "numeric" });
 }
 
 export function qualityLabel(q) {

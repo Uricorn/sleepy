@@ -3,15 +3,17 @@ import { toast } from "sonner";
 import { useNavigate } from "@tanstack/react-router";
 import { getReminderCheckState } from "@/lib/sleep-fns";
 import { nowInTz } from "@/lib/sleep-utils";
+import { useI18n } from "@/i18n";
 
 // In the Android app the schedule is handed to native alarms (they fire even when
-// the app is closed). In a browser, reminders fire only while the page is open.
-// Browser-based reminders. Fires a Notification when the wall-clock time in the
+// the app is closed). In a browser, reminders fire only while the page is open:
+// a Notification fires a Notification when the wall-clock time in the
 // user's timezone matches a configured reminder, the relevant stage is not yet
 // done, and the app is open in the browser. A native mobile build (with push
 // enabled) is required for reliable background delivery.
 export function useReminders() {
   const navigate = useNavigate();
+  const { t } = useI18n();
   const fired = useRef({});
   const synced = useRef(null);
 
@@ -42,14 +44,14 @@ export function useReminders() {
           fired.current[key] = true;
           const isBed = type === "bedtime";
           if (window.SleepyNative || !("Notification" in window) || Notification.permission !== "granted") {
-            toast(isBed ? "Time to log before bed" : "Complete last night's sleep entry", {
+            toast(isBed ? t("Time to log before bed") : t("Complete last night's sleep entry"), {
               duration: 15000,
-              action: { label: "Open", onClick: () => navigate({ to: "/", search: { stage: isBed ? "before_bed" : "after_waking" } }) },
+              action: { label: t("Open"), onClick: () => navigate({ to: "/", search: { stage: isBed ? "before_bed" : "after_waking" } }) },
             });
             return;
           }
-          const n = new Notification(isBed ? "Time to log before bed" : "Complete last night's sleep entry", {
-            body: isBed ? "Tap to record your before-bed notes." : "Tap to finish your morning entry.",
+          const n = new Notification(isBed ? t("Time to log before bed") : t("Complete last night's sleep entry"), {
+            body: isBed ? t("Tap to record your before-bed notes.") : t("Tap to finish your morning entry."),
             tag: `lull-${type}`,
           });
           n.onclick = () => {
@@ -68,5 +70,5 @@ export function useReminders() {
     check();
     const id = setInterval(check, 60000);
     return () => clearInterval(id);
-  }, [navigate]);
+  }, [navigate, t]);
 }

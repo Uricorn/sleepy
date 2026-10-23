@@ -31,6 +31,34 @@ async function runTests() {
   assert.match(t3.reply, /Screenshots are not analyzed/i);
   console.log("✓ Test 3 passed");
 
+  // Localized keywords (Arabic, Spanish, Russian, Chinese, German)
+  const ar = parseLocal("ذهبت إلى السرير الساعة 11:30 م، استيقظت 7:00 ص، نمت 7.5 ساعات، الجودة ٤، متعب");
+  assert.equal(ar.fields.bedtime, "23:30");
+  assert.equal(ar.fields.estimated_out_of_bed_time, "07:00");
+  assert.equal(ar.fields.estimated_total_sleep_hours, 7.5);
+  assert.equal(ar.fields.sleep_quality, 4);
+  assert.equal(ar.fields.woke_up_tired, true);
+  const es = parseLocal("me acosté a las 23:30, me desperté a las 7:00, dormí 7,5 horas, calidad 4, descansado");
+  assert.equal(es.fields.bedtime, "23:30");
+  assert.equal(es.fields.estimated_out_of_bed_time, "07:00");
+  assert.equal(es.fields.estimated_total_sleep_hours, 7.5);
+  assert.equal(es.fields.sleep_quality, 4);
+  assert.equal(es.fields.woke_up_tired, false);
+  const ru = parseLocal("лег в 23:30, проснулся в 7:00, спал 7 часов 30 минут, качество 4");
+  assert.equal(ru.fields.bedtime, "23:30");
+  assert.equal(ru.fields.estimated_out_of_bed_time, "07:00");
+  assert.equal(ru.fields.estimated_total_sleep_hours, 7.5);
+  assert.equal(ru.fields.sleep_quality, 4);
+  const zh = parseLocal("上床 23:30，起床 7:00，睡了7.5小时，质量4");
+  assert.equal(zh.fields.bedtime, "23:30");
+  assert.equal(zh.fields.estimated_total_sleep_hours, 7.5);
+  assert.equal(zh.fields.sleep_quality, 4);
+  const de = parseLocal("ins bett um 23:30, aufgewacht um 7:00, geschlafen 7,5 stunden, qualität 4, müde");
+  assert.equal(de.fields.bedtime, "23:30");
+  assert.equal(de.fields.estimated_total_sleep_hours, 7.5);
+  assert.equal(de.fields.woke_up_tired, true);
+  console.log("✓ Localized keyword tests passed");
+
   // Test 4: chatWithAssistant wrapper with legacy message array format
   const res = await chatWithAssistant({
     data: {

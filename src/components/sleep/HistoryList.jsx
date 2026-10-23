@@ -1,6 +1,7 @@
 import { ChevronRight, Moon, Sunrise } from "lucide-react";
 import { formatDateLabel, formatTime } from "@/lib/sleep-utils";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n";
 
 function Pill({ on, icon: Icon, label, indigo }) {
   return (
@@ -21,8 +22,9 @@ function Pill({ on, icon: Icon, label, indigo }) {
 }
 
 export function HistoryList({ entries = [], onEdit }) {
+  const { t } = useI18n();
   if (!entries.length) {
-    return <p className="text-sm text-muted-foreground">No entries yet. Log tonight to start your diary.</p>;
+    return <p className="text-sm text-muted-foreground">{t("No entries yet. Log tonight to start your diary.")}</p>;
   }
   return (
     <div className="space-y-2">
@@ -30,19 +32,19 @@ export function HistoryList({ entries = [], onEdit }) {
         <button
           key={e.id}
           onClick={() => onEdit(e)}
-          className="flex w-full items-center gap-3 rounded-2xl border border-border bg-card p-4 text-left hover:border-[#818CF8]/40"
+          className="flex w-full items-center gap-3 rounded-2xl border border-border bg-card p-4 text-start hover:border-[#818CF8]/40"
         >
           <div className="min-w-0 flex-1">
             <p className="truncate font-medium">{formatDateLabel(e.date)}</p>
             <p className="text-xs text-muted-foreground">
-              {e.bedtime ? `Bed ${formatTime(e.bedtime)}` : "—"} · {e.estimated_total_sleep_hours != null ? `${e.estimated_total_sleep_hours}h` : "—"}
+              {e.bedtime ? `${t("Bed")} ${formatTime(e.bedtime)}` : "—"} · {e.estimated_total_sleep_hours != null ? `${e.estimated_total_sleep_hours}h` : "—"}
             </p>
           </div>
           <div className="flex items-center gap-1.5">
-            <Pill on={e.before_bed_recorded} icon={Moon} label="Night" indigo />
-            <Pill on={e.after_waking_recorded} icon={Sunrise} label="AM" />
+            <Pill on={e.before_bed_recorded} icon={Moon} label={t("Night")} indigo />
+            <Pill on={e.after_waking_recorded} icon={Sunrise} label={t("AM")} />
           </div>
-          <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          <ChevronRight className="h-4 w-4 text-muted-foreground rtl:rotate-180" />
         </button>
       ))}
     </div>
