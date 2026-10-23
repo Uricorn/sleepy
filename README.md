@@ -1,4 +1,4 @@
-# Sleepy Local
+# Sleepy
 
 A local-only sleep diary being converted from a platform-specific web app into a standalone Android APK. The original `Uricorn/sleepy` repository is untouched. This repository is `Uricorn/sleepy-basecode`.
 

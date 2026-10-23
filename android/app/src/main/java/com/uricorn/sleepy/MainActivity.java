@@ -1,4 +1,4 @@
-package com.uricorn.sleepy.local;
+package com.uricorn.sleepy;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -53,7 +53,7 @@ public final class MainActivity extends Activity {
         settings.setAllowContentAccess(true);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
         settings.setJavaScriptCanOpenWindowsAutomatically(false);
-        settings.setUserAgentString(settings.getUserAgentString() + " SleepyLocalAndroid/1");
+        settings.setUserAgentString(settings.getUserAgentString() + " SleepyAndroid/1");
         webView.addJavascriptInterface(new BackupBridge(), "SleepyNative");
         webView.setWebViewClient(new WebViewClient() {
             @Override public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {

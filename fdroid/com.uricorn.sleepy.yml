@@ -1,7 +1,7 @@
-# DRAFT F-Droid build recipe. Copy to metadata/com.uricorn.sleepy.local.yml in a fork of
+# DRAFT F-Droid build recipe. Copy to metadata/com.uricorn.sleepy.yml in a fork of
 # https://gitlab.com/fdroid/fdroiddata and open a merge request. See docs/FDROID.md.
-# Validate locally first:  fdroid readmeta && fdroid lint com.uricorn.sleepy.local &&
-#                          fdroid build -v -l com.uricorn.sleepy.local
+# Validate locally first:  fdroid readmeta && fdroid lint com.uricorn.sleepy &&
+#                          fdroid build -v -l com.uricorn.sleepy
 Categories:
   - Sports & Health
 License: MIT
@@ -11,7 +11,7 @@ SourceCode: https://github.com/Uricorn/sleepy-basecode
 IssueTracker: https://github.com/Uricorn/sleepy-basecode/issues
 Changelog: https://github.com/Uricorn/sleepy-basecode/blob/HEAD/CHANGELOG.md
 
-AutoName: Sleepy Local
+AutoName: Sleepy
 
 RepoType: git
 Repo: https://github.com/Uricorn/sleepy-basecode.git

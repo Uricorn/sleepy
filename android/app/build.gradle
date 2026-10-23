@@ -12,10 +12,10 @@ def signingValue = { String envName, String propName ->
 def releaseStoreFile = signingValue('SLEEPY_KEYSTORE_FILE', 'storeFile')
 
 android {
-    namespace 'com.uricorn.sleepy.local'
+    namespace 'com.uricorn.sleepy'
     compileSdk 35
     defaultConfig {
-        applicationId 'com.uricorn.sleepy.local'
+        applicationId 'com.uricorn.sleepy'
         minSdk 26
         targetSdk 35
         // Keep these two literals in sync with package.json "version" and add

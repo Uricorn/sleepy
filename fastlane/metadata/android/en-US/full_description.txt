@@ -1,4 +1,4 @@
-Sleepy Local is a simple sleep diary that keeps everything on your phone. It has no account, no cloud, no ads and no analytics, and the app does not even request the INTERNET permission.
+Sleepy is a simple sleep diary that keeps everything on your phone. It has no account, no cloud, no ads and no analytics, and the app does not even request the INTERNET permission.
 
 <b>What you can do</b>
 • Record a before-bed entry and a morning entry for each night

@@ -55,7 +55,7 @@ jobs:
         run: ./gradlew assembleDebug lintDebug --no-daemon
       - uses: actions/upload-artifact@v4
         with:
-          name: sleepy-local-debug-apk
+          name: sleepy-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 7
       - name: Verify no INTERNET permission in the built APK
