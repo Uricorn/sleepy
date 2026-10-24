@@ -6,6 +6,11 @@ versioning: [Semantic Versioning](https://semver.org/). Each release also needs
 
 ## [Unreleased]
 
+## [1.2.1]
+
+### Changed
+- Updated development dependencies (ESLint 10) and cleaned up unused assignments flagged by the new lint rules.
+
 ## [1.2.0]
 
 ### Fixed
