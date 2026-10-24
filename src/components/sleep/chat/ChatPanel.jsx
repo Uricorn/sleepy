@@ -49,7 +49,7 @@ export function ChatPanel() {
   };
 
   return (
-    <div className="flex h-[calc(100dvh-20rem)] min-h-64 flex-col md:h-[calc(100dvh-6rem)]">
+    <div className="flex h-[calc(var(--vvh,100dvh)-20rem)] min-h-64 flex-col md:h-[calc(100dvh-6rem)]">
       <div className="flex-1 space-y-3 overflow-y-auto pb-3">
         {messages.map((m, i) => (
           <ChatBubble key={i} message={m} />
