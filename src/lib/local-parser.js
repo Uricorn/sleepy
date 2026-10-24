@@ -79,7 +79,7 @@ export function parseLocal(text = "") {
   const found = Object.keys(fields).length;
   const mentionsScreenshot = new RegExp(K.SCREENSHOT, "i").test(t);
 
-  let reply = "";
+  let reply;
   if (found) {
     reply = mentionsScreenshot
       ? "I read your text note on this device. Here's what I found — check it and add it to your diary. (Note: screenshots are not analyzed by the local text parser.)"

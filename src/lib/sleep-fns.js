@@ -20,7 +20,7 @@ const ENTRY_FIELDS = [
 ];
 
 function read() {
-  let p = {};
+  let p;
   try {
     p = JSON.parse(localStorage.getItem(KEY) || "{}") || {};
   } catch {
