@@ -1,0 +1,1 @@
+• Maintenance update: development dependency upgrades and code cleanup
