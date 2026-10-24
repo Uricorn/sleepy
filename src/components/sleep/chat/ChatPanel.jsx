@@ -17,6 +17,31 @@ export function ChatPanel() {
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const endRef = useRef(null);
+  const rootRef = useRef(null);
+  const [fitH, setFitH] = useState(null);
+
+  // On mobile, size the panel so its input sits just above the on-screen keyboard.
+  const fitToKeyboard = () => {
+    const vv = window.visualViewport;
+    const el = rootRef.current;
+    if (!vv || !el || window.innerWidth >= 768) return;
+    const top = el.getBoundingClientRect().top;
+    setFitH(Math.max(200, vv.offsetTop + vv.height - top - 8));
+  };
+  const onFocusInput = () => {
+    setTimeout(() => {
+      rootRef.current?.scrollIntoView({ block: "start", behavior: "smooth" });
+      setTimeout(fitToKeyboard, 300);
+    }, 350);
+  };
+  useEffect(() => {
+    const vv = window.visualViewport;
+    const reset = () => {
+      if (vv && window.innerHeight - vv.height < 100) setFitH(null);
+    };
+    vv?.addEventListener("resize", reset);
+    return () => vv?.removeEventListener("resize", reset);
+  }, []);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -49,7 +74,7 @@ export function ChatPanel() {
   };
 
   return (
-    <div className="flex h-[calc(var(--vvh,100dvh)-20rem)] min-h-64 flex-col md:h-[calc(100dvh-6rem)]">
+    <div ref={rootRef} style={fitH ? { height: fitH } : undefined} className="flex h-[calc(var(--vvh,100dvh)-20rem)] min-h-64 flex-col md:h-[calc(100dvh-6rem)]">
       <div className="flex-1 space-y-3 overflow-y-auto pb-3">
         {messages.map((m, i) => (
           <ChatBubble key={i} message={m} />
@@ -66,6 +91,7 @@ export function ChatPanel() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
+          onFocus={onFocusInput}
           rows={2}
           maxLength={2000}
           placeholder={t("Message… (e.g. bed at 11pm, up at 7am, slept 7.5h, quality 4)")}
