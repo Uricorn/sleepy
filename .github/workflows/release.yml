@@ -14,7 +14,7 @@ permissions:
 jobs:
   release:
     name: Build, sign and publish
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: gradle/actions/wrapper-validation@v6

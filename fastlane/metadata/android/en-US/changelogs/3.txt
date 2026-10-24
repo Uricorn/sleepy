@@ -1,0 +1,1 @@
+• Focused text fields now stay visible above the keyboard

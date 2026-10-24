@@ -6,6 +6,11 @@ versioning: [Semantic Versioning](https://semver.org/). Each release also needs
 
 ## [Unreleased]
 
+## [1.2.0]
+
+### Fixed
+- Focused text fields stay visible above the on-screen keyboard.
+
 ## [1.1.0]
 
 ### Added
