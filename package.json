@@ -15,6 +15,8 @@
     "test": "node scripts/test-diary.mjs && node src/lib/local-parser.test.js && node scripts/check-release.mjs && node scripts/check-i18n.mjs",
     "demo-data": "node scripts/demo-data.mjs",
     "android:build": "sh scripts/build-android.sh",
+    "version": "node scripts/sync-version.mjs && git add android/app/build.gradle",
+    "version:sync": "node scripts/sync-version.mjs",
     "check:release": "node scripts/check-release.mjs && node scripts/check-i18n.mjs",
     "android:release": "sh scripts/build-android.sh release"
   },
