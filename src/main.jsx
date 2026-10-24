@@ -23,8 +23,17 @@ const revealField = () => {
   const el = document.activeElement;
   if (isField(el)) el.scrollIntoView({ block: 'center', behavior: 'smooth' });
 };
+// Hide the fixed bottom nav while typing so it never covers the field above the keyboard.
 document.addEventListener('focusin', (e) => {
-  if (isField(e.target)) setTimeout(revealField, 350);
+  if (isField(e.target)) {
+    document.documentElement.classList.add('kb-open');
+    setTimeout(revealField, 350);
+  }
+});
+document.addEventListener('focusout', () => {
+  setTimeout(() => {
+    if (!isField(document.activeElement)) document.documentElement.classList.remove('kb-open');
+  }, 100);
 });
 window.visualViewport?.addEventListener('resize', revealField);
 

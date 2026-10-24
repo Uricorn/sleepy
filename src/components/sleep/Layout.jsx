@@ -41,7 +41,7 @@ export function SleepLayout({ children }) {
         <main className="flex-1 overflow-y-auto pb-[calc(6rem+env(safe-area-inset-bottom,16px))]">{children}</main>
         <nav
           aria-label={t("Main")}
-          className={`fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t border-border bg-card/95 backdrop-blur`}
+          className="mobile-bottom-nav fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t border-border bg-card/95 backdrop-blur"
           style={{ paddingBottom: "env(safe-area-inset-bottom, 16px)" }}
         >
           {items.map(({ to, label, icon: Icon }) => (
