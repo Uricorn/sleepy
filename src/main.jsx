@@ -16,3 +16,14 @@ createRoot(document.getElementById('root')).render(
     </I18nProvider>
   </React.StrictMode>,
 );
+
+// Keep the focused field visible when the on-screen keyboard opens.
+const isField = (el) => el && el.matches && el.matches('input, textarea, select, [contenteditable="true"]');
+const revealField = () => {
+  const el = document.activeElement;
+  if (isField(el)) el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+};
+document.addEventListener('focusin', (e) => {
+  if (isField(e.target)) setTimeout(revealField, 350);
+});
+window.visualViewport?.addEventListener('resize', revealField);
