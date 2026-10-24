@@ -71,3 +71,5 @@
     min-height: 56px;
   }
 }
+/* Hide the mobile bottom nav while the on-screen keyboard is open. */
+.kb-open .mobile-bottom-nav { display: none; }
