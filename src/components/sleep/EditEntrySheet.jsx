@@ -78,7 +78,7 @@ export function EditEntrySheet({ entry, open, onOpenChange }) {
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>{t("Edit both stages of this night.")}</DrawerDescription>
           </DrawerHeader>
-          <div className="max-h-[72vh] overflow-y-auto px-4 pb-8">{content}</div>
+          <div className="max-h-[min(72vh,calc(var(--vvh,100vh)-9rem))] overflow-y-auto px-4 pb-8">{content}</div>
         </DrawerContent>
       </Drawer>
     );
@@ -91,7 +91,7 @@ export function EditEntrySheet({ entry, open, onOpenChange }) {
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{t("Edit both stages of this night.")}</DialogDescription>
         </DialogHeader>
-        <div className="max-h-[72vh] overflow-y-auto">{content}</div>
+        <div className="max-h-[min(72vh,calc(var(--vvh,100vh)-9rem))] overflow-y-auto">{content}</div>
       </DialogContent>
     </Dialog>
   );
