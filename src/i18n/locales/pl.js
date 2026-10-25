@@ -152,4 +152,6 @@ export default [
   "Transkrypcja…",
   "Zatrzymaj nagrywanie",
   "Wprowadzanie głosowe",
+  "Dla {date} nadal brakuje danych — dotknij pozycji, aby ją uzupełnić:",
+  "{date} jest w pełni uzupełniony. Nadal możesz dodać przebudzenia lub notatki.",
 ];

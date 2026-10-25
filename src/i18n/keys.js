@@ -153,4 +153,6 @@ export const KEYS = [
   "Transcribing…",
   "Stop recording",
   "Voice input",
+  "Still missing for {date} — tap one to fill it in:",
+  "{date} is fully logged. You can still add awakenings or notes.",
 ];

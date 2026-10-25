@@ -24,19 +24,20 @@ function yesterday() {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
-export function ApplyCard({ fields }) {
+export function ApplyCard({ fields, defaultDate, onApplied }) {
   const { t } = useI18n();
   const router = useRouter();
-  const [date, setDate] = useState(fields.date || yesterday());
+  const [date, setDate] = useState(fields.date || defaultDate || yesterday());
   const [done, setDone] = useState(false);
   const rows = LABELS.filter(([k]) => fields[k] !== undefined);
   if (!rows.length) return null;
 
   const apply = async () => {
-    await applyChatFields({ date, fields });
+    const saved = await applyChatFields({ date, fields });
     await router.invalidate();
     setDone(true);
     toast.success(t("Diary updated"));
+    onApplied?.(date, saved);
   };
 
   return (

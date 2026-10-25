@@ -152,4 +152,6 @@ export default [
   "Yazıya dökülüyor…",
   "Kaydı durdur",
   "Sesli giriş",
+  "{date} için hâlâ eksik bilgi var — tamamlamak için birine dokunun:",
+  "{date} tamamen kaydedildi. Gece uyanmaları veya not ekleyebilirsiniz.",
 ];

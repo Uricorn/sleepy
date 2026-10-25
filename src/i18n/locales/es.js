@@ -152,4 +152,6 @@ export default [
   "Transcribiendo…",
   "Detener grabación",
   "Entrada de voz",
+  "Aún falta información de {date}: toca una para completarla:",
+  "{date} está completo. Aún puedes añadir despertares o notas.",
 ];

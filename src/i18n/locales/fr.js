@@ -152,4 +152,6 @@ export default [
   "Transcription…",
   "Arrêter l'enregistrement",
   "Saisie vocale",
+  "Il manque encore des infos pour {date} — touchez-en une pour la compléter :",
+  "{date} est complet. Vous pouvez encore ajouter des réveils ou des notes.",
 ];

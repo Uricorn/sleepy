@@ -152,4 +152,6 @@ export default [
   "Transcrevendo…",
   "Parar gravação",
   "Entrada de voz",
+  "Ainda faltam dados de {date} — toque numa opção para preenchê-la:",
+  "{date} está completo. Você ainda pode adicionar despertares ou notas.",
 ];

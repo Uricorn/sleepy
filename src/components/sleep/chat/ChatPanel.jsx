@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Send, Loader2, Mic, Square } from "lucide-react";
 import { toast } from "sonner";
 import { chatWithAssistant } from "@/lib/chat-fns";
-import { todayNightKey } from "@/lib/sleep-utils";
+import { todayNightKey, formatDateLabel } from "@/lib/sleep-utils";
+import { missingPrompts } from "@/lib/missing-info";
 import { ChatBubble } from "./ChatBubble";
 import { useI18n } from "@/i18n";
 import { useDictation } from "@/lib/use-dictation";
@@ -24,6 +25,8 @@ export function ChatPanel() {
   });
   const voiceBusy = dictation.status === "loading" || dictation.status === "transcribing";
   const recording = dictation.status === "recording";
+  const [lastDate, setLastDate] = useState(null);
+  const inputRef = useRef(null);
   const endRef = useRef(null);
   const rootRef = useRef(null);
   const [fitH, setFitH] = useState(null);
@@ -55,6 +58,24 @@ export function ChatPanel() {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, busy]);
 
+  // After a night is saved, tell the user what is still empty for it and offer quick prompts.
+  const onApplied = (date, entry) => {
+    setLastDate(date);
+    const missing = missingPrompts(entry);
+    const label = formatDateLabel(date);
+    setMessages((m) => [
+      ...m,
+      missing.length
+        ? { role: "assistant", content: t("Still missing for {date} — tap one to fill it in:", { date: label }), suggestions: missing }
+        : { role: "assistant", content: t("{date} is fully logged. You can still add awakenings or notes.", { date: label }) },
+    ]);
+  };
+
+  const onSuggest = (starter) => {
+    setInput((v) => (v && !/\s$/.test(v) ? `${v}, ${starter}` : `${v}${starter}`).slice(0, 2000));
+    inputRef.current?.focus();
+  };
+
   const send = async () => {
     const text = input.trim();
     if (!text || busy) return;
@@ -85,7 +106,7 @@ export function ChatPanel() {
     <div ref={rootRef} style={fitH ? { height: fitH } : undefined} className="flex h-[calc(var(--vvh,100dvh)-20rem)] min-h-64 flex-col md:h-[calc(100dvh-6rem)]">
       <div className="flex-1 space-y-3 overflow-y-auto pb-3">
         {messages.map((m, i) => (
-          <ChatBubble key={i} message={m} />
+          <ChatBubble key={i} message={m} defaultDate={lastDate} onApplied={onApplied} onSuggest={onSuggest} />
         ))}
         {busy && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -102,6 +123,7 @@ export function ChatPanel() {
       </div>
       <div className="flex items-end gap-2">
         <textarea
+          ref={inputRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
