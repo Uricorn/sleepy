@@ -8,7 +8,7 @@ import { useI18n } from "@/i18n";
 
 const LABELS = [
   ["bedtime", "Bedtime", formatTime],
-  ["estimated_sleep_onset", "Sleep onset", formatTime],
+  ["estimated_sleep_onset", "Time fell asleep", formatTime],
   ["night_awakenings", "Awakenings", (v) => v.map(formatTime).join(", ")],
   ["estimated_out_of_bed_time", "Out of bed", formatTime],
   ["estimated_total_sleep_hours", "Total sleep", (v) => `${v} h`],
