@@ -7,7 +7,7 @@ versioning: [Semantic Versioning](https://semver.org/). Each release also needs
 ## [Unreleased]
 
 ### Added
-- Voice input in the assistant chat: a mic button transcribes speech on-device with Whisper (`onnx-community/whisper-base` via Transformers.js, in a Web Worker). No cloud or browser speech service is used. The microphone is requested only when the mic button is tapped, and recognition uses the current app language. The model is bundled with the web build and the Android app (microphone permission added, requested only on tap); the app still has no INTERNET permission.
+- Voice input in the assistant chat: a mic button transcribes speech on-device with Whisper (`onnx-community/whisper-tiny` via Transformers.js, in a Web Worker). No cloud or browser speech service is used. The microphone is requested only when the mic button is tapped, and recognition uses the current app language. The model is bundled with the web build and the Android app (microphone permission added, requested only on tap); the app still has no INTERNET permission.
 
 ### Changed
 - Night awakenings: time is optional, each can record minutes awake and whether you got out of bed; suggested times fall between falling asleep and waking.

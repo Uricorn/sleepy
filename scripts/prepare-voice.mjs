@@ -9,8 +9,8 @@ if (process.env.SLEEPY_SKIP_VOICE === '1') {
   process.exit(0);
 }
 
-const REPO = 'onnx-community/whisper-base';
-const REVISION = '1846881b6b3a3024392c1eea3ad983695bc23925'; // pinned model revision
+const REPO = 'onnx-community/whisper-tiny';
+const REVISION = 'ff4177021cc41f7db950912b73ea4fdf7d01d8e7'; // pinned model revision
 const FILES = [
   'config.json', 'generation_config.json', 'preprocessor_config.json', 'tokenizer.json',
   'tokenizer_config.json', 'added_tokens.json', 'special_tokens_map.json', 'vocab.json', 'merges.txt',

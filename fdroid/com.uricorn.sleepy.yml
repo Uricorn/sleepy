@@ -4,7 +4,7 @@
 #                          fdroid build -v -l com.uricorn.sleepy
 Categories:
   - Sports & Health
-License: PolyForm-Noncommercial-1.0.0
+License: AGPL-3.0-only
 AuthorName: Uricorn
 WebSite: https://github.com/Uricorn/sleepy
 SourceCode: https://github.com/Uricorn/sleepy

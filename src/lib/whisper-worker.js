@@ -15,7 +15,7 @@ let asr = null;
 
 async function load() {
   if (asr) return asr;
-  asr = await pipeline("automatic-speech-recognition", "onnx-community/whisper-base", {
+  asr = await pipeline("automatic-speech-recognition", "onnx-community/whisper-tiny", {
     device: "wasm",
     dtype: "q8",
     progress_callback: (p) => {

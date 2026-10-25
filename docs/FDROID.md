@@ -7,7 +7,7 @@ binary is taken from this repo, which is why `*.apk` is git-ignored.
 
 | Requirement | Where |
 |---|---|
-| Open-source licence | `LICENSE` (MIT - change if you prefer another FLOSS licence, and update `License:` in the recipe) |
+| Open-source licence | `LICENSE` (GNU AGPL-3.0; keep `License: AGPL-3.0-only` in the recipe in sync) |
 | No proprietary libs / trackers / network | Manifest has no INTERNET permission, no Android dependencies; CI fails if that changes |
 | Store listing (title, descriptions, icon, changelog) | `fastlane/metadata/android/en-US/` |
 | Build recipe draft | `fdroid/com.uricorn.sleepy.yml` |
@@ -17,7 +17,7 @@ binary is taken from this repo, which is why `*.apk` is git-ignored.
 
 ## Open item: bundled voice model
 
-Voice input ships a ~77 MB Whisper model (MIT) plus ONNX Runtime WebAssembly (MIT) inside the APK.
+Voice input ships a ~40 MB Whisper model (MIT) plus ONNX Runtime WebAssembly (MIT) inside the APK.
 The model is **downloaded at build time** by `scripts/prepare-voice.mjs` from Hugging Face. F-Droid
 generally disallows build-time downloads of binaries and may flag prebuilt `.onnx`/`.wasm` blobs, so
 before submitting: ask the F-Droid reviewers how to provide it (e.g. a `srclibs`/`prebuild` source
