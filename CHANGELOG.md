@@ -6,6 +6,12 @@ versioning: [Semantic Versioning](https://semver.org/). Each release also needs
 
 ## [Unreleased]
 
+### Added
+- Voice input in the assistant chat: a mic button transcribes speech on-device with Whisper (`onnx-community/whisper-base` via Transformers.js, in a Web Worker). No cloud or browser speech service is used. The microphone is requested only when the mic button is tapped, and recognition uses the current app language. Currently browser/dev only (see README).
+
+### Changed
+- Morning form: "Estimated sleep onset" is now "Time fell asleep (estimate)" and defaults to bedtime + 20 minutes when empty.
+
 ## [1.2.1]
 
 ### Changed
