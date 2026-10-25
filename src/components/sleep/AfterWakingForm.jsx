@@ -43,7 +43,7 @@ export function AfterWakingForm({ entry, onSave, saving }) {
     setError("");
     onSave({
       estimated_sleep_onset: onset,
-      night_awakenings: awakenings.filter((a) => a),
+      night_awakenings: awakenings,
       estimated_out_of_bed_time: outOfBed,
       estimated_total_sleep_hours: hours === "" ? null : n,
       sleep_quality: quality,
