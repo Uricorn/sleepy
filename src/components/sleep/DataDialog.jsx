@@ -89,6 +89,10 @@ export function DataDialog({ className, iconOnly = false }) {
             <Link to="/privacy" onClick={() => setOpen(false)} className="block pt-1 text-center text-sm text-muted-foreground underline">
               {t("Privacy policy")}
             </Link>
+            <div className="flex justify-center gap-4 text-sm text-muted-foreground">
+              <a href="https://github.com/Uricorn/sleepy" target="_blank" rel="noopener noreferrer" className="underline">{t("Source code")}</a>
+              <a href="https://github.com/Uricorn/sleepy/issues" target="_blank" rel="noopener noreferrer" className="underline">{t("Report an issue / contact")}</a>
+            </div>
           </div>
         </DialogContent>
       </Dialog>

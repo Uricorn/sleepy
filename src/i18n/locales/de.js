@@ -152,4 +152,6 @@ export default [
   "Spracheingabe",
   "Für {date} fehlt noch etwas – tippe auf einen Punkt, um ihn zu ergänzen:",
   "{date} ist vollständig erfasst. Du kannst noch nächtliches Aufwachen oder Notizen ergänzen.",
+  "Quellcode",
+  "Problem melden / Kontakt",
 ];

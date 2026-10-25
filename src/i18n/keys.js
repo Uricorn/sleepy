@@ -153,4 +153,6 @@ export const KEYS = [
   "Voice input",
   "Still missing for {date} — tap one to fill it in:",
   "{date} is fully logged. You can still add awakenings or notes.",
+  "Source code",
+  "Report an issue / contact",
 ];
