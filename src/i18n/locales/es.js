@@ -132,7 +132,7 @@ export default [
   "Política de privacidad",
   "Tu diario se queda en tu dispositivo",
   "Sleepy no necesita cuenta. Tus registros de sueño y ajustes de recordatorios se guardan solo en el almacenamiento local de este dispositivo. No los recopilamos, subimos ni vendemos.",
-  "El asistente usa un sencillo analizador de texto en el dispositivo. No contacta con ningún servicio de IA ni analiza capturas de pantalla. No se añade nada a tu diario hasta que pulsas «Añadir al diario». La app de Android no tiene permiso de internet.",
+  "El asistente usa un sencillo analizador de texto en el dispositivo. No contacta con ningún servicio de IA. No se añade nada a tu diario hasta que pulsas «Añadir al diario». La app de Android no tiene permiso de internet.",
   "Copias de seguridad y borrado de datos",
   "Puedes exportar un archivo de copia, importarlo en otro dispositivo o borrarlo todo desde «Tus datos». Desinstalar la app o borrar los datos del navegador elimina tu diario si no tienes copia.",
   "No es consejo médico",

@@ -132,7 +132,7 @@ export default [
   "Politique de confidentialité",
   "Votre journal reste sur votre appareil",
   "Sleepy n'a pas besoin de compte. Vos nuits et réglages de rappel sont stockés uniquement dans le stockage local de cet appareil. Nous ne les collectons, ne les envoyons ni ne les vendons.",
-  "L'assistant utilise un simple lecteur de texte sur l'appareil. Il ne contacte aucun service d'IA et n'analyse pas les captures d'écran. Rien n'est ajouté à votre journal tant que vous n'appuyez pas sur « Ajouter au journal ». L'app Android n'a pas d'autorisation internet.",
+  "L'assistant utilise un simple lecteur de texte sur l'appareil. Il ne contacte aucun service d'IA. Rien n'est ajouté à votre journal tant que vous n'appuyez pas sur « Ajouter au journal ». L'app Android n'a pas d'autorisation internet.",
   "Sauvegardes et suppression des données",
   "Vous pouvez exporter une sauvegarde, l'importer sur un autre appareil ou tout effacer depuis « Vos données ». Désinstaller l'app ou effacer les données du navigateur supprime votre journal sans sauvegarde.",
   "Pas un avis médical",

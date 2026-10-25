@@ -132,7 +132,7 @@ export default [
   "Datenschutzerklärung",
   "Dein Tagebuch bleibt auf deinem Gerät",
   "Sleepy braucht kein Konto. Deine Schlafeinträge und Erinnerungseinstellungen werden nur im lokalen Speicher dieses Geräts gespeichert. Wir erfassen, laden oder verkaufen sie nicht.",
-  "Der Assistent nutzt einen einfachen Textparser auf dem Gerät. Er kontaktiert keinen KI-Dienst und analysiert keine Screenshots. Nichts wird deinem Tagebuch hinzugefügt, bis du „Zum Tagebuch hinzufügen“ tippst. Die Android-App hat keine Internetberechtigung.",
+  "Der Assistent nutzt einen einfachen Textparser auf dem Gerät. Er kontaktiert keinen KI-Dienst. Nichts wird deinem Tagebuch hinzugefügt, bis du „Zum Tagebuch hinzufügen“ tippst. Die Android-App hat keine Internetberechtigung.",
   "Sicherungen und Löschen von Daten",
   "Du kannst eine Sicherungsdatei exportieren, auf einem anderen Gerät importieren oder unter „Deine Daten“ alles löschen. Deinstallieren der App oder Löschen der Browserdaten löscht dein Tagebuch, falls du keine Sicherung hast.",
   "Keine medizinische Beratung",

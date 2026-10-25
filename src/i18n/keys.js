@@ -133,7 +133,7 @@ export const KEYS = [
   "Privacy Policy",
   "Your diary stays on your device",
   "Sleepy needs no account. Your sleep entries and reminder settings are stored only in this device's local storage. We do not collect, upload or sell them.",
-  "The Assistant uses a simple on-device text parser. It does not contact an AI service or analyze screenshots. Nothing is added to your diary until you tap \"Add to diary\". The Android app has no internet permission.",
+  "The Assistant uses a simple on-device text parser. It does not contact an AI service. Nothing is added to your diary until you tap \"Add to diary\". The Android app has no internet permission.",
   "Backups and deleting data",
   "You can export a backup file, import it on another device, or erase everything from \"Your data\". Uninstalling the app or clearing browser data deletes your diary unless you have a backup.",
   "Not medical advice",

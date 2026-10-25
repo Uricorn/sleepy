@@ -132,7 +132,7 @@ export default [
   "Política de Privacidade",
   "Seu diário fica no seu dispositivo",
   "O Sleepy não precisa de conta. Seus registros de sono e configurações de lembrete ficam apenas no armazenamento local deste dispositivo. Não os coletamos, enviamos nem vendemos.",
-  "O assistente usa um leitor de texto simples no dispositivo. Ele não contata nenhum serviço de IA nem analisa capturas de tela. Nada é adicionado ao diário até você tocar em “Adicionar ao diário”. O app Android não tem permissão de internet.",
+  "O assistente usa um leitor de texto simples no dispositivo. Ele não contata nenhum serviço de IA. Nada é adicionado ao diário até você tocar em “Adicionar ao diário”. O app Android não tem permissão de internet.",
   "Backups e exclusão de dados",
   "Você pode exportar um arquivo de backup, importá-lo em outro dispositivo ou apagar tudo em “Seus dados”. Desinstalar o app ou limpar os dados do navegador apaga seu diário se não houver backup.",
   "Não é aconselhamento médico",

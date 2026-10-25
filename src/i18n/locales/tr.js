@@ -132,7 +132,7 @@ export default [
   "Gizlilik Politikası",
   "Günlüğünüz cihazınızda kalır",
   "Sleepy hesap gerektirmez. Uyku kayıtlarınız ve hatırlatıcı ayarlarınız yalnızca bu cihazın yerel depolamasında saklanır. Bunları toplamaz, yüklemez veya satmayız.",
-  "Asistan, cihaz üzerinde basit bir metin ayrıştırıcı kullanır. Bir yapay zekâ servisine bağlanmaz ve ekran görüntülerini analiz etmez. “Günlüğe ekle”ye dokunana kadar günlüğünüze hiçbir şey eklenmez. Android uygulamasının internet izni yoktur.",
+  "Asistan, cihaz üzerinde basit bir metin ayrıştırıcı kullanır. Bir yapay zekâ servisine bağlanmaz. “Günlüğe ekle”ye dokunana kadar günlüğünüze hiçbir şey eklenmez. Android uygulamasının internet izni yoktur.",
   "Yedekler ve veri silme",
   "Yedek dosyası dışa aktarabilir, başka bir cihaza aktarabilir veya “Verileriniz”den her şeyi silebilirsiniz. Uygulamayı kaldırmak veya tarayıcı verilerini temizlemek, yedeğiniz yoksa günlüğünüzü siler.",
   "Tıbbi tavsiye değildir",

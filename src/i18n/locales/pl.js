@@ -132,7 +132,7 @@ export default [
   "Polityka prywatności",
   "Twój dziennik zostaje na Twoim urządzeniu",
   "Sleepy nie wymaga konta. Wpisy o śnie i ustawienia przypomnień są przechowywane tylko w lokalnej pamięci tego urządzenia. Nie zbieramy, nie wysyłamy ani nie sprzedajemy ich.",
-  "Asystent używa prostego parsera tekstu na urządzeniu. Nie łączy się z usługą AI ani nie analizuje zrzutów ekranu. Nic nie trafia do dziennika, dopóki nie dotkniesz „Dodaj do dziennika”. Aplikacja na Androida nie ma uprawnień do internetu.",
+  "Asystent używa prostego parsera tekstu na urządzeniu. Nie łączy się z usługą AI. Nic nie trafia do dziennika, dopóki nie dotkniesz „Dodaj do dziennika”. Aplikacja na Androida nie ma uprawnień do internetu.",
   "Kopie zapasowe i usuwanie danych",
   "Możesz wyeksportować kopię zapasową, zaimportować ją na innym urządzeniu lub usunąć wszystko w „Twoje dane”. Odinstalowanie aplikacji lub wyczyszczenie danych przeglądarki usuwa dziennik, jeśli nie masz kopii.",
   "To nie porada medyczna",

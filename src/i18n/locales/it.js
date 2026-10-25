@@ -132,7 +132,7 @@ export default [
   "Informativa sulla privacy",
   "Il tuo diario resta sul tuo dispositivo",
   "Sleepy non richiede un account. Le tue notti e le impostazioni dei promemoria sono salvate solo nella memoria locale di questo dispositivo. Non le raccogliamo, carichiamo né vendiamo.",
-  "L'assistente usa un semplice lettore di testo sul dispositivo. Non contatta servizi di IA e non analizza screenshot. Nulla viene aggiunto al diario finché non tocchi “Aggiungi al diario”. L'app Android non ha il permesso internet.",
+  "L'assistente usa un semplice lettore di testo sul dispositivo. Non contatta servizi di IA. Nulla viene aggiunto al diario finché non tocchi “Aggiungi al diario”. L'app Android non ha il permesso internet.",
   "Backup ed eliminazione dei dati",
   "Puoi esportare un file di backup, importarlo su un altro dispositivo o cancellare tutto da “I tuoi dati”. Disinstallare l'app o cancellare i dati del browser elimina il diario se non hai un backup.",
   "Non è un parere medico",
