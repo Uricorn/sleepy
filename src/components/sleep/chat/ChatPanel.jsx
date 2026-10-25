@@ -133,15 +133,17 @@ export function ChatPanel() {
           placeholder={t("Message… (e.g. bed at 11pm, up at 7am, slept 7.5h, quality 4)")}
           className="h-16 flex-1 resize-none rounded-2xl border border-border bg-secondary px-4 py-2 text-sm leading-snug focus:outline-none focus:ring-2 focus:ring-[#818CF8]"
         />
-        <button
-          type="button"
-          onClick={recording ? dictation.stop : dictation.start}
-          disabled={voiceBusy}
-          aria-label={recording ? t("Stop recording") : t("Voice input")}
-          className={`grid h-16 w-14 shrink-0 place-items-center rounded-2xl border border-border disabled:opacity-60 ${recording ? "animate-pulse bg-destructive text-white" : "bg-secondary"}`}
-        >
-          {voiceBusy ? <Loader2 className="h-5 w-5 animate-spin" /> : recording ? <Square className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
-        </button>
+        {import.meta.env.VITE_VOICE !== "0" && (
+          <button
+            type="button"
+            onClick={recording ? dictation.stop : dictation.start}
+            disabled={voiceBusy}
+            aria-label={recording ? t("Stop recording") : t("Voice input")}
+            className={`grid h-16 w-14 shrink-0 place-items-center rounded-2xl border border-border disabled:opacity-60 ${recording ? "animate-pulse bg-destructive text-white" : "bg-secondary"}`}
+          >
+            {voiceBusy ? <Loader2 className="h-5 w-5 animate-spin" /> : recording ? <Square className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
+          </button>
+        )}
         <button
           onClick={send}
           disabled={busy || !input.trim()}

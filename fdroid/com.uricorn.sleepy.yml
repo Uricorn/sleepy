@@ -29,7 +29,8 @@ Builds:
     init:
       - cd ../..
       - npm ci --ignore-scripts --no-audit --no-fund
-      - npm run build
+      # F-Droid variant: no build-time download, no bundled speech model (mic button hidden).
+      - SLEEPY_SKIP_VOICE=1 npm run build
     rm:
       - dist
     gradle:
