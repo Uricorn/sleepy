@@ -55,7 +55,7 @@ export function AfterWakingForm({ entry, onSave, saving }) {
   return (
     <div className="space-y-4">
       <TimeInput id="onset" label={t("Time fell asleep (estimate)")} value={onset} onChange={setOnset} />
-      <AwakeningList value={awakenings} onChange={setAwakenings} />
+      <AwakeningList value={awakenings} onChange={setAwakenings} asleep={onset} wake={outOfBed} />
       <TimeInput id="outofbed" label={t("Out-of-bed time")} value={outOfBed} onChange={setOutOfBed} />
       <div className="space-y-2">
         <label htmlFor="sleep-hours" className="text-sm font-medium text-muted-foreground">{t("Estimated total sleep (hours)")}</label>

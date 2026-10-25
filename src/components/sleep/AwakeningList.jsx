@@ -5,10 +5,31 @@ import { useI18n } from "@/i18n";
 // (and chat-parsed ones) are plain "HH:MM" strings, so normalize on read.
 const norm = (a) => (typeof a === "string" ? { time: a } : a || {});
 
-export function AwakeningList({ value = [], onChange }) {
+const toMin = (t) => {
+  const m = /^(\d{1,2}):(\d{2})/.exec(t || "");
+  return m ? Number(m[1]) * 60 + Number(m[2]) : null;
+};
+const fmt = (min) => {
+  const m = ((min % 1440) + 1440) % 1440;
+  return `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+};
+
+// Suggest a time between the last known point (previous awakening, else fell-asleep time)
+// and wake-up time. Blank when there is nothing to anchor on.
+function suggest(items, asleep, wake) {
+  const prev = [...items].reverse().map((a) => toMin(a.time)).find((x) => x != null);
+  const start = prev ?? toMin(asleep);
+  if (start == null) return "";
+  const w = toMin(wake);
+  let end = w == null ? start + 120 : w;
+  while (end <= start) end += 1440;
+  return fmt(Math.round((start + (end - start) / 2) / 5) * 5);
+}
+
+export function AwakeningList({ value = [], onChange, asleep, wake }) {
   const { t } = useI18n();
   const items = value.map(norm);
-  const add = () => onChange([...items, { time: "" }]);
+  const add = () => onChange([...items, { time: suggest(items, asleep, wake) }]);
   const remove = (i) => onChange(items.filter((_, idx) => idx !== i));
   const patch = (i, p) => onChange(items.map((x, idx) => (idx === i ? { ...x, ...p } : x)));
 
