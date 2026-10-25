@@ -25,10 +25,10 @@ async function runTests() {
   assert.equal(t2.fields.woke_up_tired, true);
   console.log("✓ Test 2 passed");
 
-  // Test 3: Screenshot mention explanation
-  const t3 = parseLocal("Here is a screenshot from my ring");
+  // Test 3: nothing recognised -> hint, no fields
+  const t3 = parseLocal("Hello there");
   assert.equal(Object.keys(t3.fields).length, 0);
-  assert.match(t3.reply, /Screenshots are not analyzed/i);
+  assert.match(t3.reply, /couldn't extract/i);
   console.log("✓ Test 3 passed");
 
   // Localized keywords (Arabic, Spanish, Russian, Chinese, German)

@@ -204,26 +204,6 @@ export const NOTES = join(
   "نوٹس|نوٹ",
 );
 
-export const SCREENSHOT = join(
-  "screenshot|image|photo|picture|upload",
-  "captura|imagen|foto|subir",
-  "capture d'écran|image|photo|téléverser",
-  "bildschirmfoto|bild|foto|hochladen",
-  "imagem|enviar",
-  "скриншот|скрин|снимок экрана|фото|изображение",
-  "знімок екрана|скріншот|фото",
-  "schermata|immagine|foto|carica",
-  "ekran görüntüsü|resim|fotoğraf",
-  "zrzut ekranu|obraz|zdjęcie",
-  "스크린샷|이미지|사진",
-  "स्क्रीनशॉट|तस्वीर|फोटो",
-  "截图|图片|照片",
-  "スクリーンショット|画像|写真",
-  "لقطة شاشة|لقطات الشاشة|صورة",
-  "צילום מסך|תמונה",
-  "تصویر صفحه|عکس",
-  "اسکرین شاٹ|تصویر",
-);
 
 // Localized am/pm suffixes (Arabic ص/م). Mapped to "am"/"pm" by the parser.
 export const AMPM = "am|pm|a\\.m\\.|p\\.m\\.|ص|م";

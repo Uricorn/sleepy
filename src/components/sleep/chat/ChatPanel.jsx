@@ -10,7 +10,7 @@ import { useDictation } from "@/lib/use-dictation";
 
 const INTRO = {
   role: "assistant",
-  content: "Hi! Tell me about your night (e.g. “bed at 11:30pm, up at 7am, slept 7.5 hours, quality 4”), and I'll extract diary entries for you. Note: this local text parser reads typed notes and does not analyze screenshots.",
+  content: "Hi! Tell me about your night (e.g. “bed at 11:30pm, up at 7am, slept 7.5 hours, quality 4”), and I'll extract diary entries for you.",
 };
 
 export function ChatPanel() {

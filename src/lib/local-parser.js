@@ -77,18 +77,9 @@ export function parseLocal(text = "") {
   if (addNotesMatch && !preNotesMatch) fields.additional_notes = addNotesMatch[1].trim();
 
   const found = Object.keys(fields).length;
-  const mentionsScreenshot = new RegExp(K.SCREENSHOT, "i").test(t);
-
-  let reply;
-  if (found) {
-    reply = mentionsScreenshot
-      ? "I read your text note on this device. Here's what I found — check it and add it to your diary. (Note: screenshots are not analyzed by the local text parser.)"
-      : "I read your message on this device. Here's what I found — check it and add it to your diary.";
-  } else {
-    reply = mentionsScreenshot
-      ? "Screenshots are not analyzed by the local text parser. Try typing notes like “bed at 11:30pm, up at 7am, slept 7.5 hours, quality 4”."
-      : "I couldn't extract sleep details from your note. Try typing notes like “bed at 11:30pm, up at 7am, slept 7.5 hours, quality 4”. Note: screenshots are not analyzed by the local text parser.";
-  }
+  const reply = found
+    ? "I read your message on this device. Here's what I found — check it and add it to your diary."
+    : "I couldn't extract sleep details from your note. Try typing notes like “bed at 11:30pm, up at 7am, slept 7.5 hours, quality 4”.";
 
   return {
     reply,
