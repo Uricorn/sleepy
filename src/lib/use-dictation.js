@@ -63,6 +63,13 @@ export function useDictation({ lang, onText, onError }) {
         setStatus("loading");
         try {
           const audio = await decodeTo16k(new Blob(chunks, { type: rec.mimeType }));
+          // Whisper invents text on silence, so skip near-silent recordings.
+          const rms = Math.sqrt(audio.reduce((a, v) => a + v * v, 0) / (audio.length || 1));
+          if (rms < 0.003) {
+            setStatus("idle");
+            cb.current.onError("silent");
+            return;
+          }
           getWorker().postMessage({ audio, language: WHISPER_LANG[lang] || "english" });
         } catch (err) {
           setStatus("idle");

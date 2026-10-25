@@ -15,6 +15,15 @@ binary is taken from this repo, which is why `*.apk` is git-ignored.
 | Consistency checks | `npm run check:release` (also in CI) |
 | Deterministic build inputs | `package-lock.json`, Gradle wrapper pinned with SHA-256, `dependenciesInfo` stripped |
 
+## Open item: bundled voice model
+
+Voice input ships a ~77 MB Whisper model (MIT) plus ONNX Runtime WebAssembly (MIT) inside the APK.
+The model is **downloaded at build time** by `scripts/prepare-voice.mjs` from Hugging Face. F-Droid
+generally disallows build-time downloads of binaries and may flag prebuilt `.onnx`/`.wasm` blobs, so
+before submitting: ask the F-Droid reviewers how to provide it (e.g. a `srclibs`/`prebuild` source
+they accept), or build the F-Droid variant with `SLEEPY_SKIP_VOICE=1` (the mic button then reports an
+error — hide it first). This has not been checked with F-Droid.
+
 ## Steps to submit
 
 1. Push this branch, merge it, and create the first tag: see [RELEASING.md](RELEASING.md).

@@ -20,7 +20,7 @@ export function ChatPanel() {
   const dictation = useDictation({
     lang,
     onText: (text) => setInput((v) => (v ? `${v} ${text}` : text).slice(0, 2000)),
-    onError: (m) => toast.error(m === "denied" ? t("Microphone access was denied.") : t("Voice input failed.")),
+    onError: (m) => toast.error(m === "denied" ? t("Microphone access was denied.") : m === "silent" ? t("No speech detected.") : t("Voice input failed.")),
   });
   const voiceBusy = dictation.status === "loading" || dictation.status === "transcribing";
   const recording = dictation.status === "recording";
@@ -95,7 +95,7 @@ export function ChatPanel() {
         {voiceBusy && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Loader2 className="h-4 w-4 animate-spin" />{" "}
-            {dictation.progress != null ? `${t("Downloading voice model (once)…")} ${dictation.progress}%` : t("Transcribing…")}
+            {t("Transcribing…")}
           </div>
         )}
         <div ref={endRef} />

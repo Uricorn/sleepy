@@ -8,7 +8,7 @@ A private, offline sleep diary for Android. All data stays on the device; the ap
 - Before-bed and morning entries, history, trends, editing and JSON backups.
 - Multilingual UI (17 languages incl. RTL: Arabic, Hebrew, Persian, Urdu) via `src/i18n`; language switcher in the app. Locale files in `src/i18n/locales` are positional arrays matching `src/i18n/keys.js`; `npm test` verifies lengths.
 - Typed-note parsing runs locally, with multilingual keywords (`src/lib/parser-keywords.js`). No cloud AI, image analysis, login or server database.
-- Voice input in the assistant chat (mic button): fully local Whisper speech-to-text (`src/lib/use-dictation.js`, `src/lib/whisper-worker.js`), no fallback to cloud/browser speech services. The mic permission is requested only on tapping the button. The model (~75–150 MB) is downloaded from Hugging Face on first use and cached, so this **requires network access once and is not yet available in the Android build**, which has no INTERNET or RECORD_AUDIO permission. Shipping it on Android needs the model bundled into the assets, `RECORD_AUDIO` plus WebView permission handling, and `env.allowRemoteModels = false`.
+- Voice input in the assistant chat (mic button): fully local Whisper speech-to-text (`src/lib/use-dictation.js`, `src/lib/whisper-worker.js`), no cloud or browser speech service. The mic permission is requested only when the button is tapped. The model files (~77 MB, `onnx-community/whisper-base` quantized, pinned revision) are fetched at **build/dev time** by `scripts/prepare-voice.mjs` into git-ignored `public/voice` and shipped inside the web build / APK, so the app never needs network access at runtime. Set `SLEEPY_SKIP_VOICE=1` to skip this download (voice input then fails with an error). The APK grows by roughly 100 MB. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - Morning entry "Time fell asleep (estimate)" defaults to the logged bedtime + 20 minutes.
 - Android WebView shell with bundled assets, no INTERNET permission, import file picker and native backup-save dialog.
 - Browser/PWA assets use local icons. The Android shell loads its bundled files from an intercepted local HTTPS origin, without hosting or an actual web server.
@@ -31,6 +31,8 @@ npm run dev
 npm run build
 npm run lint
 ```
+
+`npm run dev` and `npm run build` first download the voice model (needs network once; cached in `public/voice`).
 
 Development and production assets must not require an account, SDK, runtime, cloud service or external hosting.
 
