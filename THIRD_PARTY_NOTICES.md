@@ -1,6 +1,6 @@
 # Third-party notices
 
-Sleepy itself is MIT licensed. Voice input bundles these components, all under licences compatible with MIT:
+Sleepy itself is under the PolyForm Noncommercial License 1.0.0 (see LICENSE). Voice input bundles these components, all under licences compatible with redistribution:
 
 | Component | Licence | Use |
 |---|---|---|
@@ -8,7 +8,7 @@ Sleepy itself is MIT licensed. Voice input bundles these components, all under l
 | Transformers.js (`@huggingface/transformers`) | Apache-2.0 | runs the model in a Web Worker |
 | ONNX Runtime Web (`onnxruntime-web`, WebAssembly build) | MIT, Copyright (c) Microsoft Corporation | inference runtime |
 
-Apache-2.0 and MIT both permit redistribution inside an MIT-licensed app provided the copyright and
+Apache-2.0 and MIT both permit redistribution inside this app provided the copyright and
 licence notices are kept; this file and the packages' own licence files in `node_modules` serve that purpose.
 Full texts: <https://github.com/openai/whisper/blob/main/LICENSE>,
 <https://github.com/huggingface/transformers.js/blob/main/LICENSE>,

@@ -18,7 +18,7 @@ A private, offline sleep diary for Android. All data stays on the device; the ap
 
 Releases are built by CI (`.github/workflows/release.yml`) and prepared for F-Droid. See
 [docs/RELEASING.md](docs/RELEASING.md) and [docs/FDROID.md](docs/FDROID.md). Changes are listed in
-[CHANGELOG.md](CHANGELOG.md); contributions: [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under MIT.
+[CHANGELOG.md](CHANGELOG.md); contributions: [CONTRIBUTING.md](CONTRIBUTING.md). Licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE): free for personal and other noncommercial use, no commercial use.
 
 ## Local development
 
