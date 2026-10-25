@@ -8,9 +8,16 @@ import { QualityScale } from "./QualityScale";
 import { AwakeningList } from "./AwakeningList";
 import { useI18n } from "@/i18n";
 
+function bedtimePlus20(bedtime) {
+  const m = /^(\d{1,2}):(\d{2})/.exec(bedtime || "");
+  if (!m) return "";
+  const total = (Number(m[1]) * 60 + Number(m[2]) + 20) % 1440;
+  return `${String(Math.floor(total / 60)).padStart(2, "0")}:${String(total % 60).padStart(2, "0")}`;
+}
+
 export function AfterWakingForm({ entry, onSave, saving }) {
   const { t } = useI18n();
-  const [onset, setOnset] = useState(entry?.estimated_sleep_onset || "");
+  const [onset, setOnset] = useState(entry?.estimated_sleep_onset || bedtimePlus20(entry?.bedtime));
   const [awakenings, setAwakenings] = useState(entry?.night_awakenings || []);
   const [outOfBed, setOutOfBed] = useState(entry?.estimated_out_of_bed_time || "");
   const [hours, setHours] = useState(entry?.estimated_total_sleep_hours ?? "");
@@ -36,7 +43,7 @@ export function AfterWakingForm({ entry, onSave, saving }) {
     setError("");
     onSave({
       estimated_sleep_onset: onset,
-      night_awakenings: awakenings.filter((a) => a),
+      night_awakenings: awakenings,
       estimated_out_of_bed_time: outOfBed,
       estimated_total_sleep_hours: hours === "" ? null : n,
       sleep_quality: quality,
@@ -47,8 +54,8 @@ export function AfterWakingForm({ entry, onSave, saving }) {
 
   return (
     <div className="space-y-4">
-      <TimeInput id="onset" label={t("Estimated sleep onset")} value={onset} onChange={setOnset} />
-      <AwakeningList value={awakenings} onChange={setAwakenings} />
+      <TimeInput id="onset" label={t("Time fell asleep (estimate)")} value={onset} onChange={setOnset} />
+      <AwakeningList value={awakenings} onChange={setAwakenings} asleep={onset} wake={outOfBed} />
       <TimeInput id="outofbed" label={t("Out-of-bed time")} value={outOfBed} onChange={setOutOfBed} />
       <div className="space-y-2">
         <label htmlFor="sleep-hours" className="text-sm font-medium text-muted-foreground">{t("Estimated total sleep (hours)")}</label>

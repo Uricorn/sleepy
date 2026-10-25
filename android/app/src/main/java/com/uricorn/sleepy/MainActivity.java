@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.webkit.PermissionRequest;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -27,6 +28,8 @@ import java.util.Map;
 public final class MainActivity extends Activity {
     private static final int IMPORT_FILE = 71;
     private static final int EXPORT_FILE = 72;
+    private static final int MIC_REQUEST = 74;
+    private PermissionRequest pendingMic;
     private static final String HOST = "sleepy.local";
     private WebView webView;
     private ValueCallback<Uri[]> fileCallback;
@@ -82,6 +85,23 @@ public final class MainActivity extends Activity {
             }
         });
         webView.setWebChromeClient(new WebChromeClient() {
+            @Override public void onPermissionRequest(PermissionRequest request) {
+                // Voice input: only our own origin, only audio capture, only after the user taps the mic.
+                boolean ours = HOST.equals(request.getOrigin().getHost());
+                String[] res = request.getResources();
+                boolean audioOnly = res.length == 1 && PermissionRequest.RESOURCE_AUDIO_CAPTURE.equals(res[0]);
+                if (!ours || !audioOnly) { request.deny(); return; }
+                if (checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                    request.grant(res);
+                } else {
+                    if (pendingMic != null) pendingMic.deny();
+                    pendingMic = request;
+                    requestPermissions(new String[]{android.Manifest.permission.RECORD_AUDIO}, MIC_REQUEST);
+                }
+            }
+            @Override public void onPermissionRequestCanceled(PermissionRequest request) {
+                if (pendingMic == request) pendingMic = null;
+            }
             @Override public boolean onShowFileChooser(WebView view, ValueCallback<Uri[]> callback, FileChooserParams params) {
                 if (fileCallback != null) fileCallback.onReceiveValue(null);
                 fileCallback = callback;
@@ -101,6 +121,18 @@ public final class MainActivity extends Activity {
     private static String stageHash(Intent intent) {
         String stage = intent == null ? null : intent.getStringExtra("stage");
         return "before_bed".equals(stage) || "after_waking".equals(stage) ? "#/?stage=" + stage : "";
+    }
+
+    @Override public void onRequestPermissionsResult(int code, String[] permissions, int[] results) {
+        super.onRequestPermissionsResult(code, permissions, results);
+        if (code != MIC_REQUEST || pendingMic == null) return;
+        PermissionRequest request = pendingMic;
+        pendingMic = null;
+        if (results.length > 0 && results[0] == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            request.grant(new String[]{PermissionRequest.RESOURCE_AUDIO_CAPTURE});
+        } else {
+            request.deny();
+        }
     }
 
     @Override protected void onNewIntent(Intent intent) {
@@ -124,6 +156,7 @@ public final class MainActivity extends Activity {
         if (lower.endsWith(".png")) return "image/png";
         if (lower.endsWith(".svg")) return "image/svg+xml";
         if (lower.endsWith(".ico")) return "image/x-icon";
+        if (lower.endsWith(".wasm")) return "application/wasm";
         if (lower.endsWith(".woff2")) return "font/woff2";
         return "application/octet-stream";
     }

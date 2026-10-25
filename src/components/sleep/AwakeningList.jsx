@@ -1,37 +1,92 @@
 import { Plus, X } from "lucide-react";
 import { useI18n } from "@/i18n";
 
-export function AwakeningList({ value = [], onChange }) {
+// An awakening is { time, out_of_bed, awake_minutes }; all optional. Older entries
+// (and chat-parsed ones) are plain "HH:MM" strings, so normalize on read.
+const norm = (a) => (typeof a === "string" ? { time: a } : a || {});
+
+const toMin = (t) => {
+  const m = /^(\d{1,2}):(\d{2})/.exec(t || "");
+  return m ? Number(m[1]) * 60 + Number(m[2]) : null;
+};
+const fmt = (min) => {
+  const m = ((min % 1440) + 1440) % 1440;
+  return `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+};
+
+// Suggest a time between the last known point (previous awakening, else fell-asleep time)
+// and wake-up time. Blank when there is nothing to anchor on.
+function suggest(items, asleep, wake) {
+  const prev = [...items].reverse().map((a) => toMin(a.time)).find((x) => x != null);
+  const start = prev ?? toMin(asleep);
+  if (start == null) return "";
+  const w = toMin(wake);
+  let end = w == null ? start + 120 : w;
+  while (end <= start) end += 1440;
+  return fmt(Math.round((start + (end - start) / 2) / 5) * 5);
+}
+
+export function AwakeningList({ value = [], onChange, asleep, wake }) {
   const { t } = useI18n();
-  const add = () => onChange([...value, ""]);
-  const remove = (i) => onChange(value.filter((_, idx) => idx !== i));
-  const set = (i, v) => onChange(value.map((x, idx) => (idx === i ? v : x)));
+  const items = value.map(norm);
+  const add = () => onChange([...items, { time: suggest(items, asleep, wake) }]);
+  const remove = (i) => onChange(items.filter((_, idx) => idx !== i));
+  const patch = (i, p) => onChange(items.map((x, idx) => (idx === i ? { ...x, ...p } : x)));
 
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-muted-foreground">{t("Night awakenings")}</span>
+        <span className="text-sm font-medium text-muted-foreground">
+          {t("Night awakenings")}
+          {items.length > 0 && ` (${items.length})`}
+        </span>
         <button type="button" onClick={add} className="flex items-center gap-1 text-sm font-medium text-[#818CF8]">
           <Plus className="h-4 w-4" /> {t("Add")}
         </button>
       </div>
-      {value.length === 0 && <p className="text-sm text-muted-foreground">{t("No awakenings recorded.")}</p>}
+      {items.length === 0 && <p className="text-sm text-muted-foreground">{t("No awakenings recorded.")}</p>}
       <div className="space-y-2">
-        {value.map((t, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <input
-              type="time"
-              value={t}
-              onChange={(e) => set(i, e.target.value)}
-              className="h-14 flex-1 rounded-2xl border border-border bg-secondary px-4 font-heading text-lg focus:outline-none focus:ring-2 focus:ring-[#818CF8]"
-            />
-            <button
-              type="button"
-              onClick={() => remove(i)}
-              className="grid h-14 w-14 place-items-center rounded-2xl border border-border bg-secondary text-muted-foreground hover:text-destructive"
-            >
-              <X className="h-5 w-5" />
-            </button>
+        {items.map((a, i) => (
+          <div key={i} className="space-y-2 rounded-2xl border border-border p-3">
+            <div className="flex items-center gap-2">
+              <input
+                type="time"
+                aria-label={t("Time (optional)")}
+                value={a.time || ""}
+                onChange={(e) => patch(i, { time: e.target.value })}
+                className="h-12 flex-1 rounded-2xl border border-border bg-secondary px-4 font-heading text-lg focus:outline-none focus:ring-2 focus:ring-[#818CF8]"
+              />
+              <button
+                type="button"
+                aria-label={t("Remove")}
+                onClick={() => remove(i)}
+                className="grid h-12 w-12 place-items-center rounded-2xl border border-border bg-secondary text-muted-foreground hover:text-destructive"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                inputMode="numeric"
+                min="0"
+                max="600"
+                aria-label={t("Stayed awake (minutes)")}
+                placeholder={t("Awake for… min")}
+                value={a.awake_minutes ?? ""}
+                onChange={(e) => patch(i, { awake_minutes: e.target.value === "" ? "" : Math.max(0, Math.min(600, Number(e.target.value))) })}
+                className="h-12 min-w-0 flex-1 rounded-2xl border border-border bg-secondary px-4 text-base focus:outline-none focus:ring-2 focus:ring-[#818CF8]"
+              />
+              <button
+                type="button"
+                aria-pressed={!!a.out_of_bed}
+                onClick={() => patch(i, { out_of_bed: !a.out_of_bed })}
+                className={`h-12 shrink-0 rounded-2xl border px-4 text-sm ${a.out_of_bed ? "border-[#818CF8] bg-[#818CF8]/20" : "border-border bg-secondary"}`}
+              >
+                {t("Got out of bed")}
+              </button>
+            </div>
+            <p className="text-xs text-muted-foreground">{t("Time is optional — leave blank if you don't know.")}</p>
           </div>
         ))}
       </div>

@@ -23,7 +23,7 @@ function PrivacyPage() {
       </section>
       <section className="space-y-2">
         <h2 className="font-heading text-lg font-bold">{t("Assistant")}</h2>
-        <p className="text-muted-foreground">{t("The Assistant uses a simple on-device text parser. It does not contact an AI service or analyze screenshots. Nothing is added to your diary until you tap \"Add to diary\". The Android app has no internet permission.")}</p>
+        <p className="text-muted-foreground">{t("The Assistant uses a simple on-device text parser. It does not contact an AI service. Nothing is added to your diary until you tap \"Add to diary\". The Android app has no internet permission.")}</p>
       </section>
       <section className="space-y-2">
         <h2 className="font-heading text-lg font-bold">{t("Backups and deleting data")}</h2>

@@ -1,6 +1,13 @@
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 import { formatShortDate } from "@/lib/sleep-utils";
 import { useI18n } from "@/i18n";
+
+const tooltipProps = {
+  cursor: { fill: "rgba(148,163,184,0.15)" },
+  contentStyle: { background: "#161B26", border: "1px solid #2A3142", borderRadius: 12, fontSize: 12, color: "#E2E8F0" },
+  labelStyle: { color: "#94A3B8" },
+  itemStyle: { color: "#E2E8F0" },
+};
 
 export function TrendsCard({ entries = [] }) {
   const { t } = useI18n();
@@ -38,7 +45,8 @@ export function TrendsCard({ entries = [] }) {
             <BarChart data={data}>
               <XAxis dataKey="name" tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} />
               <YAxis hide domain={[0, 10]} />
-              <Bar dataKey="hours" radius={[6, 6, 0, 0]} fill="#818CF8" />
+              <Tooltip {...tooltipProps} formatter={(v) => (v > 0 ? `${v} h` : "—")} separator="" />
+              <Bar dataKey="hours" name="" radius={[6, 6, 0, 0]} fill="#818CF8" />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -50,7 +58,8 @@ export function TrendsCard({ entries = [] }) {
             <BarChart data={data}>
               <XAxis dataKey="name" tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} />
               <YAxis hide domain={[0, 5]} />
-              <Bar dataKey="quality" radius={[6, 6, 0, 0]} fill="#34D399" />
+              <Tooltip {...tooltipProps} formatter={(v) => (v > 0 ? `${v}/5` : "—")} separator="" />
+              <Bar dataKey="quality" name="" radius={[6, 6, 0, 0]} fill="#34D399" />
             </BarChart>
           </ResponsiveContainer>
         </div>

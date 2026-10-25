@@ -7,13 +7,20 @@ binary is taken from this repo, which is why `*.apk` is git-ignored.
 
 | Requirement | Where |
 |---|---|
-| Open-source licence | `LICENSE` (MIT - change if you prefer another FLOSS licence, and update `License:` in the recipe) |
+| Open-source licence | `LICENSE` (GNU AGPL-3.0; keep `License: AGPL-3.0-only` in the recipe in sync) |
 | No proprietary libs / trackers / network | Manifest has no INTERNET permission, no Android dependencies; CI fails if that changes |
 | Store listing (title, descriptions, icon, changelog) | `fastlane/metadata/android/en-US/` |
 | Build recipe draft | `fdroid/com.uricorn.sleepy.yml` |
 | Version auto-detection | tags `vX.Y.Z` + `versionCode`/`versionName` in `android/app/build.gradle` |
 | Consistency checks | `npm run check:release` (also in CI) |
 | Deterministic build inputs | `package-lock.json`, Gradle wrapper pinned with SHA-256, `dependenciesInfo` stripped |
+
+## Voice input is left out of the F-Droid build
+
+The recipe builds with `SLEEPY_SKIP_VOICE=1`: `scripts/prepare-voice.mjs` downloads nothing, no
+Whisper model or ONNX WebAssembly is bundled, and the mic button is hidden (`vite.config.js` sets
+`import.meta.env.VITE_VOICE` to `0`). That keeps the F-Droid APK small and free of prebuilt binaries
+and build-time network access. GitHub / Play builds without the flag keep voice input.
 
 ## Steps to submit
 
