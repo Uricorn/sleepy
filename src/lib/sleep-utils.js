@@ -65,3 +65,11 @@ export function formatShortDate(dateStr) {
 export function qualityLabel(q) {
   return ["", "Very poor", "Poor", "Fair", "Good", "Excellent"][q] || "—";
 }
+export function shiftDateKey(key, days) {
+  const [y, m, d] = key.split("-").map(Number);
+  const dt = new Date(y, m - 1, d + days);
+  return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, "0")}-${String(dt.getDate()).padStart(2, "0")}`;
+}
+
+// Hours before this count as "still last night" when deciding whether to ask which night to log.
+export const EARLY_MORNING_HOUR = 6;

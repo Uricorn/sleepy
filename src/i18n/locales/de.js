@@ -154,4 +154,8 @@ export default [
   "{date} ist vollständig erfasst. Du kannst noch nächtliches Aufwachen oder Notizen ergänzen.",
   "Quellcode",
   "Problem melden / Kontakt",
+  "Es ist nach Mitternacht. Für welche Nacht ist das?",
+  "Letzte Nacht",
+  "Eintrag für",
+  "Datum der Nacht",
 ];

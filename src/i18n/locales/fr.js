@@ -154,4 +154,8 @@ export default [
   "{date} est complet. Vous pouvez encore ajouter des réveils ou des notes.",
   "Code source",
   "Signaler un problème / contact",
+  "Il est passé minuit. Pour quelle nuit ?",
+  "Cette nuit passée",
+  "Saisie pour",
+  "Date de la nuit",
 ];

@@ -154,4 +154,8 @@ export default [
   "{date} è completo. Puoi ancora aggiungere risvegli o note.",
   "Codice sorgente",
   "Segnala un problema / contatti",
+  "È passata la mezzanotte. Per quale notte è?",
+  "Scorsa notte",
+  "Registrazione per",
+  "Data della notte",
 ];

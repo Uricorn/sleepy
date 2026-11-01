@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { TimeInput } from "./TimeInput";
 import { useI18n } from "@/i18n";
 
-export function BeforeBedForm({ entry, onSave, saving }) {
+export function BeforeBedForm({ entry, onSave, saving, blocked }) {
   const { t } = useI18n();
   const [bedtime, setBedtime] = useState(entry?.bedtime || "");
   const [notes, setNotes] = useState(entry?.pre_sleep_notes || "");
@@ -29,7 +29,7 @@ export function BeforeBedForm({ entry, onSave, saving }) {
       </div>
       <Button
         onClick={submit}
-        disabled={saving || !bedtime}
+        disabled={saving || blocked || !bedtime}
         className="h-14 w-full rounded-2xl bg-[#818CF8] text-base font-semibold text-[#0C1017] hover:bg-[#818CF8]/90"
       >
         {done ? (
