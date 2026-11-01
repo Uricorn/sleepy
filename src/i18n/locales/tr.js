@@ -154,4 +154,8 @@ export default [
   "{date} tamamen kaydedildi. Gece uyanmaları veya not ekleyebilirsiniz.",
   "Kaynak kod",
   "Sorun bildir / iletişim",
+  "Gece yarısı geçti. Bu hangi gece için?",
+  "Dün gece",
+  "Kayıt tarihi:",
+  "Gece tarihi",
 ];

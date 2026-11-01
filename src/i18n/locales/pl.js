@@ -154,4 +154,8 @@ export default [
   "{date} jest w pełni uzupełniony. Nadal możesz dodać przebudzenia lub notatki.",
   "Kod źródłowy",
   "Zgłoś problem / kontakt",
+  "Jest po północy. Której nocy to dotyczy?",
+  "Ostatnia noc",
+  "Wpis dla",
+  "Data nocy",
 ];

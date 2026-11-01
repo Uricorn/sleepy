@@ -154,4 +154,8 @@ export default [
   "{date} está completo. Você ainda pode adicionar despertares ou notas.",
   "Código-fonte",
   "Relatar problema / contato",
+  "Já passou da meia-noite. Para qual noite é?",
+  "Ontem à noite",
+  "Registrando para",
+  "Data da noite",
 ];

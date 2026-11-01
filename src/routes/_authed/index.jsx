@@ -11,7 +11,7 @@ import { HistoryList } from "@/components/sleep/HistoryList";
 import { ReminderSettings } from "@/components/sleep/ReminderSettings";
 import { EditEntrySheet } from "@/components/sleep/EditEntrySheet";
 import { getHomeData, saveBeforeBed, saveAfterWaking, saveReminderSettings } from "@/lib/sleep-fns";
-import { todayNightKey, formatDateLabel } from "@/lib/sleep-utils";
+import { todayNightKey, formatDateLabel, shiftDateKey, EARLY_MORNING_HOUR } from "@/lib/sleep-utils";
 import { useI18n } from "@/i18n";
 
 const searchSchema = z.object({
@@ -32,9 +32,20 @@ function HomePage() {
   const { t } = useI18n();
   const navigate = Route.useNavigate();
   const data = useLoaderData({ from: "/_authed/" });
-  const { tonightEntry, lastNightEntry, recentEntries, trends, reminderSettings } = data;
+  const { lastNightEntry, recentEntries, trends, reminderSettings } = data;
   const router = useRouter();
-  const nightDate = todayNightKey();
+  const today = todayNightKey();
+  const yesterday = shiftDateKey(today, -1);
+  // Which night is being logged. Null = not chosen yet (defaults to today).
+  const [chosenDate, setChosenDate] = useState(null);
+  const nightDate = chosenDate || today;
+  const tonightEntry = recentEntries.find((e) => e.date === nightDate) || null;
+  // Logging after midnight with nothing recorded for last night is ambiguous: ask.
+  const askWhichNight =
+    !chosenDate &&
+    new Date().getHours() < EARLY_MORNING_HOUR &&
+    !recentEntries.some((e) => e.date === today) &&
+    !recentEntries.some((e) => e.date === yesterday && e.before_bed_recorded);
 
   const [savingBed, setSavingBed] = useState(false);
   const [savingWake, setSavingWake] = useState(false);
@@ -59,7 +70,7 @@ function HomePage() {
   // The morning stage binds to the most recent entry whose waking isn't done yet
   // (handles nights crossing midnight), else tonight's entry.
   const pendingWake = recentEntries.find((e) => !e.after_waking_recorded);
-  const afterWakingEntry = pendingWake || tonightEntry;
+  const afterWakingEntry = chosenDate ? tonightEntry : pendingWake || tonightEntry;
 
   const onSaveBed = async (d) => {
     setSavingBed(true);
@@ -136,7 +147,32 @@ function HomePage() {
           <h2 className="font-heading text-xl font-bold">{t("Before Bed")}</h2>
         </div>
         <div className="rounded-[1.25rem] border border-border bg-card p-5">
-          <BeforeBedForm key={tonightEntry?.id || "new-bed"} entry={tonightEntry} onSave={onSaveBed} saving={savingBed} />
+          {askWhichNight ? (
+            <div className="mb-4 space-y-3 rounded-2xl bg-secondary p-4">
+              <p className="text-sm">{t("It's after midnight. Which night is this for?")}</p>
+              <div className="flex flex-wrap gap-2">
+                <button type="button" onClick={() => setChosenDate(yesterday)} className="h-10 rounded-full border border-border bg-card px-4 text-sm font-semibold">
+                  {t("Last night")} · {formatDateLabel(yesterday)}
+                </button>
+                <button type="button" onClick={() => setChosenDate(today)} className="h-10 rounded-full bg-[#818CF8] px-4 text-sm font-semibold text-[#0C1017]">
+                  {t("Tonight")} · {formatDateLabel(today)}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <label className="mb-4 flex items-center justify-between gap-3 text-sm text-muted-foreground">
+              <span>{t("Logging for")} {formatDateLabel(nightDate)}</span>
+              <input
+                type="date"
+                value={nightDate}
+                max={today}
+                onChange={(e) => e.target.value && setChosenDate(e.target.value)}
+                aria-label={t("Night date")}
+                className="rounded-xl border border-border bg-secondary px-3 py-1.5 text-foreground"
+              />
+            </label>
+          )}
+          <BeforeBedForm key={tonightEntry?.id || `new-bed-${nightDate}`} entry={tonightEntry} onSave={onSaveBed} saving={savingBed} blocked={askWhichNight} />
         </div>
       </section>
 

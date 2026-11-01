@@ -155,4 +155,8 @@ export const KEYS = [
   "{date} is fully logged. You can still add awakenings or notes.",
   "Source code",
   "Report an issue / contact",
+  "It's after midnight. Which night is this for?",
+  "Last night",
+  "Logging for",
+  "Night date",
 ];

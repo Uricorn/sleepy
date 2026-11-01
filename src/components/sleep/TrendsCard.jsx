@@ -1,6 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 import { formatShortDate } from "@/lib/sleep-utils";
-import { useI18n } from "@/i18n";
+import { useI18n, LANGUAGES } from "@/i18n";
 
 const tooltipProps = {
   cursor: { fill: "rgba(148,163,184,0.15)" },
@@ -10,9 +10,12 @@ const tooltipProps = {
 };
 
 export function TrendsCard({ entries = [] }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const rtl = LANGUAGES[lang]?.dir === "rtl";
+  // Entries arrive newest-first; chart oldest → newest (mirrored in RTL languages).
   const data = [...entries]
     .slice(0, 7)
+    .reverse()
     .map((e) => ({ name: formatShortDate(e.date), hours: e.estimated_total_sleep_hours ?? 0, quality: e.sleep_quality ?? 0 }));
   // Average only nights that actually have a value, so unlogged mornings don't pull it down.
   const average = (key) => {
@@ -43,7 +46,7 @@ export function TrendsCard({ entries = [] }) {
         <div className="h-32">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={data}>
-              <XAxis dataKey="name" tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} />
+              <XAxis dataKey="name" reversed={rtl} tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} />
               <YAxis hide domain={[0, 10]} />
               <Tooltip {...tooltipProps} formatter={(v) => (v > 0 ? `${v} h` : "—")} separator="" />
               <Bar dataKey="hours" name="" radius={[6, 6, 0, 0]} fill="#818CF8" />
@@ -56,7 +59,7 @@ export function TrendsCard({ entries = [] }) {
         <div className="h-32">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={data}>
-              <XAxis dataKey="name" tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} />
+              <XAxis dataKey="name" reversed={rtl} tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} />
               <YAxis hide domain={[0, 5]} />
               <Tooltip {...tooltipProps} formatter={(v) => (v > 0 ? `${v}/5` : "—")} separator="" />
               <Bar dataKey="quality" name="" radius={[6, 6, 0, 0]} fill="#34D399" />
