@@ -15,6 +15,25 @@ function bedtimePlus20(bedtime) {
   return `${String(Math.floor(total / 60)).padStart(2, "0")}:${String(total % 60).padStart(2, "0")}`;
 }
 
+const toMin = (t) => {
+  const m = /^(\d{1,2}):(\d{2})/.exec(t || "");
+  return m ? Number(m[1]) * 60 + Number(m[2]) : null;
+};
+
+// Time from falling asleep to getting up, minus awake time (10 min per awakening unless stated).
+function estimateSleepHours(onset, outOfBed, awakenings) {
+  const start = toMin(onset);
+  const end = toMin(outOfBed);
+  if (start == null || end == null) return null;
+  let span = end - start;
+  if (span <= 0) span += 1440;
+  const awake = awakenings.reduce((sum, a) => {
+    const mins = typeof a === "object" && a && a.awake_minutes !== "" && a.awake_minutes != null ? Number(a.awake_minutes) : 10;
+    return sum + (Number.isFinite(mins) ? mins : 10);
+  }, 0);
+  return Math.max(0, Math.round(((span - awake) / 60) * 10) / 10);
+}
+
 export function AfterWakingForm({ entry, onSave, saving }) {
   const { t } = useI18n();
   const [onset, setOnset] = useState(entry?.estimated_sleep_onset || bedtimePlus20(entry?.bedtime));
@@ -45,7 +64,7 @@ export function AfterWakingForm({ entry, onSave, saving }) {
       estimated_sleep_onset: onset,
       night_awakenings: awakenings,
       estimated_out_of_bed_time: outOfBed,
-      estimated_total_sleep_hours: hours === "" ? null : n,
+      estimated_total_sleep_hours: hours === "" ? estimateSleepHours(onset, outOfBed, awakenings) : n,
       sleep_quality: quality,
       woke_up_tired: tired,
       additional_notes: notes,
@@ -98,7 +117,7 @@ export function AfterWakingForm({ entry, onSave, saving }) {
           ))}
         </div>
         {error && <p className="text-sm text-destructive">{error}</p>}
-        <p className="text-xs text-muted-foreground">{t("Enter your own estimate — never auto-calculated.")}</p>
+        <p className="text-xs text-muted-foreground">{t("Leave blank to auto-calculate (10 min awake per awakening unless you set a duration).")}</p>
       </div>
       <QualityScale value={quality} onChange={setQuality} />
       <div className="flex items-center justify-between rounded-2xl border border-border bg-secondary p-4">
