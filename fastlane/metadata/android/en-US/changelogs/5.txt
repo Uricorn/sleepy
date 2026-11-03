@@ -1,0 +1,1 @@
+Voice input in the assistant chat (on-device Whisper), optional night-awakening times with minutes awake, and a clearer "Time fell asleep (estimate)" field.
