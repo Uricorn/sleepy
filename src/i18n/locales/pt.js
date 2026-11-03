@@ -35,7 +35,7 @@ export default [
   "Diminuir horas",
   "Aumentar horas",
   "ex.: 7,5",
-  "Digite sua própria estimativa — nunca calculada automaticamente.",
+  "Deixe em branco para calcular automaticamente (10 min acordado por despertar, a menos que indique a duração).",
   "Acordei cansado(a)",
   "Você se sentiu sem descanso?",
   "Notas adicionais",

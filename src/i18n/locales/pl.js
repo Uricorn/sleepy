@@ -35,7 +35,7 @@ export default [
   "Zmniejsz godziny",
   "Zwiększ godziny",
   "np. 7,5",
-  "Wpisz własne oszacowanie – nigdy nie jest liczone automatycznie.",
+  "Zostaw puste, aby obliczyć automatycznie (10 min czuwania na każde przebudzenie, chyba że podasz czas).",
   "Obudziłem się zmęczony",
   "Czy czułeś się niewyspany?",
   "Dodatkowe notatki",

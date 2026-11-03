@@ -36,7 +36,7 @@ export const KEYS = [
   "Decrease hours",
   "Increase hours",
   "e.g. 7.5",
-  "Enter your own estimate — never auto-calculated.",
+  "Leave blank to auto-calculate (10 min awake per awakening unless you set a duration).",
   "Woke up tired",
   "Did you feel unrested?",
   "Additional notes",

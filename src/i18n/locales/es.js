@@ -35,7 +35,7 @@ export default [
   "Reducir horas",
   "Aumentar horas",
   "p. ej. 7,5",
-  "Introduce tu propia estimación: nunca se calcula automáticamente.",
+  "Déjalo en blanco para calcularlo automáticamente (10 min despierto por despertar, salvo que indiques una duración).",
   "Me desperté cansado/a",
   "¿Te sentiste sin descansar?",
   "Notas adicionales",
