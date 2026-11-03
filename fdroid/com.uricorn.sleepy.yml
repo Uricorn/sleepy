@@ -17,9 +17,9 @@ RepoType: git
 Repo: https://github.com/Uricorn/sleepy.git
 
 Builds:
-  - versionName: 1.2.1
-    versionCode: 4
-    commit: v1.2.1
+  - versionName: 1.2.2
+    versionCode: 5
+    commit: v1.2.2
     subdir: android/app
     sudo:
       - apt-get update
@@ -41,5 +41,5 @@ Builds:
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9.]+$
 UpdateCheckData: android/app/build.gradle|versionCode\s+(\d+)|android/app/build.gradle|versionName\s+'([\d.]+)'
-CurrentVersion: 1.2.1
-CurrentVersionCode: 4
+CurrentVersion: 1.2.2
+CurrentVersionCode: 5
