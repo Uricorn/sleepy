@@ -35,7 +35,7 @@ export default [
   "Saati azalt",
   "Saati artır",
   "örn. 7,5",
-  "Kendi tahmininizi girin — asla otomatik hesaplanmaz.",
+  "Otomatik hesaplamak için boş bırakın (her uyanış için 10 dk uyanık, süre belirtmediyseniz).",
   "Yorgun uyandım",
   "Dinlenmemiş hissettiniz mi?",
   "Ek notlar",

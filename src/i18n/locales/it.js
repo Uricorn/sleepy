@@ -35,7 +35,7 @@ export default [
   "Diminuisci ore",
   "Aumenta ore",
   "es. 7,5",
-  "Inserisci la tua stima — mai calcolata automaticamente.",
+  "Lascia vuoto per il calcolo automatico (10 min di veglia per ogni risveglio, salvo diversa durata indicata).",
   "Svegliato stanco",
   "Ti sei sentito poco riposato?",
   "Note aggiuntive",

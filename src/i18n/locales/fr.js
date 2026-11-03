@@ -35,7 +35,7 @@ export default [
   "Diminuer les heures",
   "Augmenter les heures",
   "ex. 7,5",
-  "Saisissez votre propre estimation — jamais calculée automatiquement.",
+  "Laissez vide pour un calcul automatique (10 min d'éveil par réveil, sauf si vous indiquez une durée).",
   "Réveil fatigué",
   "Vous êtes-vous senti peu reposé ?",
   "Notes supplémentaires",

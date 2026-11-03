@@ -35,7 +35,7 @@ export default [
   "Stunden verringern",
   "Stunden erhöhen",
   "z. B. 7,5",
-  "Gib deine eigene Schätzung ein – wird nie automatisch berechnet.",
+  "Leer lassen, um automatisch zu berechnen (10 Min. wach pro Aufwachen, sofern du keine Dauer angibst).",
   "Müde aufgewacht",
   "Hast du dich unausgeruht gefühlt?",
   "Zusätzliche Notizen",
