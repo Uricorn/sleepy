@@ -7,7 +7,7 @@ async function files(dir, prefix = '') {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     const relative = path.posix.join(prefix, entry.name);
     if (entry.isDirectory()) result.push(...await files(path.join(dir, entry.name), relative));
-    else if (entry.name !== 'sw.js' && !relative.startsWith('voice/')) result.push('./' + relative);
+    else if (entry.name !== 'sw.js') result.push('./' + relative);
   }
   return result.sort();
 }

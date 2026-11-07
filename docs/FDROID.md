@@ -15,12 +15,10 @@ binary is taken from this repo, which is why `*.apk` is git-ignored.
 | Consistency checks | `npm run check:release` (also in CI) |
 | Deterministic build inputs | `package-lock.json`, Gradle wrapper pinned with SHA-256, `dependenciesInfo` stripped |
 
-## Voice input is left out of the F-Droid build
+## Build notes
 
-The recipe builds with `SLEEPY_SKIP_VOICE=1`: `scripts/prepare-voice.mjs` downloads nothing, no
-Whisper model or ONNX WebAssembly is bundled, and the mic button is hidden (`vite.config.js` sets
-`import.meta.env.VITE_VOICE` to `0`). That keeps the F-Droid APK small and free of prebuilt binaries
-and build-time network access. GitHub / Play builds without the flag keep voice input.
+Since 1.2.3 the app has no voice input, no `RECORD_AUDIO` permission and no build-time downloads, so the
+F-Droid build is the plain `npm run build` followed by Gradle. (1.2.2 was built with `SLEEPY_SKIP_VOICE=1`.)
 
 ## Steps to submit
 

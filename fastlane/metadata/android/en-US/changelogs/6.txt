@@ -1,0 +1,1 @@
+Removed voice input and the microphone permission, so the app is smaller and asks only for notification permissions. Typed notes are still parsed on your device. No other changes.

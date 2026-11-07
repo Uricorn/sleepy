@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Send, Loader2, Mic, Square } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { chatWithAssistant } from "@/lib/chat-fns";
 import { todayNightKey, formatDateLabel } from "@/lib/sleep-utils";
 import { missingPrompts } from "@/lib/missing-info";
 import { ChatBubble } from "./ChatBubble";
 import { useI18n } from "@/i18n";
-import { useDictation } from "@/lib/use-dictation";
 
 const INTRO = {
   role: "assistant",
@@ -14,17 +13,10 @@ const INTRO = {
 };
 
 export function ChatPanel() {
-  const { t, lang } = useI18n();
+  const { t } = useI18n();
   const [messages, setMessages] = useState([INTRO]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  const dictation = useDictation({
-    lang,
-    onText: (text) => setInput((v) => (v ? `${v} ${text}` : text).slice(0, 2000)),
-    onError: (m) => toast.error(m === "denied" ? t("Microphone access was denied.") : m === "silent" ? t("No speech detected.") : t("Voice input failed.")),
-  });
-  const voiceBusy = dictation.status === "loading" || dictation.status === "transcribing";
-  const recording = dictation.status === "recording";
   const [lastDate, setLastDate] = useState(null);
   const inputRef = useRef(null);
   const endRef = useRef(null);
@@ -113,12 +105,6 @@ export function ChatPanel() {
             <Loader2 className="h-4 w-4 animate-spin" /> {t("Reading…")}
           </div>
         )}
-        {voiceBusy && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Loader2 className="h-4 w-4 animate-spin" />{" "}
-            {t("Transcribing…")}
-          </div>
-        )}
         <div ref={endRef} />
       </div>
       <div className="flex items-end gap-2">
@@ -133,17 +119,6 @@ export function ChatPanel() {
           placeholder={t("Message… (e.g. bed at 11pm, up at 7am, slept 7.5h, quality 4)")}
           className="h-16 flex-1 resize-none rounded-2xl border border-border bg-secondary px-4 py-2 text-sm leading-snug focus:outline-none focus:ring-2 focus:ring-[#818CF8]"
         />
-        {import.meta.env.VITE_VOICE !== "0" && (
-          <button
-            type="button"
-            onClick={recording ? dictation.stop : dictation.start}
-            disabled={voiceBusy}
-            aria-label={recording ? t("Stop recording") : t("Voice input")}
-            className={`grid h-16 w-14 shrink-0 place-items-center rounded-2xl border border-border disabled:opacity-60 ${recording ? "animate-pulse bg-destructive text-white" : "bg-secondary"}`}
-          >
-            {voiceBusy ? <Loader2 className="h-5 w-5 animate-spin" /> : recording ? <Square className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
-          </button>
-        )}
         <button
           onClick={send}
           disabled={busy || !input.trim()}
