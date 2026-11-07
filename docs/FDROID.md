@@ -15,12 +15,24 @@ binary is taken from this repo, which is why `*.apk` is git-ignored.
 | Consistency checks | `npm run check:release` (also in CI) |
 | Deterministic build inputs | `package-lock.json`, Gradle wrapper pinned with SHA-256, `dependenciesInfo` stripped |
 
-## Voice input is left out of the F-Droid build
+## Build notes
 
-The recipe builds with `SLEEPY_SKIP_VOICE=1`: `scripts/prepare-voice.mjs` downloads nothing, no
-Whisper model or ONNX WebAssembly is bundled, and the mic button is hidden (`vite.config.js` sets
-`import.meta.env.VITE_VOICE` to `0`). That keeps the F-Droid APK small and free of prebuilt binaries
-and build-time network access. GitHub / Play builds without the flag keep voice input.
+Since 1.2.3 the app has no voice input, no `RECORD_AUDIO` permission and no build-time downloads, so the
+F-Droid build is the plain `npm run build` followed by Gradle. (1.2.2 was built with `SLEEPY_SKIP_VOICE=1`.)
+
+## Reproducible build with our own signing key
+
+From 1.2.3 the recipe sets `Binaries` (the GitHub release APK) and `AllowedAPKSigningKeys`. F-Droid
+builds from source, compares it with the release APK ignoring the signature, and then publishes the
+APK signed by us. Requirements that keep the two identical:
+
+- `release.yml` and the recipe use the same Node version (22.12.0) and both run plain `npm ci && npm run build`.
+- The Gradle wrapper, JDK 17 and `dependenciesInfo { includeInApk = false }` stay as they are.
+- The release APK is named `Sleepy-v<version>.apk` (the recipe's `Binaries` URL depends on it).
+- Signing certificate SHA-256: `4b4b4e81c91851cc33eb7b0276b955ed0947c756901d39218391db0ce6b0d22b`
+  (public; never commit the keystore or its passwords). Changing the key means a new `AllowedAPKSigningKeys` entry.
+
+Check locally before submitting: `fdroid build -v -l com.uricorn.sleepy && fdroid verify -v com.uricorn.sleepy`.
 
 ## Steps to submit
 

@@ -35,6 +35,7 @@ check(existsSync(join(root, meta, 'images/icon.png')), `${meta}/images/icon.png 
 
 const manifest = read('android/app/src/main/AndroidManifest.xml');
 check(!/<uses-permission[^>]*INTERNET/.test(manifest), 'AndroidManifest must not request INTERNET (privacy promise)');
+check(!/RECORD_AUDIO/.test(manifest), 'AndroidManifest must not request RECORD_AUDIO (voice input was removed in 1.2.3)');
 check(/allowBackup="false"/.test(manifest), 'AndroidManifest must keep allowBackup="false"');
 
 const topLog = read('CHANGELOG.md');

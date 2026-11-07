@@ -1,5 +1,3 @@
-# on-device speech assets, fetched by scripts/prepare-voice.mjs
-public/voice
 
 # env
 .env

@@ -6,6 +6,12 @@ versioning: [Semantic Versioning](https://semver.org/). Each release also needs
 
 ## [Unreleased]
 
+## [1.2.3]
+
+### Removed
+- Voice input (the mic button, on-device Whisper model, ONNX Runtime and Transformers.js) and the `RECORD_AUDIO` permission. The app now asks only for notification and boot-completed permissions, builds without any network download, and the APK is much smaller. Typed notes are still parsed locally by the Assistant.
+- `SLEEPY_SKIP_VOICE`, `scripts/prepare-voice.mjs` and `THIRD_PARTY_NOTICES.md` (it listed only voice components).
+
 ## [1.2.2]
 
 ### Added

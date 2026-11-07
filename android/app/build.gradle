@@ -21,8 +21,8 @@ android {
         // Keep these two literals in sync with package.json "version" and add
         // fastlane/metadata/android/en-US/changelogs/<versionCode>.txt for each
         // release (npm run check:release enforces this). F-Droid reads them too.
-        versionCode 5
-        versionName '1.2.2'
+        versionCode 6
+        versionName '1.2.3'
     }
     signingConfigs {
         if (releaseStoreFile) {
