@@ -12,7 +12,6 @@ AutoName: Sleepy
 
 RepoType: git
 Repo: https://github.com/Uricorn/sleepy.git
-
 Binaries: https://github.com/Uricorn/sleepy/releases/download/v%v/Sleepy-v%v.apk
 
 Builds:
@@ -21,7 +20,10 @@ Builds:
     commit: 6e004a503e5f4715cb31ad10f757873d2ec25ecc
     subdir: android/app
     sudo:
+      - echo "deb https://deb.debian.org/debian bookworm main" > /etc/apt/sources.list.d/bookworm.list
       - apt-get update
+      - apt-get install -y -t bookworm openjdk-17-jdk-headless
+      - update-java-alternatives -s java-1.17.0-openjdk-amd64
       - apt-get install -y curl xz-utils
       - curl -fsSLo /tmp/node.tar.xz https://nodejs.org/dist/v22.12.0/node-v22.12.0-linux-x64.tar.xz
       - echo "22982235e1b71fa8850f82edd09cdae7e3f32df1764a9ec298c72d25ef2c164f  /tmp/node.tar.xz"
