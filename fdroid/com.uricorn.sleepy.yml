@@ -2,6 +2,7 @@ Categories:
   - Sports & Health
 License: AGPL-3.0-only
 AuthorName: Uricorn
+AuthorWebSite: https://github.com/Uricorn
 WebSite: https://github.com/Uricorn/sleepy
 SourceCode: https://github.com/Uricorn/sleepy
 IssueTracker: https://github.com/Uricorn/sleepy/issues
@@ -23,7 +24,8 @@ Builds:
       - apt-get update
       - apt-get install -y curl xz-utils
       - curl -fsSLo /tmp/node.tar.xz https://nodejs.org/dist/v22.12.0/node-v22.12.0-linux-x64.tar.xz
-      - echo "22982235e1b71fa8850f82edd09cdae7e3f32df1764a9ec298c72d25ef2c164f  /tmp/node.tar.xz" | sha256sum -c -
+      - echo "22982235e1b71fa8850f82edd09cdae7e3f32df1764a9ec298c72d25ef2c164f  /tmp/node.tar.xz"
+        | sha256sum -c -
       - tar -xJf /tmp/node.tar.xz -C /opt
       - ln -sf /opt/node-v22.12.0-linux-x64/bin/node /usr/local/bin/node
       - ln -sf /opt/node-v22.12.0-linux-x64/bin/npm /usr/local/bin/npm
@@ -31,7 +33,6 @@ Builds:
     init:
       - cd ../..
       - npm ci --ignore-scripts --no-audit --no-fund
-      # dist/ is built here and bundled by Gradle; do not add an rm: for it.
       - npm run build
     gradle:
       - yes
@@ -40,6 +41,7 @@ AllowedAPKSigningKeys: 4b4b4e81c91851cc33eb7b0276b955ed0947c756901d39218391db0ce
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9.]+$
-UpdateCheckData: android/app/build.gradle|versionCode\s+(\d+)|android/app/build.gradle|versionName\s+'([\d.]+)'
+UpdateCheckData: 
+  android/app/build.gradle|versionCode\s+(\d+)|android/app/build.gradle|versionName\s+'([\d.]+)'
 CurrentVersion: 1.2.3
 CurrentVersionCode: 6
