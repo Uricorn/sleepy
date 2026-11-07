@@ -6,6 +6,7 @@ Categories:
   - Sports & Health
 License: AGPL-3.0-only
 AuthorName: Uricorn
+AllowedAPKSigningKeys: 4b4b4e81c91851cc33eb7b0276b955ed0947c756901d39218391db0ce6b0d22b
 WebSite: https://github.com/Uricorn/sleepy
 SourceCode: https://github.com/Uricorn/sleepy
 IssueTracker: https://github.com/Uricorn/sleepy/issues
@@ -17,29 +18,30 @@ RepoType: git
 Repo: https://github.com/Uricorn/sleepy.git
 
 Builds:
-  - versionName: 1.2.1
-    versionCode: 4
-    commit: v1.2.1
+  - versionName: 1.2.2
+    versionCode: 5
+    commit: 5a87063eda20a7e2df8165c491c1037494c898ed
     subdir: android/app
     sudo:
       - apt-get update
-      - apt-get install -y npm
-      - npm install -g n
-      - n 22.12.0
+      - apt-get install -y curl xz-utils
+      - curl -fsSLo /tmp/node.tar.xz https://nodejs.org/dist/v22.12.0/node-v22.12.0-linux-x64.tar.xz
+      - echo "22982235e1b71fa8850f82edd09cdae7e3f32df1764a9ec298c72d25ef2c164f  /tmp/node.tar.xz" | sha256sum -c -
+      - tar -xJf /tmp/node.tar.xz -C /opt
+      - ln -sf /opt/node-v22.12.0-linux-x64/bin/node /usr/local/bin/node
+      - ln -sf /opt/node-v22.12.0-linux-x64/bin/npm /usr/local/bin/npm
+      - ln -sf /opt/node-v22.12.0-linux-x64/bin/npx /usr/local/bin/npx
     init:
       - cd ../..
       - npm ci --ignore-scripts --no-audit --no-fund
       # F-Droid variant: no build-time download, no bundled speech model (mic button hidden).
+      # dist/ is built here and bundled by Gradle; do not add an rm: for it.
       - SLEEPY_SKIP_VOICE=1 npm run build
-    rm:
-      - dist
     gradle:
       - yes
-    # The web assets are produced by npm; the committed gradle wrapper jar is verified by F-Droid.
-    scanignore: []
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9.]+$
 UpdateCheckData: android/app/build.gradle|versionCode\s+(\d+)|android/app/build.gradle|versionName\s+'([\d.]+)'
-CurrentVersion: 1.2.1
-CurrentVersionCode: 4
+CurrentVersion: 1.2.2
+CurrentVersionCode: 5
