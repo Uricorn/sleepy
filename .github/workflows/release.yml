@@ -18,9 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: gradle/actions/wrapper-validation@v6
+      # Keep this Node version identical to the F-Droid recipe (fdroid/com.uricorn.sleepy.yml),
+      # so F-Droid's build of the web assets matches this APK byte for byte.
       - uses: actions/setup-node@v7
         with:
-          node-version-file: .nvmrc
+          node-version: 22.12.0
           cache: npm
       - uses: actions/setup-java@v6
         with:
