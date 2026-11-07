@@ -1,7 +1,3 @@
-# DRAFT F-Droid build recipe. Copy to metadata/com.uricorn.sleepy.yml in a fork of
-# https://gitlab.com/fdroid/fdroiddata and open a merge request. See docs/FDROID.md.
-# Validate locally first:  fdroid readmeta && fdroid lint com.uricorn.sleepy &&
-#                          fdroid build -v -l com.uricorn.sleepy
 Categories:
   - Sports & Health
 License: AGPL-3.0-only
@@ -16,10 +12,12 @@ AutoName: Sleepy
 RepoType: git
 Repo: https://github.com/Uricorn/sleepy.git
 
+Binaries: https://github.com/Uricorn/sleepy/releases/download/v%v/Sleepy-v%v.apk
+
 Builds:
-  - versionName: 1.2.2
-    versionCode: 5
-    commit: 5a87063eda20a7e2df8165c491c1037494c898ed
+  - versionName: 1.2.3
+    versionCode: 6
+    commit: 6e004a503e5f4715cb31ad10f757873d2ec25ecc
     subdir: android/app
     sudo:
       - apt-get update
@@ -33,14 +31,15 @@ Builds:
     init:
       - cd ../..
       - npm ci --ignore-scripts --no-audit --no-fund
-      # F-Droid variant: no build-time download, no bundled speech model (mic button hidden).
       # dist/ is built here and bundled by Gradle; do not add an rm: for it.
-      - SLEEPY_SKIP_VOICE=1 npm run build
+      - npm run build
     gradle:
       - yes
+
+AllowedAPKSigningKeys: 4b4b4e81c91851cc33eb7b0276b955ed0947c756901d39218391db0ce6b0d22b
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9.]+$
 UpdateCheckData: android/app/build.gradle|versionCode\s+(\d+)|android/app/build.gradle|versionName\s+'([\d.]+)'
-CurrentVersion: 1.2.2
-CurrentVersionCode: 5
+CurrentVersion: 1.2.3
+CurrentVersionCode: 6
