@@ -2,10 +2,8 @@ name: Sync F-Droid recipe
 
 # Pushes fdroid/com.uricorn.sleepy.yml to a branch of your fdroiddata fork on GitLab, so the open
 # merge request updates itself. Setup (once):
-#   Secret   FDROID_GITLAB_TOKEN  GitLab access token with write_repository on the fork
-#   Variable FDROIDDATA_FORK      fork path, e.g. "yourname/fdroiddata"
-#   Variable FDROIDDATA_BRANCH    optional, defaults to "com.uricorn.sleepy"
-# Skips silently until both are set.
+#   Secret FDROID_GITLAB_TOKEN  GitLab access token with write_repository on the fork
+# Fork and branch are hard-coded below. Skips silently until the secret is set.
 on:
   push:
     branches: [main]
@@ -21,14 +19,14 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TOKEN: ${{ secrets.FDROID_GITLAB_TOKEN }}
-      FORK: ${{ vars.FDROIDDATA_FORK }}
-      BRANCH: ${{ vars.FDROIDDATA_BRANCH || 'com.uricorn.sleepy' }}
+      FORK: uricorn/fdroiddata
+      BRANCH: com.uricorn.sleepy
     steps:
       - uses: actions/checkout@v7
       - name: Sync
         run: |
-          if [ -z "$TOKEN" ] || [ -z "$FORK" ]; then
-            echo "FDROID_GITLAB_TOKEN / FDROIDDATA_FORK not set; skipping."
+          if [ -z "$TOKEN" ]; then
+            echo "FDROID_GITLAB_TOKEN not set; skipping."
             exit 0
           fi
           git clone --depth 1 "https://oauth2:${TOKEN}@gitlab.com/${FORK}.git" /tmp/fdroiddata
